@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c4enfsbhpq34c"]
 
 [ext_resource type="PackedScene" uid="uid://dsb4mvl7rlj3a" path="res://scenes/Player.tscn" id="1_ayu48"]
+[ext_resource type="Script" uid="uid://cm666m61wbl20" path="res://scripts/gameplay/camera.gd" id="2_egai5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ayu48"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,6 +17,16 @@ glow_enabled = true
 
 [node name="Store" type="Node3D" unique_id=602147578]
 
+[node name="Play" type="Node3D" parent="." unique_id=393200098]
+
+[node name="Player" parent="Play" unique_id=2146991704 instance=ExtResource("1_ayu48")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Play" unique_id=1311168993 node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
+script = ExtResource("2_egai5")
+player = NodePath("../Player")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=351153258]
 environment = SubResource("Environment_lw67d")
 
@@ -23,12 +34,6 @@ environment = SubResource("Environment_lw67d")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." unique_id=2146991704 instance=ExtResource("1_ayu48")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1456578326]
 use_collision = true
 size = Vector3(10, 1, 10)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1311168993]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
