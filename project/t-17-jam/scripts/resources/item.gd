@@ -9,6 +9,8 @@ class_name ItemResource
 @export var world_texture: Texture2D
 ## Optional parameter for how much to scale the world texture when in-game.
 @export var world_texture_scale : float = 1.0
+## The base price of the item.
+@export var price: int = 100
 
 # TODO Add a recipe to allow for crafting this item?
 # TODO Add fields to specify which item this should turn into after being transformed by a object?

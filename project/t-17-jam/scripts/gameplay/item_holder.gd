@@ -1,6 +1,7 @@
 ### A place where the player can place an object.
 ### NPCs can also walk up to certain item holders to buy the object.
 extends Area3D
+class_name ItemHolder
 
 ## The item this holder currently has.
 @export var item: ItemResource

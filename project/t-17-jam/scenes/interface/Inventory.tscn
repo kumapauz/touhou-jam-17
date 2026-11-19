@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://nadiwcif1tnb"]
 
 [ext_resource type="Script" uid="uid://dy3ih3d26nojk" path="res://scripts/interface/inventory_manager.gd" id="1_jhjjr"]
+[ext_resource type="PackedScene" uid="uid://dsg034tagyv50" path="res://scenes/interface/InventoryItem.tscn" id="2_unyr0"]
 
-[node name="Inventory" type="Control" unique_id=576772133]
+[node name="Inventory" type="Control" unique_id=576772133 node_paths=PackedStringArray("cursor", "inventory_item_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,3 +11,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jhjjr")
+cursor = NodePath("ItemMenu/CursorPosition")
+inventory_item_parent = NodePath("ItemMenu/Items")
+
+[node name="ItemMenu" type="Control" parent="." unique_id=403287714]
+anchors_preset = 0
+offset_right = 454.0
+offset_bottom = 341.0
+
+[node name="Items" type="VBoxContainer" parent="ItemMenu" unique_id=1652061721]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryItem" parent="ItemMenu/Items" unique_id=10900996 instance=ExtResource("2_unyr0")]
+layout_mode = 2
+
+[node name="InventoryItem2" parent="ItemMenu/Items" unique_id=1577542011 instance=ExtResource("2_unyr0")]
+layout_mode = 2
+
+[node name="InventoryItem3" parent="ItemMenu/Items" unique_id=168751785 instance=ExtResource("2_unyr0")]
+layout_mode = 2
+
+[node name="InventoryItem4" parent="ItemMenu/Items" unique_id=552323892 instance=ExtResource("2_unyr0")]
+layout_mode = 2
+
+[node name="InventoryItem5" parent="ItemMenu/Items" unique_id=1619945481 instance=ExtResource("2_unyr0")]
+layout_mode = 2
+
+[node name="CursorPosition" type="Control" parent="ItemMenu" unique_id=592441975]
+anchors_preset = 0
+offset_top = 51.0
+offset_right = 40.0
+offset_bottom = 91.0
+
+[node name="Cursor" type="ColorRect" parent="ItemMenu/CursorPosition" unique_id=1441884704]
+layout_mode = 0
+offset_right = 462.0
+offset_bottom = 13.0
+color = Color(0, 1, 0, 0.5019608)
