@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://dsg034tagyv50"]
 
-[ext_resource type="Texture2D" uid="uid://ct3d8n18wehtu" path="res://icon.svg" id="1_hpk18"]
 [ext_resource type="Script" uid="uid://d1mm3tm823pjw" path="res://scripts/interface/inventory_item.gd" id="1_t0pcf"]
+[ext_resource type="Texture2D" uid="uid://cyml7meso7n57" path="res://assets/items/nothing.png" id="2_337y5"]
 [ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/InventoryFont.tres" id="3_337y5"]
 
-[node name="InventoryItem" type="HBoxContainer" unique_id=10900996]
+[node name="InventoryItem" type="HBoxContainer" unique_id=10900996 node_paths=PackedStringArray("sprite", "label")]
 custom_minimum_size = Vector2(0, 64)
 offset_right = 580.0
 offset_bottom = 35.0
 script = ExtResource("1_t0pcf")
+sprite = NodePath("Sprite")
+label = NodePath("Label")
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=1351447006]
 layout_mode = 2
-texture = ExtResource("1_hpk18")
+texture = ExtResource("2_337y5")
 expand_mode = 3
 stretch_mode = 5
 

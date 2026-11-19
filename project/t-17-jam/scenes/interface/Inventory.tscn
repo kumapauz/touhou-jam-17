@@ -1,9 +1,130 @@
 [gd_scene format=3 uid="uid://nadiwcif1tnb"]
 
 [ext_resource type="Script" uid="uid://dy3ih3d26nojk" path="res://scripts/interface/inventory_manager.gd" id="1_jhjjr"]
+[ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_tb4qw"]
 [ext_resource type="PackedScene" uid="uid://dsg034tagyv50" path="res://scenes/interface/InventoryItem.tscn" id="2_unyr0"]
 
-[node name="Inventory" type="Control" unique_id=576772133 node_paths=PackedStringArray("cursor", "inventory_item_parent")]
+[sub_resource type="Animation" id="Animation_mlrm8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ItemMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ItemMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f4tlj"]
+resource_name = "hide"
+length = 0.19999999999999998
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.19999999),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_menu_hidden"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ItemMenu:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ItemMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tb4qw"]
+resource_name = "show"
+length = 0.19999999999999998
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.19999999),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_menu_shown"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ItemMenu:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ItemMenu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlrm8"]
+_data = {
+&"RESET": SubResource("Animation_mlrm8"),
+&"hide": SubResource("Animation_f4tlj"),
+&"show": SubResource("Animation_tb4qw")
+}
+
+[node name="Inventory" type="Control" unique_id=576772133 node_paths=PackedStringArray("item_menu_animator", "cursor", "inventory_item_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,10 +132,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jhjjr")
+nothing_item = ExtResource("2_tb4qw")
+item_menu_animator = NodePath("ItemMenu/ItemMenuAnimator")
 cursor = NodePath("ItemMenu/CursorPosition")
 inventory_item_parent = NodePath("ItemMenu/Items")
 
 [node name="ItemMenu" type="Control" parent="." unique_id=403287714]
+visible = false
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 0
 offset_right = 454.0
 offset_bottom = 341.0
@@ -53,3 +178,7 @@ layout_mode = 0
 offset_right = 462.0
 offset_bottom = 13.0
 color = Color(0, 1, 0, 0.5019608)
+
+[node name="ItemMenuAnimator" type="AnimationPlayer" parent="ItemMenu" unique_id=150365003]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_mlrm8")

@@ -29,6 +29,9 @@ func _physics_process(delta: float) -> void:
 	process_animation()
 
 func process_actions() -> void:
+	if !is_input_enabled:
+		return
+	
 	if Input.is_action_just_pressed("confirm"):
 		if item_holders.size() == 0:
 			return
@@ -37,10 +40,12 @@ func process_actions() -> void:
 		var menu_settings := InventoryManager.MenuSettings.new()
 		menu_settings.allow_selecting_nothing = true
 		inventory.show_menu(menu_settings)
+		inventory.item_selected.connect(Callable(item_holders.get(0), "set_item"), CONNECT_ONE_SHOT)
+		inventory.menu_hidden.connect(Callable.create(self, "enable_movement"), CONNECT_ONE_SHOT)
 		disable_movement()
 
 func process_movement(delta: float) -> void:
-	if !is_movement_enabled:
+	if !is_input_enabled:
 		return
 	
 	var input: Vector2 = Vector2(Input.get_axis("left", "right"), Input.get_axis("down", "up")).limit_length()
@@ -82,12 +87,12 @@ func apply_velocity() -> void:
 	move_and_slide()
 
 ## Tracks whether the player is processing movement.
-var is_movement_enabled: bool
+var is_input_enabled: bool
 func enable_movement() -> void:
-	is_movement_enabled = true
+	is_input_enabled = true
 
 func disable_movement() -> void:
-	is_movement_enabled = false
+	is_input_enabled = false
 	move_speed = 0
 	# TODO Reset animations
 
