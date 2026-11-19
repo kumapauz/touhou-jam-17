@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dsb4mvl7rlj3a"]
 
 [ext_resource type="Script" uid="uid://cn4f0qqrt8r34" path="res://scripts/gameplay/player.gd" id="1_p0vlq"]
+[ext_resource type="Texture2D" uid="uid://ct3d8n18wehtu" path="res://icon.svg" id="2_eq5ko"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5q5h1"]
 height = 1.5
@@ -10,15 +11,20 @@ height = 1.5
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e2t8q"]
 height = 1.5
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_e2t8q"]
+radius = 0.8
+
 [node name="Player" type="CharacterBody3D" unique_id=1804894144 node_paths=PackedStringArray("debug_root")]
 script = ExtResource("1_p0vlq")
-top_speed = 8.0
-traction = 50.0
-friction = 50.0
+top_speed = 10.0
+traction = 120.0
+friction = 160.0
+turn_speed = 40.0
 debug_root = NodePath("Debug")
 
 [node name="Debug" type="Node3D" parent="." unique_id=591872979]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Debug" unique_id=1030226199]
 mesh = SubResource("CapsuleMesh_5q5h1")
@@ -30,3 +36,18 @@ mesh = SubResource("BoxMesh_e2t8q")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1457357027]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_e2t8q")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1880992419]
+centered = false
+offset = Vector2(-64, 0)
+double_sided = false
+alpha_cut = 1
+texture = ExtResource("2_eq5ko")
+
+[node name="Detection" type="Area3D" parent="." unique_id=1377646963]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detection" unique_id=1308682778]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("SphereShape3D_e2t8q")
