@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dsb4mvl7rlj3a"]
+
+[ext_resource type="Script" uid="uid://cn4f0qqrt8r34" path="res://scripts/gameplay/player.gd" id="1_p0vlq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5q5h1"]
+height = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_e2t8q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e2t8q"]
+height = 1.5
+
+[node name="Player" type="CharacterBody3D" unique_id=1804894144 node_paths=PackedStringArray("debug_root")]
+script = ExtResource("1_p0vlq")
+top_speed = 8.0
+traction = 50.0
+friction = 50.0
+debug_root = NodePath("Debug")
+
+[node name="Debug" type="Node3D" parent="." unique_id=591872979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Debug" unique_id=1030226199]
+mesh = SubResource("CapsuleMesh_5q5h1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Debug" unique_id=1327051140]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0)
+mesh = SubResource("BoxMesh_e2t8q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1457357027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_e2t8q")
