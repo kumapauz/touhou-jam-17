@@ -9,6 +9,7 @@ extends CharacterBody3D
 
 @export_group("Components")
 @export var inventory: InventoryManager
+@export var sprite : AnimatedSprite3D
 
 @export_group("Debug Settings")
 @export var debug_root: Node3D
@@ -25,6 +26,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	process_movement(delta)
+	process_animation()
 
 func process_actions() -> void:
 	if Input.is_action_just_pressed("confirm"):
@@ -50,6 +52,15 @@ func process_movement(delta: float) -> void:
 		process_turning(input_angle, delta)
 		process_speed(input_length, delta)
 	apply_velocity()
+
+func process_animation() -> void:
+	sprite.play("idle" if is_zero_approx(move_speed) else "walk")
+	var delta_angle: float = abs(angle_difference(move_angle, 0))
+	if (sprite.flip_h && delta_angle < PI * 0.4) || (!sprite.flip_h && delta_angle > PI * 0.6):
+		flip_sprite()
+
+func flip_sprite() -> void:
+	sprite.flip_h = !sprite.flip_h
 
 func process_speed(length: float, delta: float) -> void:
 	move_speed = move_toward(move_speed, top_speed * length, traction * delta)
