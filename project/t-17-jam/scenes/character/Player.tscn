@@ -16,23 +16,23 @@ height = 1.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_e2t8q"]
 radius = 0.8
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_paho4"]
+atlas = ExtResource("4_paho4")
+region = Rect2(0, 0, 256, 256)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xcdk0"]
 atlas = ExtResource("4_paho4")
-region = Rect2(0, 0, 512, 512)
+region = Rect2(0, 0, 256, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ddj42"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw7qa"]
 atlas = ExtResource("4_paho4")
-region = Rect2(1024, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2sry6"]
-atlas = ExtResource("4_paho4")
-region = Rect2(0, 0, 512, 512)
+region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2t8q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xcdk0")
+"texture": SubResource("AtlasTexture_paho4")
 }],
 "loop": 1,
 "name": &"idle",
@@ -40,10 +40,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ddj42")
+"texture": SubResource("AtlasTexture_xcdk0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2sry6")
+"texture": SubResource("AtlasTexture_mw7qa")
 }],
 "loop": 1,
 "name": &"walk",
@@ -95,11 +95,10 @@ shape = SubResource("SphereShape3D_e2t8q")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1715968167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2108846, 0)
-pixel_size = 0.005
 double_sided = false
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_e2t8q")
-animation = &"walk"
+animation = &"idle"
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_item_detector_entered"]
 [connection signal="area_exited" from="ItemDetector" to="." method="_on_item_detector_exited"]
