@@ -50,8 +50,7 @@ func process_menu() -> void:
 
 func scroll_selection(dir: int) -> void:
 	var menu_count: int = get_menu_item_count()
-	item_selection += dir
-	item_selection = abs(item_selection % menu_count)
+	item_selection = posmod(item_selection + dir, menu_count)
 	process_cursor_position()
 
 func process_cursor_position() -> void:

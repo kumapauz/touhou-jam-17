@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://ct3d8n18wehtu" path="res://icon.svg" id="2_t1ah2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vbqnc"]
-radius = 1.0
+height = 5.0
+radius = 2.0
 
 [node name="ItemHolder" type="Area3D" unique_id=866453235 node_paths=PackedStringArray("sprite")]
 collision_mask = 0
@@ -23,3 +24,4 @@ texture = ExtResource("2_t1ah2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=818695110]
 shape = SubResource("CylinderShape3D_vbqnc")
+debug_color = Color(0, 1, 0, 0.41960785)
