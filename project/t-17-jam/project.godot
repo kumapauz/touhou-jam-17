@@ -89,6 +89,10 @@ pause={
 
 [layer_names]
 
+3d_render/layer_1="environment"
+3d_render/layer_2="items"
+3d_render/layer_3="character"
+3d_render/layer_4="lights"
 3d_physics/layer_1="environment"
 3d_physics/layer_2="trigger"
 

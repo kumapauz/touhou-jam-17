@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://3mbtt6e21o4"]
+
+[ext_resource type="Texture2D" uid="uid://dkyxvmh1u6sfx" path="res://assets/model/texture/gradient_atlas.png" id="1_85qnv"]
+
+[resource]
+resource_name = "GradientAtlas"
+albedo_texture = ExtResource("1_85qnv")

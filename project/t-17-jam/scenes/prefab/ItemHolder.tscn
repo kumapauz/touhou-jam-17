@@ -3,10 +3,15 @@
 [ext_resource type="Script" uid="uid://dq3mlbg5mc4ai" path="res://scripts/gameplay/item_holder.gd" id="1_vbqnc"]
 [ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_7rufu"]
 [ext_resource type="Texture2D" uid="uid://ct3d8n18wehtu" path="res://icon.svg" id="2_t1ah2"]
+[ext_resource type="Texture2D" uid="uid://dvuwjb74f420q" path="res://assets/model/texture/blob_shadow.png" id="4_j4p0w"]
+[ext_resource type="PackedScene" uid="uid://d11ebnfcksi3x" path="res://assets/model/ItemHolder.gltf" id="4_wejcb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vbqnc"]
 height = 5.0
 radius = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2t8q"]
+size = Vector3(2, 1.8, 2)
 
 [node name="ItemHolder" type="Area3D" unique_id=866453235 node_paths=PackedStringArray("sprite")]
 collision_layer = 2
@@ -17,12 +22,29 @@ null_item = ExtResource("2_7rufu")
 sprite = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1608962974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+layers = 2
+cast_shadow = 0
 centered = false
 offset = Vector2(-64, 0)
+shaded = true
 double_sided = false
 alpha_cut = 1
 texture = ExtResource("2_t1ah2")
 
+[node name="Decal" type="Decal" parent="Sprite3D" unique_id=443197619]
+size = Vector3(1.5, 1, 1.5)
+texture_albedo = ExtResource("4_j4p0w")
+cull_mask = 1
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=818695110]
 shape = SubResource("CylinderShape3D_vbqnc")
 debug_color = Color(0, 1, 0, 0.41960785)
+
+[node name="ItemHolder" parent="." unique_id=1873543462 instance=ExtResource("4_wejcb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1756167353]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=12268669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9604645e-08, 0.90000004, 0)
+shape = SubResource("BoxShape3D_e2t8q")

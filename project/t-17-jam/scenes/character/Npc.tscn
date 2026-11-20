@@ -43,7 +43,17 @@ sprites = NodePath("Sprite")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=368983274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2108846, 0)
+layers = 4
+shaded = true
 double_sided = false
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_4u3ad")
 animation = &"idle"
+
+[node name="Lighting" type="OmniLight3D" parent="Sprite" unique_id=153413214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08911538, 0.70000005)
+layers = 8
+light_color = Color(1, 0.56078434, 0.019607844, 1)
+light_energy = 0.8
+light_cull_mask = 4293918724
+omni_range = 2.0

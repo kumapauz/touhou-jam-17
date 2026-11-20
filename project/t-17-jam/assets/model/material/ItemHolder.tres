@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cyg12ne03qo83"]
+
+[ext_resource type="Texture2D" uid="uid://da6ixgmif5p1f" path="res://assets/model/texture/item_holder.png" id="1_n6vi4"]
+
+[resource]
+resource_name = "ItemHolder"
+albedo_texture = ExtResource("1_n6vi4")

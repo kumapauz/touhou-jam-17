@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ciaelwseavonh"]
+
+[ext_resource type="Texture2D" uid="uid://d34q5va1yfghv" path="res://assets/model/texture/floorboards.png" id="1_fn0q1"]
+
+[resource]
+resource_name = "Floor"
+albedo_texture = ExtResource("1_fn0q1")
