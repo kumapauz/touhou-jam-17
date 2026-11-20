@@ -20,13 +20,13 @@ radius = 0.8
 atlas = ExtResource("4_paho4")
 region = Rect2(0, 0, 256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw7qa"]
+atlas = ExtResource("4_paho4")
+region = Rect2(256, 0, 256, 256)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xcdk0"]
 atlas = ExtResource("4_paho4")
 region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mw7qa"]
-atlas = ExtResource("4_paho4")
-region = Rect2(512, 0, 256, 256)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2t8q"]
 animations = [{
@@ -40,10 +40,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xcdk0")
+"texture": SubResource("AtlasTexture_mw7qa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mw7qa")
+"texture": SubResource("AtlasTexture_xcdk0")
 }],
 "loop": 1,
 "name": &"walk",
@@ -98,7 +98,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2108846, 0)
 double_sided = false
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_e2t8q")
-animation = &"idle"
+animation = &"walk"
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_item_detector_entered"]
 [connection signal="area_exited" from="ItemDetector" to="." method="_on_item_detector_exited"]

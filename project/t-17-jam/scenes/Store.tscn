@@ -158,3 +158,5 @@ item = ExtResource("4_xdmv4")
 [node name="ItemHolder3" parent="Holders/SideCounter" unique_id=777656679 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 item = ExtResource("4_xdmv4")
+
+[node name="NPCManager" type="Node3D" parent="." unique_id=34856755]
