@@ -17,7 +17,6 @@ var _npc_pool: Array[NpcController]
 var astar_grid: AStarGrid2D
 var _is_grid_initialized: bool
 const RAYCAST_DISTANCE: int = 5
-const GRID_OFFSET: Vector2i = Vector2i(-3, 0)
 
 func _ready() -> void:
 	init_npc_pool()
@@ -30,9 +29,31 @@ func init_item_holder(root: Node) -> void:
 			_item_holders.append(child)
 		init_item_holder(child)
 
+func spawn_npcs() -> void:
+	for i in range(_npc_pool.size()):
+		if !spawn_npc():
+			break
+
+## Spawns a single NPC.
+func spawn_npc() -> bool:
+	if _npc_pool.back().is_active:
+		# No more NPCs to spawn
+		return false
+	var npc: NpcController = _npc_pool.pop_back()
+	# TODO npc.set_npc(get_random_npc())
+	npc.activate()
+	npc.position = Vector3.ZERO
+	npc.set_path(request_path(npc))
+	_npc_pool.push_front(npc)
+	return true
+
 func _process(_delta: float) -> void:
 	if !_is_grid_initialized:
 		init_pathfinding()
+		return
+	
+	if Input.is_action_just_pressed("ui_copy"):
+		spawn_npc()
 
 ## Creates npc nodes.
 func init_npc_pool() -> void:
@@ -40,18 +61,19 @@ func init_npc_pool() -> void:
 		var npc: NpcController = npc_scene.instantiate()
 		_npc_pool.append(npc)
 		npc_parent.add_child(npc)
+		npc.position = Vector3.ZERO
 		npc.deactivate()
 
 ## Creates the AStar grid for pathfinding
 func init_pathfinding() -> void:
 	astar_grid = AStarGrid2D.new()
 	# Initialize cell size
-	astar_grid.region = Rect2i(0, 0, 23, 8)
+	astar_grid.region = Rect2i(0, 0, 23, 9)
 	astar_grid.cell_size = Vector2.ONE
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	astar_grid.update()
 	
 	var space: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	
 	for x in range(astar_grid.region.position.x, astar_grid.region.size.x):
 		for y in range(astar_grid.region.position.y, astar_grid.region.size.y):
 			var to_pos: Vector3 = convert_grid_to_world_pos(Vector2i(x, y))
@@ -69,15 +91,42 @@ func init_pathfinding() -> void:
 				print("Set %s/%s solid" % [grid_point, col_point])
 	
 	_is_grid_initialized = true
-	#print(astar_grid.get_id_path(Vector2i(0, 0), Vector2i(3, 4))) # Prints [(0, 0), (1, 1), (2, 2), (3, 3), (3, 4)]
-	#print(astar_grid.get_point_path(Vector2i(0, 0), Vector2i(3, 4))) # Prints [(0, 0), (16, 16), (32, 32), (48, 48), (48, 64)]
 
 ## Constructs a Vector3 cooresponding to the given grid position.
 func convert_grid_to_world_pos(grid_pos: Vector2i) -> Vector3:
-	grid_pos -= GRID_OFFSET
 	return global_position + Vector3(grid_pos.x, 0, grid_pos.y)
 
 ## Rounds the world position to the closest grid position.
 func convert_world_to_grid_pos(world_pos: Vector3) -> Vector2i:
 	var local_pos: Vector3i = to_local(world_pos).round()
-	return Vector2i(local_pos.x, local_pos.z) + GRID_OFFSET
+	return Vector2i(local_pos.x, local_pos.z)
+
+var PREFERRED_ITEM_CHANCE: int = 10
+var NORMAL_ITEM_CHANCE: int = 5
+var DISLIKED_ITEM_CHANCE: int = 1
+
+## Gets a path for the given NPC.
+func request_path(npc: NpcController) -> PackedVector2Array:
+	var valid_items: Array[ItemHolder]
+	for item_holder in _item_holders:
+		if !item_holder.has_item():
+			continue
+		var chance: int = NORMAL_ITEM_CHANCE
+		if npc.is_preferred_item(item_holder.item):
+			chance = PREFERRED_ITEM_CHANCE
+		elif npc.is_disliked_item(item_holder.item):
+			chance = DISLIKED_ITEM_CHANCE
+		for i in range(chance):
+			valid_items.append(item_holder)
+	
+	var start_pos: Vector2i = convert_world_to_grid_pos(npc.global_position)
+	# Default behavior: Head to the door and leave
+	var end_pos: Vector2i = convert_world_to_grid_pos(global_position)
+	if valid_items.size() != 0:
+		var target_item: ItemHolder = valid_items.get(randi_range(0, valid_items.size() - 1))
+		npc.set_target_holder(target_item)
+		end_pos = convert_world_to_grid_pos(target_item.global_position)
+	else:
+		npc.set_target_holder(null)
+	print(start_pos, end_pos)
+	return astar_grid.get_point_path(start_pos, end_pos, true)

@@ -162,7 +162,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 item = ExtResource("4_xdmv4")
 
 [node name="NPCManager" type="Node3D" parent="." unique_id=34856755 node_paths=PackedStringArray("npc_parent", "item_holder_parent")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
 script = ExtResource("5_gii7t")
 npc_resource_path = "res://resource/npcs"
 npc_scene = ExtResource("6_oe1d6")
@@ -170,3 +170,4 @@ npc_parent = NodePath("NPCParent")
 item_holder_parent = NodePath("../ItemHolders")
 
 [node name="NPCParent" type="Node3D" parent="NPCManager" unique_id=351537189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
