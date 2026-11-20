@@ -1,5 +1,6 @@
 ## Manages spawning NPCs and giving them places to go.
 extends Node3D
+class_name NpcManager
 
 ## Maximum number of npcs at the start
 @export var max_npcs: int = 5
