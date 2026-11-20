@@ -5,6 +5,7 @@ extends Node3D
 @export var max_npcs: int = 5
 
 @export_dir var npc_resource_path: String
+var _npc_resources : Array[NpcResource]
 @export var npc_scene: PackedScene
 
 @export_group("Components")
@@ -20,6 +21,7 @@ const RAYCAST_DISTANCE: int = 5
 
 func _ready() -> void:
 	init_npc_pool()
+	init_npc_resources()
 	init_item_holder(item_holder_parent)
 
 ## Recursively get all item holders.
@@ -40,7 +42,7 @@ func spawn_npc() -> bool:
 		# No more NPCs to spawn
 		return false
 	var npc: NpcController = _npc_pool.pop_back()
-	# TODO npc.set_npc(get_random_npc())
+	npc.set_npc(request_npc())
 	npc.activate()
 	npc.position = Vector3.ZERO
 	npc.set_path(request_path(npc))
@@ -63,6 +65,12 @@ func init_npc_pool() -> void:
 		npc_parent.add_child(npc)
 		npc.position = Vector3.ZERO
 		npc.deactivate()
+
+func init_npc_resources() -> void:
+	for resource_file in ResourceLoader.list_directory(npc_resource_path):
+		var file_path: String = npc_resource_path.path_join(resource_file)
+		var res: NpcResource = ResourceLoader.load(file_path)
+		_npc_resources.append(res)
 
 ## Creates the AStar grid for pathfinding
 func init_pathfinding() -> void:
@@ -128,5 +136,17 @@ func request_path(npc: NpcController) -> PackedVector2Array:
 		end_pos = convert_world_to_grid_pos(target_item.global_position)
 	else:
 		npc.set_target_holder(null)
-	print(start_pos, end_pos)
 	return astar_grid.get_point_path(start_pos, end_pos, true)
+
+## Return a random npc, ensuring that no repeat characters are allowed.
+func request_npc() -> NpcResource:
+	var valid_npcs: Array[NpcResource] = _npc_resources.duplicate()
+	for npc in _npc_pool:
+		if !npc.is_active || !is_instance_valid(npc.npc) || npc.npc.npc_type == NpcResource.NPC_TYPE.MOB:
+			continue
+		
+		var index: int = valid_npcs.find(npc.npc)
+		if index == -1:
+			valid_npcs.remove_at(index)
+	var selection: int = randi_range(0, valid_npcs.size() - 1)
+	return valid_npcs.get(selection)
