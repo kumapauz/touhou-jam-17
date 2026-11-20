@@ -18,14 +18,31 @@ var is_day_active: bool
 
 var current_time: float
 ## How many seconds each business day is.
-const DAY_LENGTH: float = 10.0
+const DAY_LENGTH: float = 20.0
+
+signal day_started
+signal day_finished
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause"):
+		set_day_active(!is_day_active)
+		print("Is Day Active set to %s" % is_day_active)
+	
 	if !is_day_active:
 		return
 	
 	current_time = move_toward(current_time, DAY_LENGTH, delta)
 	time_bar.value = current_time / DAY_LENGTH
+	if is_equal_approx(current_time, DAY_LENGTH):
+		# Day has finished
+		set_day_active(false)
+
+func set_day_active(value: bool) -> void:
+	is_day_active = value
+	if value:
+		day_started.emit()
+	else:
+		day_finished.emit()
 
 func add_money(amount: int) -> void:
 	money = max(0, money + amount)

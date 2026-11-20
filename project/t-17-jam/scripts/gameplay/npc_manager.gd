@@ -2,8 +2,13 @@
 extends Node3D
 class_name NpcManager
 
+@export var base_npc_chance : float = 0.2
+## The chance that an npc will spawn during the next spawn cycle.
+var _npc_chance: float
+var npc_chance_interval: float = 0.1
+
 ## Maximum number of npcs at the start
-@export var max_npcs: int = 5
+@export_range(1,10) var max_npcs: int = 8
 
 @export_dir var npc_resource_path: String
 var _npc_resources : Array[NpcResource]
@@ -12,6 +17,7 @@ var _npc_resources : Array[NpcResource]
 @export_group("Components")
 @export var npc_parent: Node3D
 @export var item_holder_parent: Node3D
+@export var spawn_timer: Timer
 var _item_holders: Array[ItemHolder]
 
 var _npc_pool: Array[NpcController]
@@ -21,6 +27,7 @@ var _is_grid_initialized: bool
 const RAYCAST_DISTANCE: int = 5
 
 func _ready() -> void:
+	_npc_chance = base_npc_chance
 	init_npc_pool()
 	init_npc_resources()
 	init_item_holder(item_holder_parent)
@@ -62,6 +69,7 @@ func _process(_delta: float) -> void:
 func init_npc_pool() -> void:
 	for i in range(max_npcs):
 		var npc: NpcController = npc_scene.instantiate()
+		npc.set_manager(self)
 		_npc_pool.append(npc)
 		npc_parent.add_child(npc)
 		npc.position = Vector3.ZERO
@@ -79,7 +87,8 @@ func init_pathfinding() -> void:
 	# Initialize cell size
 	astar_grid.region = Rect2i(0, 0, 23, 9)
 	astar_grid.cell_size = Vector2.ONE
-	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	# TODO Normalize npc movement and allow diagonals
+	# astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	astar_grid.update()
 	
 	var space: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
@@ -151,3 +160,17 @@ func request_npc() -> NpcResource:
 			valid_npcs.remove_at(index)
 	var selection: int = randi_range(0, valid_npcs.size() - 1)
 	return valid_npcs.get(selection)
+
+## Attempts to spawn a shopper.
+func attempt_npc_spawn() -> void:
+	if randf() < _npc_chance:
+		spawn_npc()
+		_npc_chance = base_npc_chance
+	else:
+		_npc_chance += npc_chance_interval
+
+func on_store_opened() -> void:
+	spawn_timer.start()
+
+func on_store_closed() -> void:
+	spawn_timer.stop()
