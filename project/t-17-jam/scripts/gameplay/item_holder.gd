@@ -16,6 +16,7 @@ signal item_sent_to_inventory(item: ItemResource)
 
 func _ready() -> void:
 	# Mostly for testing in the editor
+	sprite.texture = null
 	set_item(item, true)
 	item_sent_to_inventory.connect(Callable(InventoryManager.instance, "add_item"))
 

@@ -15,6 +15,8 @@ signal menu_hidden
 @export var cursor: Control
 @export var inventory_item_parent: VBoxContainer
 var _menu_items: Array[InventoryItem]
+## List of actively visible items.
+var _visible_items: Array[ItemResource]
 
 ## Tracks whether the inventory manager should be processing inputs.
 var process_inputs: bool
@@ -49,8 +51,23 @@ func process_menu() -> void:
 		scroll_selection(1)
 
 func scroll_selection(dir: int) -> void:
-	var menu_count: int = get_menu_item_count()
-	item_selection = posmod(item_selection + dir, menu_count)
+	var item_count: int = _visible_items.size()
+	item_selection += dir
+	var scroll_dir: int = 0
+	if item_selection >= item_count:
+		scroll_dir = 1 # Scroll down
+	elif item_selection < 0:
+		scroll_dir = -1 # Scroll up
+	item_selection = posmod(item_selection, item_count)
+	
+	if scroll_dir != 0:
+		var total_count: int = get_menu_item_count()
+		if total_count > _menu_items.size():
+			@warning_ignore("integer_division")
+			menu_scroll = posmod(menu_scroll + scroll_dir, total_count / _menu_items.size() + 1)
+			populate_menu_items()
+			item_count = _visible_items.size()
+			item_selection = 0 if scroll_dir > 0 else item_count - 1
 	process_cursor_position()
 
 func process_cursor_position() -> void:
@@ -68,7 +85,7 @@ class MenuSettings:
 		SELECT_WITH_NULL, # Used to place an item. Allow selecting "nothing."
 	}
 
-var items: Array[ItemResource]
+@export var items: Array[ItemResource]
 
 ## Adds an item to the inventory (duplicates allowed).
 func add_item(item: ItemResource) -> void:
@@ -99,26 +116,28 @@ var menu_scroll: int
 
 ## Populates the list of shown menu items.
 func populate_menu_items() -> void:
+	_visible_items.clear()
+	
+	# TODO Allow items to be grouped together
+	# Update visible item list
+	var offset: int = 0
+	if current_settings.allow_selecting_nothing:
+		offset = -1
+		if menu_scroll == 0:
+			_visible_items.append(nothing_item)
+	var start_index: int = max(menu_scroll * _menu_items.size() + offset, 0)
+	for i in range(0, _menu_items.size() + offset):
+		var target_index: int = start_index + i
+		if target_index >= items.size():
+			break
+		_visible_items.append(items.get(target_index))
+	
+	# Update the buttons
 	for i in _menu_items.size():
-		if i == 0 && menu_scroll == 0 && current_settings.allow_selecting_nothing:
-			_menu_items[i].set_item(nothing_item)
-			print("Set a nothing item.")
-			continue
-		var target_item: ItemResource = find_item(i)
-		if is_instance_valid(target_item):
-			_menu_items[i].set_item(target_item)
+		if i < _visible_items.size():
+			_menu_items[i].set_item(_visible_items.get(i))
 		else:
 			_menu_items[i].set_item(null)
-	process_cursor_position()
-
-## Returns an item for a given menu item option.
-func find_item(menu_index: int) -> ItemResource:
-	# TODO Allow grouping items together
-	if current_settings.allow_selecting_nothing:
-		menu_index -= 1
-	if items.size() <= menu_scroll + menu_index:
-		return null
-	return items.get(menu_scroll + menu_index)
 
 ## Returns the number of possible selections in the menu.
 func get_menu_item_count() -> int:
@@ -136,6 +155,7 @@ func show_menu(settings : MenuSettings) -> void:
 	item_selection = 0
 	menu_scroll = 0
 	populate_menu_items()
+	process_cursor_position()
 	item_menu_animator.play("show")
 	menu_shown.emit()
 

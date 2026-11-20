@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cn4f0qqrt8r34" path="res://scripts/gameplay/player_controller.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://ct3d8n18wehtu" path="res://icon.svg" id="2_eq5ko"]
-[ext_resource type="PackedScene" uid="uid://nadiwcif1tnb" path="res://scenes/interface/Inventory.tscn" id="3_cxfou"]
 [ext_resource type="Texture2D" uid="uid://bwit1h0qqj35t" path="res://assets/character/tsukasa/spritesheet.png" id="4_paho4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5q5h1"]
@@ -50,14 +49,13 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Player" type="CharacterBody3D" unique_id=1804894144 node_paths=PackedStringArray("inventory", "sprite", "debug_root")]
+[node name="Player" type="CharacterBody3D" unique_id=1804894144 node_paths=PackedStringArray("sprite", "debug_root")]
 collision_layer = 0
 script = ExtResource("1_p0vlq")
 top_speed = 10.0
 traction = 120.0
 friction = 160.0
 turn_speed = 40.0
-inventory = NodePath("Inventory")
 sprite = NodePath("Sprite")
 debug_root = NodePath("Debug")
 
@@ -92,8 +90,6 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemDetector" unique_id=1308682778]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("SphereShape3D_e2t8q")
-
-[node name="Inventory" parent="." unique_id=576772133 instance=ExtResource("3_cxfou")]
 
 [node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1715968167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2108846, 0)

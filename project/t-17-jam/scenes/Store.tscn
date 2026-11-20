@@ -2,9 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://dsb4mvl7rlj3a" path="res://scenes/character/Player.tscn" id="1_ayu48"]
 [ext_resource type="Script" uid="uid://cm666m61wbl20" path="res://scripts/gameplay/camera.gd" id="2_egai5"]
+[ext_resource type="PackedScene" uid="uid://nadiwcif1tnb" path="res://scenes/interface/Inventory.tscn" id="3_126te"]
 [ext_resource type="PackedScene" uid="uid://by8m7efnmjpbt" path="res://scenes/prefab/ItemHolder.tscn" id="3_lw67d"]
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="4_6hsdf"]
 [ext_resource type="Resource" uid="uid://bi5l3q4iomax6" path="res://resource/items/Apple.tres" id="4_xdmv4"]
 [ext_resource type="Script" uid="uid://02ynruafbyra" path="res://scripts/gameplay/npc_manager.gd" id="5_gii7t"]
+[ext_resource type="Resource" uid="uid://biy4l7vw6axob" path="res://resource/items/AlchemyBook.tres" id="5_xlrfv"]
+[ext_resource type="Resource" uid="uid://c75toub3n1o0c" path="res://resource/items/BambooShoot.tres" id="6_126te"]
 [ext_resource type="PackedScene" uid="uid://clu6oabjgfu61" path="res://scenes/character/Npc.tscn" id="6_oe1d6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ayu48"]
@@ -34,6 +38,9 @@ fov = 60.0
 far = 1000.0
 script = ExtResource("2_egai5")
 player = NodePath("../Player")
+
+[node name="Inventory" parent="Prefabs" unique_id=576772133 instance=ExtResource("3_126te")]
+items = Array[ExtResource("4_6hsdf")]([ExtResource("6_126te"), ExtResource("4_xdmv4"), ExtResource("5_xlrfv"), ExtResource("6_126te"), ExtResource("5_xlrfv"), ExtResource("5_xlrfv"), ExtResource("6_126te")])
 
 [node name="Room" type="Node3D" parent="." unique_id=785936400]
 
@@ -103,27 +110,21 @@ size = Vector3(16, 1, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -7)
 
 [node name="ItemHolder1" parent="ItemHolders/FrontDisplay" unique_id=866453235 instance=ExtResource("3_lw67d")]
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder2" parent="ItemHolders/FrontDisplay" unique_id=576850799 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder3" parent="ItemHolders/FrontDisplay" unique_id=1197791908 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder4" parent="ItemHolders/FrontDisplay" unique_id=760412069 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder5" parent="ItemHolders/FrontDisplay" unique_id=2094318848 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder6" parent="ItemHolders/FrontDisplay" unique_id=329377740 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="BackCounter" type="Node3D" parent="ItemHolders" unique_id=1823053767]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
@@ -141,25 +142,25 @@ item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder4" parent="ItemHolders/BackCounter" unique_id=1730332419 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
-item = ExtResource("4_xdmv4")
+item = ExtResource("5_xlrfv")
 
 [node name="ItemHolder5" parent="ItemHolders/BackCounter" unique_id=413252603 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
-item = ExtResource("4_xdmv4")
+item = ExtResource("5_xlrfv")
 
 [node name="SideCounter" type="Node3D" parent="ItemHolders" unique_id=113873710]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, -1)
 
 [node name="ItemHolder1" parent="ItemHolders/SideCounter" unique_id=1423017091 instance=ExtResource("3_lw67d")]
-item = ExtResource("4_xdmv4")
+item = ExtResource("6_126te")
 
 [node name="ItemHolder2" parent="ItemHolders/SideCounter" unique_id=252967262 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
-item = ExtResource("4_xdmv4")
+item = ExtResource("6_126te")
 
 [node name="ItemHolder3" parent="ItemHolders/SideCounter" unique_id=777656679 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-item = ExtResource("4_xdmv4")
+item = ExtResource("6_126te")
 
 [node name="NPCManager" type="Node3D" parent="." unique_id=34856755 node_paths=PackedStringArray("npc_parent", "item_holder_parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)

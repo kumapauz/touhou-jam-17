@@ -8,7 +8,6 @@ extends CharacterBody3D
 @export var turn_speed: float = 20.0
 
 @export_group("Components")
-@export var inventory: InventoryManager
 @export var sprite : AnimatedSprite3D
 
 @export_group("Debug Settings")
@@ -39,18 +38,18 @@ func process_actions() -> void:
 		# Open inventory menu
 		var menu_settings := InventoryManager.MenuSettings.new()
 		menu_settings.allow_selecting_nothing = true
-		inventory.show_menu(menu_settings)
-		inventory.item_selected.connect(Callable.create(self, "on_inventory_selected"), CONNECT_ONE_SHOT)
-		inventory.menu_hidden.connect(Callable.create(self, "on_inventory_hidden"), CONNECT_ONE_SHOT)
+		InventoryManager.instance.show_menu(menu_settings)
+		InventoryManager.instance.item_selected.connect(Callable.create(self, "on_inventory_selected"), CONNECT_ONE_SHOT)
+		InventoryManager.instance.menu_hidden.connect(Callable.create(self, "on_inventory_hidden"), CONNECT_ONE_SHOT)
 		disable_movement()
 
 func on_inventory_selected(item: ItemResource) -> void:
-	inventory.remove_item(item)
+	InventoryManager.instance.remove_item(item)
 	item_holders.get(0).set_item(item)
 
 func on_inventory_hidden() -> void:
-	for connection in inventory.item_selected.get_connections():
-		inventory.item_selected.disconnect(connection)
+	for connection in InventoryManager.instance.item_selected.get_connections():
+		InventoryManager.instance.item_selected.disconnect(connection["callable"])
 	enable_movement()
 
 func process_movement(delta: float) -> void:
