@@ -2,15 +2,18 @@
 
 [ext_resource type="Script" uid="uid://d1mm3tm823pjw" path="res://scripts/interface/inventory_item.gd" id="1_t0pcf"]
 [ext_resource type="Texture2D" uid="uid://cyml7meso7n57" path="res://assets/items/nothing.png" id="2_337y5"]
+[ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_jdoo1"]
 [ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/InventoryFont.tres" id="3_337y5"]
 
-[node name="InventoryItem" type="HBoxContainer" unique_id=10900996 node_paths=PackedStringArray("sprite", "label")]
+[node name="InventoryItem" type="HBoxContainer" unique_id=10900996 node_paths=PackedStringArray("sprite", "label", "amount")]
 custom_minimum_size = Vector2(0, 64)
 offset_right = 580.0
 offset_bottom = 35.0
 script = ExtResource("1_t0pcf")
+null_item = ExtResource("2_jdoo1")
 sprite = NodePath("Sprite")
 label = NodePath("Label")
+amount = NodePath("Amount")
 
 [node name="Sprite" type="TextureRect" parent="." unique_id=1351447006]
 layout_mode = 2
@@ -27,7 +30,7 @@ label_settings = ExtResource("3_337y5")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Quantity" type="Label" parent="." unique_id=1726520885]
+[node name="Amount" type="Label" parent="." unique_id=1726520885]
 layout_mode = 2
 text = "x05"
 label_settings = ExtResource("3_337y5")

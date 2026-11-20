@@ -2,6 +2,8 @@
 extends Control
 class_name InventoryManager
 
+static var instance: InventoryManager
+
 signal menu_shown
 signal item_selected(item: ItemResource)
 signal menu_hidden
@@ -21,6 +23,9 @@ var is_menu_active: bool
 ## Tracks the configuration of the current menu popup.
 var current_settings: MenuSettings
 
+func _enter_tree() -> void:
+	instance = self
+
 func _ready() -> void:
 	for child in inventory_item_parent.get_children():
 		if child is InventoryItem:
@@ -37,6 +42,20 @@ func process_menu() -> void:
 	
 	if Input.is_action_just_pressed("confirm"):
 		select_item()
+	
+	if Input.is_action_just_pressed("up"):
+		scroll_selection(-1)
+	elif Input.is_action_just_pressed("down"):
+		scroll_selection(1)
+
+func scroll_selection(dir: int) -> void:
+	var menu_count: int = get_menu_item_count()
+	item_selection += dir
+	item_selection = abs(item_selection % menu_count)
+	process_cursor_position()
+
+func process_cursor_position() -> void:
+	cursor.global_position = _menu_items.get(item_selection).global_position
 
 class MenuSettings:
 	## Should the menu allow a separate "nothing" option?
@@ -54,15 +73,27 @@ var items: Array[ItemResource]
 
 ## Adds an item to the inventory (duplicates allowed).
 func add_item(item: ItemResource) -> void:
+	if !is_instance_valid(item):
+		return
 	items.append(item)
+	print("Item received: " + item.item_name)
 
 ## Removes the first instance of an item from the inventory.
 func remove_item(item: ItemResource) -> bool:
 	var index: int = items.find(item)
 	if index != -1:
 		items.remove_at(index)
+		print("Item sent: " + item.item_name)
 		return true
 	return false
+
+## Returns the number of a particular item the player is holding.
+func get_item_count(item: ItemResource) -> int:
+	var count: int = 0
+	for i in items:
+		if i == item:
+			count += 1
+	return count
 
 var item_selection: int
 var menu_scroll: int
@@ -79,31 +110,41 @@ func populate_menu_items() -> void:
 			_menu_items[i].set_item(target_item)
 		else:
 			_menu_items[i].set_item(null)
+	process_cursor_position()
 
 ## Returns an item for a given menu item option.
 func find_item(menu_index: int) -> ItemResource:
-	if items.size() == 0:
-		return null
 	# TODO Allow grouping items together
 	if current_settings.allow_selecting_nothing:
 		menu_index -= 1
+	if items.size() <= menu_scroll + menu_index:
+		return null
 	return items.get(menu_scroll + menu_index)
+
+## Returns the number of possible selections in the menu.
+func get_menu_item_count() -> int:
+	# TODO Allow grouping items together
+	var total: int = items.size()
+	if current_settings.allow_selecting_nothing:
+		total += 1
+	return total
 
 ## Shows a menu so players can select an item. 
 func show_menu(settings : MenuSettings) -> void:
 	# TODO Change menu type based on context. 
 	is_menu_active = true
 	current_settings = settings
+	item_selection = 0
+	menu_scroll = 0
 	populate_menu_items()
 	item_menu_animator.play("show")
 	menu_shown.emit()
 
-func hide_menu(selected_item: ItemResource = null) -> void:
+func hide_menu() -> void:
 	if !is_menu_active: # Menu is not visible
 		return
 	process_inputs = false
 	item_menu_animator.play("hide")
-	item_selected.emit(selected_item)
 
 ## Called from the animator.
 func on_menu_shown() -> void:
@@ -115,4 +156,6 @@ func on_menu_hidden() -> void:
 	menu_hidden.emit()
 
 func select_item() -> void:
-	hide_menu(_menu_items.get(item_selection).item) # Selected nothing
+	var selected_item: ItemResource = _menu_items.get(item_selection).item
+	hide_menu() # Selected nothing
+	item_selected.emit(selected_item)

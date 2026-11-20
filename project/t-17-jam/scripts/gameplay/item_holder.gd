@@ -3,6 +3,8 @@
 extends Area3D
 class_name ItemHolder
 
+signal item_sent_to_inventory(item: ItemResource)
+
 ## The item this holder currently has.
 @export var item: ItemResource
 ## An item that forces the item to dissappear.
@@ -14,12 +16,16 @@ class_name ItemHolder
 
 func _ready() -> void:
 	# Mostly for testing in the editor
-	set_item(item)
+	set_item(item, true)
+	item_sent_to_inventory.connect(Callable(InventoryManager.instance, "add_item"))
 
 ## Changes the item of this particular item holder.
-func set_item(new_item: ItemResource) -> void:
+func set_item(new_item: ItemResource, is_initializing = false) -> void:
 	if !is_instance_valid(new_item): # Can't set to null
 		return
+	
+	if !is_initializing:
+		item_sent_to_inventory.emit(item)
 	
 	if new_item == null_item: # Clearing the item
 		new_item = null
