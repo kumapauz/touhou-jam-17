@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c75toub3n1o0c"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_w2ekd"]
+[ext_resource type="Texture2D" uid="uid://cdpediinaawmv" path="res://assets/items/bamboo_shoot.png" id="2_w2ekd"]
+
+[resource]
+script = ExtResource("1_w2ekd")
+item_name = "Bamboo Shoot"
+item_description = "Grows in a dense forest where all who lose their path are doomed to wander forever."
+ui_texture = ExtResource("2_w2ekd")
+metadata/_custom_type_script = "uid://rnbtm2pl8g8f"
