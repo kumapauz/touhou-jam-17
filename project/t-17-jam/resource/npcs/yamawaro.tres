@@ -42,3 +42,4 @@ animations = [{
 script = ExtResource("2_8iynw")
 name = "Yamawaro"
 sprite_frames = SubResource("SpriteFrames_4ax3m")
+expressions = Array[Texture2D]([ExtResource("3_vjca0")])

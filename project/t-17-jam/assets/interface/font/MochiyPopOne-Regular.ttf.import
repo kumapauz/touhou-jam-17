@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c5rnold7pkol2"
-path="res://.godot/imported/MochiyPopOne-Regular.ttf-3ee8b0ce3b3635dbe897570c2f894225.fontdata"
+path="res://.godot/imported/MochiyPopOne-Regular.ttf-bf1af9efcfc300d94ad1a3764a107d80.fontdata"
 
 [deps]
 
-source_file="res://assets/interface/MochiyPopOne-Regular.ttf"
-dest_files=["res://.godot/imported/MochiyPopOne-Regular.ttf-3ee8b0ce3b3635dbe897570c2f894225.fontdata"]
+source_file="res://assets/interface/font/MochiyPopOne-Regular.ttf"
+dest_files=["res://.godot/imported/MochiyPopOne-Regular.ttf-bf1af9efcfc300d94ad1a3764a107d80.fontdata"]
 
 [params]
 

@@ -167,9 +167,14 @@ cursor = NodePath("ItemMenu/CursorPosition")
 inventory_item_parent = NodePath("ItemMenu/Items")
 
 [node name="ItemMenu" type="Control" parent="." unique_id=403287714]
-anchors_preset = 0
-offset_right = 454.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -227.0
+offset_right = 227.0
 offset_bottom = 341.0
+grow_horizontal = 2
 
 [node name="Items" type="VBoxContainer" parent="ItemMenu" unique_id=1652061721]
 layout_mode = 1

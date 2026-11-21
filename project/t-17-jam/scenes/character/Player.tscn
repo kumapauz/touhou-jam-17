@@ -94,19 +94,11 @@ shape = SubResource("SphereShape3D_e2t8q")
 [node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1715968167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2108846, 0)
 layers = 4
-shaded = true
+modulate = Color(0.90541595, 0.6667114, 0.30756095, 1)
 double_sided = false
 alpha_cut = 2
 sprite_frames = SubResource("SpriteFrames_e2t8q")
 animation = &"idle"
-
-[node name="Lighting" type="OmniLight3D" parent="Sprite" unique_id=288584774]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08911538, 0.70000005)
-layers = 8
-light_color = Color(1, 0.56078434, 0.019607844, 1)
-light_energy = 0.8
-light_cull_mask = 4293918724
-omni_range = 2.0
 
 [connection signal="area_entered" from="ItemDetector" to="." method="_on_item_detector_entered"]
 [connection signal="area_exited" from="ItemDetector" to="." method="_on_item_detector_exited"]

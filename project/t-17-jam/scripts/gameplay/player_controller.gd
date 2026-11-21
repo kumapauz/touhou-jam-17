@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	process_animation()
 
 func process_actions() -> void:
-	if !is_input_enabled:
+	if !is_input_enabled || DialogManager.instance.is_dialog_active:
 		return
 	
 	if Input.is_action_just_pressed("confirm"):

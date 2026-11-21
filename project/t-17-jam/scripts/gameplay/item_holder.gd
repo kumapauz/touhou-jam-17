@@ -19,6 +19,9 @@ func _ready() -> void:
 	set_item(item, true)
 	item_sent_to_inventory.connect(Callable(InventoryManager.instance, "add_item"))
 
+func clear_item() -> void:
+	set_item(null_item)
+
 ## Changes the item of this particular item holder.
 func set_item(new_item: ItemResource, is_initializing = false) -> void:
 	if !is_instance_valid(new_item) && !is_initializing: # Can't set to null

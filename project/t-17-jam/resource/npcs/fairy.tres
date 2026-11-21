@@ -42,3 +42,6 @@ animations = [{
 script = ExtResource("2_4ax3m")
 name = "Fairy"
 sprite_frames = SubResource("SpriteFrames_gii7t")
+expressions = Array[Texture2D]([ExtResource("3_4ax3m")])
+inquiry_quotes = PackedStringArray("Gimmie this, please!", "How much for this?")
+purchase_quotes = PackedStringArray("Thanks!")

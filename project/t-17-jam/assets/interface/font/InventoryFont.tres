@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://ci1qmjpev67c8"]
 
-[ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/MochiyPopOne-Regular.ttf" id="1_3700c"]
+[ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/font/MochiyPopOne-Regular.ttf" id="1_3700c"]
 
 [resource]
 font = ExtResource("1_3700c")

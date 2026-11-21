@@ -26,6 +26,10 @@ func _physics_process(delta: float) -> void:
 	if !is_active:
 		return
 	
+	if DialogManager.instance.is_dialog_active:
+		# Pause when dialog is active (also includes haggling)
+		return
+	
 	if is_waiting() || current_path_index >= current_path.size() - 1:
 		process_wait(delta)
 		# Reached end of path
@@ -60,17 +64,25 @@ func process_wait(delta: float) -> void:
 	_wait_time = move_toward(_wait_time, 0, delta)
 	if !is_waiting():
 		# TODO Roll a chance to buy an item
+		if randf() < calculate_purchase_chance():
+			DialogManager.instance.start_sale(self)
+			return
 		if randf() < calculate_exit_chance():
 			set_path(_manager.get_exit_path(self))
 		else:
 			set_path(_manager.request_path(self))
+
+func calculate_purchase_chance() -> float:
+	if !is_instance_valid(_target_holder) || !_target_holder.has_item():
+		return 0.0
+	return npc.purchase_bias
 
 func calculate_exit_chance() -> float:
 	if !StatusManager.instance.is_day_active:
 		# Day has ended; leave the store
 		return 1.0
 	# Chance to leave increases with each purchase amount
-	return npc.loitering_bias + (_purchase_count * npc.purchase_bias)
+	return (1.0 - npc.loiter_chance) + (_purchase_count * npc.loiter_increment)
 
 func process_sprite_direction(h_delta: float) -> void:
 	if (h_delta < 0 && sprite.flip_h) || (h_delta > 0 && !sprite.flip_h):
@@ -99,6 +111,10 @@ func is_disliked_item(item: ItemResource) -> bool:
 
 func set_target_holder(holder: ItemHolder) -> void:
 	_target_holder = holder
+
+func purchase_item() -> void:
+	_target_holder.clear_item()
+	_purchase_count += 1
 
 ## Activates this NPC.
 func activate() -> void:

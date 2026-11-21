@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d1mm3tm823pjw" path="res://scripts/interface/inventory_item.gd" id="1_t0pcf"]
 [ext_resource type="Texture2D" uid="uid://cyml7meso7n57" path="res://assets/items/nothing.png" id="2_337y5"]
 [ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_jdoo1"]
-[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/InventoryFont.tres" id="3_337y5"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="3_337y5"]
 
 [node name="InventoryItem" type="HBoxContainer" unique_id=10900996 node_paths=PackedStringArray("sprite", "label", "amount")]
 custom_minimum_size = Vector2(0, 64)

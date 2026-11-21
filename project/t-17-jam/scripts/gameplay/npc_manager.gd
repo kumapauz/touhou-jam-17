@@ -17,7 +17,9 @@ var _npc_resources : Array[NpcResource]
 @export_group("Components")
 @export var npc_parent: Node3D
 @export var item_holder_parent: Node3D
-@export var spawn_timer: Timer
+@export var spawn_interval: float = 1.0
+var _spawn_timer: float
+var _is_spawning_npcs: bool
 var _item_holders: Array[ItemHolder]
 
 var _npc_pool: Array[NpcController]
@@ -58,13 +60,12 @@ func spawn_npc() -> bool:
 	_npc_pool.push_front(npc)
 	return true
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if !_is_grid_initialized:
 		init_pathfinding()
 		return
 	
-	if Input.is_action_just_pressed("ui_copy"):
-		spawn_npc()
+	process_spawn_timer(delta)
 
 ## Creates npc nodes.
 func init_npc_pool() -> void:
@@ -178,16 +179,26 @@ func request_npc() -> NpcResource:
 	var selection: int = randi_range(0, valid_npcs.size() - 1)
 	return valid_npcs.get(selection)
 
-## Attempts to spawn a shopper.
-func attempt_npc_spawn() -> void:
-	if randf() < _npc_chance:
-		spawn_npc()
-		_npc_chance = base_npc_chance
-	else:
-		_npc_chance += npc_chance_interval
+func process_spawn_timer(delta: float) -> void:
+	if !_is_spawning_npcs:
+		return
+	
+	if DialogManager.instance.is_dialog_active:
+		return
+	
+	_spawn_timer = move_toward(_spawn_timer, 0, delta)
+	if is_zero_approx(_spawn_timer):
+		## Attempt to spawn a shopper.
+		_spawn_timer = spawn_interval
+		if randf() < _npc_chance:
+			spawn_npc()
+			_npc_chance = base_npc_chance
+		else:
+			_npc_chance += npc_chance_interval
 
 func on_store_opened() -> void:
-	spawn_timer.start()
+	_is_spawning_npcs = true
+	_spawn_timer = spawn_interval
 
 func on_store_closed() -> void:
-	spawn_timer.stop()
+	_is_spawning_npcs = false

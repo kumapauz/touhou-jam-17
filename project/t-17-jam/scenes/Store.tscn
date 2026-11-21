@@ -12,12 +12,20 @@
 [ext_resource type="PackedScene" uid="uid://clu6oabjgfu61" path="res://scenes/character/Npc.tscn" id="6_oe1d6"]
 [ext_resource type="PackedScene" uid="uid://h0ehjwnr1vvv" path="res://assets/model/Room.gltf" id="8_7ftef"]
 [ext_resource type="PackedScene" uid="uid://dayjn8cs5wd2e" path="res://assets/model/Desk.gltf" id="9_x85wv"]
-[ext_resource type="Script" uid="uid://b1nuksdcwx12b" path="res://scripts/gameplay/status.gd" id="11_23q52"]
-[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/InventoryFont.tres" id="11_hq1qq"]
+[ext_resource type="Script" uid="uid://b1nuksdcwx12b" path="res://scripts/interface/status.gd" id="11_23q52"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="11_hq1qq"]
 [ext_resource type="Texture2D" uid="uid://cdpediinaawmv" path="res://assets/items/bamboo_shoot.png" id="12_y1n3w"]
 [ext_resource type="Texture2D" uid="uid://cyml7meso7n57" path="res://assets/items/nothing.png" id="13_23q52"]
 [ext_resource type="Texture2D" uid="uid://bn80bx1oqo0hg" path="res://assets/items/alchemy_book.png" id="14_7ftef"]
+[ext_resource type="Texture2D" uid="uid://gtsc43xcvhx8" path="res://assets/interface/texture/point.png" id="14_7lbio"]
+[ext_resource type="LabelSettings" uid="uid://dfopdj5m4b8hp" path="res://assets/interface/font/MoneyFont.tres" id="15_0f76r"]
 [ext_resource type="AudioStream" uid="uid://h0xiyloat5cy" path="res://assets/sound/bgm/shop.ogg" id="17_deuux"]
+[ext_resource type="Script" uid="uid://dypjsvoqxetqk" path="res://scripts/interface/dialog_manager.gd" id="18_21atw"]
+[ext_resource type="Texture2D" uid="uid://c6356s3gp2yet" path="res://assets/items/apple.png" id="19_x30x7"]
+[ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="20_slus8"]
+[ext_resource type="Texture2D" uid="uid://bksyf02q73x28" path="res://assets/interface/texture/dialog_portrait_frame.png" id="21_dupml"]
+[ext_resource type="Texture2D" uid="uid://hd20laoeyel" path="res://assets/character/mob/fairy.png" id="22_npagv"]
+[ext_resource type="Texture2D" uid="uid://dsvnd32wgj8x7" path="res://assets/interface/texture/confirm.png" id="25_8q4y6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ayu48"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,6 +40,239 @@ sky = SubResource("Sky_egai5")
 ambient_light_source = 2
 ambient_light_color = Color(0.2585261, 0.23801038, 0.38316852, 1)
 glow_enabled = true
+
+[sub_resource type="Animation" id="Animation_ir5lp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox/Confirm:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox/Confirm:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oqdy7"]
+resource_name = "confirm"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox/Confirm:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(0.8, 0.8), Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox/Confirm:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i6ptu"]
+resource_name = "init"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox/Confirm:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3lkpd"]
+resource_name = "loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox/Confirm:offset_transform_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gcybk"]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox/Confirm:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.3),
+"transitions": PackedFloat32Array(0.5, 0.5, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox/Confirm:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oqdy7"]
+_data = {
+&"RESET": SubResource("Animation_ir5lp"),
+&"confirm": SubResource("Animation_oqdy7"),
+&"init": SubResource("Animation_i6ptu"),
+&"loop": SubResource("Animation_3lkpd"),
+&"show": SubResource("Animation_gcybk")
+}
+
+[sub_resource type="Animation" id="Animation_dxwqf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8q4y6"]
+resource_name = "hide"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_jr0tc"]
+resource_name = "init"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sle2s"]
+resource_name = "show"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogBox:offset_transform_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1, 0), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DialogBox:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dxwqf"]
+_data = {
+&"RESET": SubResource("Animation_dxwqf"),
+&"hide": SubResource("Animation_8q4y6"),
+&"init": SubResource("Animation_jr0tc"),
+&"show": SubResource("Animation_sle2s")
+}
 
 [node name="Store" type="Node3D" unique_id=602147578]
 
@@ -178,19 +419,16 @@ item = ExtResource("6_126te")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 item = ExtResource("6_126te")
 
-[node name="NPCManager" type="Node3D" parent="." unique_id=34856755 node_paths=PackedStringArray("npc_parent", "item_holder_parent", "spawn_timer")]
+[node name="NPCManager" type="Node3D" parent="." unique_id=34856755 node_paths=PackedStringArray("npc_parent", "item_holder_parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -7)
 script = ExtResource("5_gii7t")
 npc_resource_path = "res://resource/npcs"
 npc_scene = ExtResource("6_oe1d6")
 npc_parent = NodePath("NPCParent")
 item_holder_parent = NodePath("../ItemHolders")
-spawn_timer = NodePath("SpawnTimer")
 
 [node name="NPCParent" type="Node3D" parent="NPCManager" unique_id=351537189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
-
-[node name="SpawnTimer" type="Timer" parent="NPCManager" unique_id=239969626]
 
 [node name="Status" type="Control" parent="." unique_id=1391030701 node_paths=PackedStringArray("npc_manager", "money_label", "time_bar")]
 layout_mode = 3
@@ -201,22 +439,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_23q52")
 npc_manager = NodePath("../NPCManager")
-money_label = NodePath("Label")
+money_label = NodePath("Money/Money")
 time_bar = NodePath("Time")
 
-[node name="Label" type="Label" parent="Status" unique_id=1424785077]
+[node name="Money" type="HBoxContainer" parent="Status" unique_id=399891086]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -97.0
-offset_top = -35.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Money:"
-label_settings = ExtResource("11_hq1qq")
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 166.0
+offset_bottom = 96.0
+theme_override_constants/separation = 0
+
+[node name="Texture" type="TextureRect" parent="Status/Money" unique_id=974145537]
+layout_mode = 2
+texture = ExtResource("14_7lbio")
+
+[node name="Money" type="Label" parent="Status/Money" unique_id=1424785077]
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("15_0f76r")
 
 [node name="Time" type="TextureProgressBar" parent="Status" unique_id=285689092]
 layout_mode = 1
@@ -233,10 +474,156 @@ texture_under = ExtResource("12_y1n3w")
 texture_over = ExtResource("13_23q52")
 texture_progress = ExtResource("14_7ftef")
 
+[node name="Dialog" type="Control" parent="." unique_id=1525328914 node_paths=PackedStringArray("item", "speaker_frame", "speaker", "dialog_label", "confirm_animator", "dialog_animator")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_21atw")
+item = NodePath("Item")
+speaker_frame = NodePath("DialogBox/Frame")
+speaker = NodePath("DialogBox/Frame/Background/Speaker")
+dialog_label = NodePath("DialogBox/Label")
+confirm_animator = NodePath("ButtonAnimationPlayer")
+dialog_animator = NodePath("DialogAnimationPlayer")
+
+[node name="Item" type="TextureRect" parent="Dialog" unique_id=1197336043]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -104.0
+offset_right = 64.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_x30x7")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="DialogBox" type="Control" parent="Dialog" unique_id=22392932]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -176.0
+offset_right = 384.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+
+[node name="DialogBox" type="NinePatchRect" parent="Dialog/DialogBox" unique_id=945388682]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_slus8")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="Dialog/DialogBox" unique_id=1714195081]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I want to buy this, please!"
+label_settings = ExtResource("11_hq1qq")
+
+[node name="Frame" type="TextureRect" parent="Dialog/DialogBox" unique_id=1496109157]
+self_modulate = Color(0.8833384, 0.46531957, 0.11210861, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = 64.0
+offset_bottom = 96.0
+grow_vertical = 2
+texture = ExtResource("21_dupml")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Background" type="ColorRect" parent="Dialog/DialogBox/Frame" unique_id=409804944]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speaker" type="TextureRect" parent="Dialog/DialogBox/Frame/Background" unique_id=1494724381]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 304.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_npagv")
+stretch_mode = 5
+
+[node name="Confirm" type="TextureRect" parent="Dialog/DialogBox" unique_id=571352132]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("25_8q4y6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ButtonAnimationPlayer" type="AnimationPlayer" parent="Dialog" unique_id=1676693910]
+libraries/ = SubResource("AnimationLibrary_oqdy7")
+autoplay = &"init"
+next/show = &"loop"
+
+[node name="DialogAnimationPlayer" type="AnimationPlayer" parent="Dialog" unique_id=1933455259]
+libraries/ = SubResource("AnimationLibrary_dxwqf")
+autoplay = &"init"
+
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=169360429]
 stream = ExtResource("17_deuux")
 autoplay = true
 
-[connection signal="timeout" from="NPCManager/SpawnTimer" to="NPCManager" method="attempt_npc_spawn"]
 [connection signal="day_finished" from="Status" to="NPCManager" method="on_store_closed"]
 [connection signal="day_started" from="Status" to="NPCManager" method="on_store_opened"]

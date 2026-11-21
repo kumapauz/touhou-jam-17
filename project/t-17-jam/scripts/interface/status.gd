@@ -28,6 +28,7 @@ signal day_finished
 
 func _enter_tree() -> void:
 	instance = self
+	add_money(0)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
