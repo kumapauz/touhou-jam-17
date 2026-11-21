@@ -68,8 +68,9 @@ func show_menu() -> void:
 func hide_menu() -> void:
 	if is_active_menu():
 		menu_stack.pop_back()
+		if menu_stack.is_empty():
+			PlayerController.instance.enable_movement()
 	animator.play("hide")
-	PlayerController.instance.enable_movement()
 	menu_hidden.emit()
 
 ## Call from the animator.

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dy3ih3d26nojk" path="res://scripts/interface/menu/inventory_manager.gd" id="1_jhjjr"]
 [ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_tb4qw"]
 [ext_resource type="PackedScene" uid="uid://dsg034tagyv50" path="res://scenes/interface/InventoryItem.tscn" id="2_unyr0"]
+[ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="3_mlrm8"]
+[ext_resource type="Texture2D" uid="uid://bbiabwi7hvkjc" path="res://assets/interface/texture/result_point.png" id="4_f4tlj"]
 
 [sub_resource type="Animation" id="Animation_mlrm8"]
 length = 0.001
@@ -153,7 +155,7 @@ _data = {
 &"show": SubResource("Animation_tb4qw")
 }
 
-[node name="Inventory" type="Control" unique_id=576772133 node_paths=PackedStringArray("cursor", "animator", "selection_parent")]
+[node name="InventoryManager" type="Control" unique_id=576772133 node_paths=PackedStringArray("cursor", "animator", "selection_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,25 +168,62 @@ cursor = NodePath("ItemMenu/CursorPosition")
 animator = NodePath("ItemMenu/MenuAnimator")
 selection_parent = NodePath("ItemMenu/Items")
 
-[node name="ItemMenu" type="Control" parent="." unique_id=403287714]
+[node name="ItemMenu" type="NinePatchRect" parent="." unique_id=652247356]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -227.0
-offset_right = 227.0
-offset_bottom = 341.0
+anchor_bottom = 0.5
+offset_left = -241.5
+offset_top = -176.0
+offset_right = 241.5
+offset_bottom = 192.0
 grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mlrm8")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="CursorPosition" type="Control" parent="ItemMenu" unique_id=592441975]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 17.5
+offset_top = 16.0
+offset_right = 17.5
+offset_bottom = 16.0
+grow_horizontal = 2
+
+[node name="Cursor" type="NinePatchRect" parent="ItemMenu/CursorPosition" unique_id=1891972135]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -16.0
+offset_right = -19.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = ExtResource("4_f4tlj")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
 
 [node name="Items" type="VBoxContainer" parent="ItemMenu" unique_id=1652061721]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 16.0
+offset_right = -19.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryItem" parent="ItemMenu/Items" unique_id=10900996 instance=ExtResource("2_unyr0")]
+[node name="InventoryItem1" parent="ItemMenu/Items" unique_id=10900996 instance=ExtResource("2_unyr0")]
 layout_mode = 2
 
 [node name="InventoryItem2" parent="ItemMenu/Items" unique_id=1577542011 instance=ExtResource("2_unyr0")]
@@ -198,17 +237,6 @@ layout_mode = 2
 
 [node name="InventoryItem5" parent="ItemMenu/Items" unique_id=1619945481 instance=ExtResource("2_unyr0")]
 layout_mode = 2
-
-[node name="CursorPosition" type="Control" parent="ItemMenu" unique_id=592441975]
-layout_mode = 1
-anchors_preset = 0
-
-[node name="Cursor" type="ColorRect" parent="ItemMenu/CursorPosition" unique_id=1441884704]
-layout_mode = 0
-offset_top = 51.0
-offset_right = 462.0
-offset_bottom = 64.0
-color = Color(0, 1, 0, 0.5019608)
 
 [node name="MenuAnimator" type="AnimationPlayer" parent="ItemMenu" unique_id=150365003]
 root_node = NodePath("../..")

@@ -4,15 +4,12 @@
 [ext_resource type="Script" uid="uid://cm666m61wbl20" path="res://scripts/gameplay/camera.gd" id="2_egai5"]
 [ext_resource type="PackedScene" uid="uid://nadiwcif1tnb" path="res://scenes/interface/Inventory.tscn" id="3_126te"]
 [ext_resource type="PackedScene" uid="uid://by8m7efnmjpbt" path="res://scenes/prefab/ItemHolder.tscn" id="3_lw67d"]
-[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="4_6hsdf"]
-[ext_resource type="Resource" uid="uid://bi5l3q4iomax6" path="res://resource/items/Apple.tres" id="4_xdmv4"]
 [ext_resource type="Script" uid="uid://02ynruafbyra" path="res://scripts/gameplay/npc_manager.gd" id="5_gii7t"]
-[ext_resource type="Resource" uid="uid://biy4l7vw6axob" path="res://resource/items/AlchemyBook.tres" id="5_xlrfv"]
 [ext_resource type="Resource" uid="uid://c75toub3n1o0c" path="res://resource/items/BambooShoot.tres" id="6_126te"]
 [ext_resource type="PackedScene" uid="uid://clu6oabjgfu61" path="res://scenes/character/Npc.tscn" id="6_oe1d6"]
 [ext_resource type="PackedScene" uid="uid://h0ehjwnr1vvv" path="res://assets/model/Room.gltf" id="8_7ftef"]
 [ext_resource type="PackedScene" uid="uid://dayjn8cs5wd2e" path="res://assets/model/Desk.gltf" id="9_x85wv"]
-[ext_resource type="Script" uid="uid://d3rm88qcta2u4" path="res://scripts/gameplay/interactable/delivery_trigger.gd" id="11_8q4y6"]
+[ext_resource type="Script" uid="uid://d3rm88qcta2u4" path="res://scripts/gameplay/interactable/desk_trigger.gd" id="11_8q4y6"]
 [ext_resource type="PackedScene" uid="uid://c76ogwohts2gi" path="res://scenes/interface/Status.tscn" id="13_slus8"]
 [ext_resource type="AudioStream" uid="uid://h0xiyloat5cy" path="res://assets/sound/bgm/shop.ogg" id="17_deuux"]
 [ext_resource type="PackedScene" uid="uid://3d83gyd60kjw" path="res://scenes/interface/Dialog.tscn" id="19_slus8"]
@@ -20,7 +17,7 @@
 [ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/font/MochiyPopOne-Regular.ttf" id="23_npagv"]
 [ext_resource type="ArrayMesh" uid="uid://qw1jhisc40ui" path="res://assets/model/glow.obj" id="24_0f76r"]
 [ext_resource type="Material" uid="uid://degvkk23ow0w5" path="res://assets/model/material/ItemHolderCursor.tres" id="25_sle2s"]
-[ext_resource type="PackedScene" uid="uid://dj1tbq6vtwjcd" path="res://scenes/interface/Deliveries.tscn" id="26_sle2s"]
+[ext_resource type="PackedScene" uid="uid://dj1tbq6vtwjcd" path="res://scenes/interface/Desk.tscn" id="26_sle2s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ayu48"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -257,25 +254,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Deliveries" parent="Interface" unique_id=167356728 instance=ExtResource("26_sle2s")]
-layout_mode = 1
-
-[node name="Inventory" parent="Interface" unique_id=576772133 instance=ExtResource("3_126te")]
-layout_mode = 1
-items = Array[ExtResource("4_6hsdf")]([ExtResource("6_126te"), ExtResource("4_xdmv4"), ExtResource("5_xlrfv"), ExtResource("6_126te"), ExtResource("5_xlrfv"), ExtResource("5_xlrfv"), ExtResource("6_126te")])
-
-[node name="Status" parent="Interface" unique_id=2004891369 instance=ExtResource("13_slus8")]
+[node name="DeskManager" parent="Interface" unique_id=167356728 instance=ExtResource("26_sle2s")]
 layout_mode = 1
 
 [node name="Dialog" parent="Interface" unique_id=221836180 instance=ExtResource("19_slus8")]
+layout_mode = 1
+
+[node name="InventoryManager" parent="Interface" unique_id=576772133 instance=ExtResource("3_126te")]
+layout_mode = 1
+
+[node name="StatusManager" parent="Interface" unique_id=2004891369 instance=ExtResource("13_slus8")]
 layout_mode = 1
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=169360429]
 stream = ExtResource("17_deuux")
 autoplay = true
 
-[connection signal="day_finished" from="Interface/Status" to="Player/Player" method="disable_movement"]
-[connection signal="day_reset" from="Interface/Status" to="Player/Player" method="respawn"]
-[connection signal="day_started" from="Interface/Status" to="Player/Player" method="enable_movement"]
-[connection signal="store_closed" from="Interface/Status" to="NPCManager" method="on_store_closed"]
-[connection signal="store_opened" from="Interface/Status" to="NPCManager" method="on_store_opened"]
+[connection signal="day_finished" from="Interface/StatusManager" to="Player/Player" method="disable_movement"]
+[connection signal="day_reset" from="Interface/StatusManager" to="Player/Player" method="respawn"]
+[connection signal="day_started" from="Interface/StatusManager" to="Player/Player" method="enable_movement"]
+[connection signal="store_closed" from="Interface/StatusManager" to="NPCManager" method="on_store_closed"]
+[connection signal="store_opened" from="Interface/StatusManager" to="NPCManager" method="on_store_opened"]

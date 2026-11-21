@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dj1tbq6vtwjcd"]
 
-[ext_resource type="Script" uid="uid://b31qo24mrm4sa" path="res://scripts/interface/menu/delivery_manager.gd" id="1_lxpun"]
+[ext_resource type="Script" uid="uid://b31qo24mrm4sa" path="res://scripts/interface/menu/desk_manager.gd" id="1_lxpun"]
 [ext_resource type="Texture2D" uid="uid://do5n62wok0xsa" path="res://assets/interface/texture/delivery_option.png" id="2_febt1"]
 [ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="2_xrg3a"]
 [ext_resource type="Texture2D" uid="uid://c2pli2qt56ayq" path="res://assets/interface/texture/delivery_cursor.png" id="3_03xuj"]
@@ -37,6 +37,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_menu_hidden"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_rrj8p"]
 resource_name = "show"
@@ -60,11 +74,11 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"on_menu_opened"
+"method": &"on_menu_shown"
 }]
 }
 
@@ -75,7 +89,7 @@ _data = {
 &"show": SubResource("Animation_rrj8p")
 }
 
-[node name="Deliveries" type="Control" unique_id=167356728 node_paths=PackedStringArray("description", "cursor", "animator", "selection_parent")]
+[node name="DeskManager" type="Control" unique_id=167356728 node_paths=PackedStringArray("description", "cursor", "animator", "selection_parent")]
 visible = false
 layout_mode = 3
 anchors_preset = 15

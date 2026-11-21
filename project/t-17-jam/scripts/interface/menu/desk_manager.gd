@@ -1,7 +1,7 @@
 extends Menu
-class_name DeliveryManager
+class_name DeskManager
 
-static var instance: DeliveryManager
+static var instance: DeskManager
 
 @export var description: Label
 @export_dir var item_resource_path: String
