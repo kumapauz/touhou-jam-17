@@ -17,7 +17,7 @@ func initialize_menu() -> void:
 func reset_trends() -> void:
 	for item in items:
 		# Reset trend prices
-		trends[item] = item.price
+		trends[item] = item.price * 0.8 # Start with initial discount of 20%
 		# TODO Add some fluctuation to the initial prices?
 
 func populate_options() -> void:
