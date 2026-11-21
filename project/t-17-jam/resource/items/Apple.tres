@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_fs3ql")
 item_name = "Apple"
-item_description = "Just a regular apple. Not bad."
+item_description = "Just a regular apple. Not too bad!"
 ui_texture = ExtResource("2_fs3ql")
+price = 50
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

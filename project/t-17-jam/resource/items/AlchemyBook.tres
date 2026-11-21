@@ -8,4 +8,5 @@ script = ExtResource("1_4ov2w")
 item_name = "Alchemy Book"
 item_description = "A book that contains knowledge of alchemy and the cosmos, only those who study magic can understand it."
 ui_texture = ExtResource("2_wngs3")
+price = 120
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

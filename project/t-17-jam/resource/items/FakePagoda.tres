@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://3mingcnu6vaj"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_cmc2a"]
+[ext_resource type="Texture2D" uid="uid://kcpo050pq7wi" path="res://assets/items/fake_pagoda.png" id="2_cmc2a"]
+
+[resource]
+script = ExtResource("1_cmc2a")
+item_name = "Fake Pagoda"
+item_description = "A cheap imitation of the Jeweled Pagoda of Bishamonten, looks like the real deal, but is overall a false copy. Perfect for swindling the Disciple of Bishamonten, not so much with her familiar, Nazrin. "
+ui_texture = ExtResource("2_cmc2a")
+price = 150
+metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

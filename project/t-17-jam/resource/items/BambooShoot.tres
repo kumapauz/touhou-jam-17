@@ -8,4 +8,5 @@ script = ExtResource("1_w2ekd")
 item_name = "Bamboo Shoot"
 item_description = "Grows in a dense forest where all who lose their path are doomed to wander forever."
 ui_texture = ExtResource("2_w2ekd")
+price = 80
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

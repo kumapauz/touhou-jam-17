@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://ca55nket6admb"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_2wk36"]
+[ext_resource type="Texture2D" uid="uid://d2qpjvi8gb4cs" path="res://assets/items/parasol.png" id="2_gptsc"]
+
+[resource]
+script = ExtResource("1_2wk36")
+item_name = "Parasol"
+item_description = "A lightweight umbrella with a cane handle used to block out light and provide shade from the sun. Also a fashionable item that indicates serenity and beauty from its user."
+ui_texture = ExtResource("2_gptsc")
+price = 200
+metadata/_custom_type_script = "uid://rnbtm2pl8g8f"
