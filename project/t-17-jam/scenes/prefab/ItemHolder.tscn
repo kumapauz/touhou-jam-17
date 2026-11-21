@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://by8m7efnmjpbt"]
 
-[ext_resource type="Script" uid="uid://dq3mlbg5mc4ai" path="res://scripts/gameplay/item_holder.gd" id="1_vbqnc"]
+[ext_resource type="Script" uid="uid://dq3mlbg5mc4ai" path="res://scripts/gameplay/interactable/item_holder.gd" id="1_vbqnc"]
 [ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_7rufu"]
 [ext_resource type="Texture2D" uid="uid://ct3d8n18wehtu" path="res://icon.svg" id="2_t1ah2"]
 [ext_resource type="Texture2D" uid="uid://dvuwjb74f420q" path="res://assets/model/texture/blob_shadow.png" id="4_j4p0w"]
@@ -15,14 +15,14 @@ radius = 2.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_e2t8q"]
 size = Vector3(2, 1.8, 2)
 
-[node name="ItemHolder" type="Area3D" unique_id=866453235 node_paths=PackedStringArray("sprite", "cursor")]
+[node name="ItemHolder" type="Area3D" unique_id=866453235 node_paths=PackedStringArray("sprite", "select_root")]
 collision_layer = 2
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_vbqnc")
 null_item = ExtResource("2_7rufu")
 sprite = NodePath("Sprite3D")
-cursor = NodePath("Cursor")
+select_root = NodePath("Cursor")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1608962974]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

@@ -57,10 +57,6 @@ func _process(delta: float) -> void:
 	if game_state == GAME_STATE.DAY_FINISHED && Input.is_action_just_pressed("confirm"):
 		reset_day()
 	
-	if Input.is_action_just_pressed("pause"):
-		game_state = GAME_STATE.STORE_OPEN
-		store_opened.emit()
-	
 	if DialogManager.instance.is_dialog_active:
 		return
 	
@@ -73,6 +69,10 @@ func _process(delta: float) -> void:
 		# Store has closed
 		game_state = GAME_STATE.STORE_CLOSED
 		store_closed.emit()
+
+func open_store() -> void:
+	game_state = GAME_STATE.STORE_OPEN
+	store_opened.emit()
 
 func add_money(amount: int) -> void:
 	money = max(0, money + amount)

@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://clu6oabjgfu61" path="res://scenes/character/Npc.tscn" id="6_oe1d6"]
 [ext_resource type="PackedScene" uid="uid://h0ehjwnr1vvv" path="res://assets/model/Room.gltf" id="8_7ftef"]
 [ext_resource type="PackedScene" uid="uid://dayjn8cs5wd2e" path="res://assets/model/Desk.gltf" id="9_x85wv"]
+[ext_resource type="Script" uid="uid://d3rm88qcta2u4" path="res://scripts/gameplay/interactable/delivery.gd" id="11_8q4y6"]
 [ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="11_hq1qq"]
 [ext_resource type="PackedScene" uid="uid://c76ogwohts2gi" path="res://scenes/interface/Status.tscn" id="13_slus8"]
 [ext_resource type="AudioStream" uid="uid://h0xiyloat5cy" path="res://assets/sound/bgm/shop.ogg" id="17_deuux"]
@@ -19,8 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://c6356s3gp2yet" path="res://assets/items/apple.png" id="19_x30x7"]
 [ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="20_slus8"]
 [ext_resource type="Texture2D" uid="uid://bksyf02q73x28" path="res://assets/interface/texture/dialog_portrait_frame.png" id="21_dupml"]
+[ext_resource type="Script" uid="uid://v2ribksypgge" path="res://scripts/gameplay/interactable/door_starter.gd" id="22_dupml"]
 [ext_resource type="Texture2D" uid="uid://hd20laoeyel" path="res://assets/character/mob/fairy.png" id="22_npagv"]
+[ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/font/MochiyPopOne-Regular.ttf" id="23_npagv"]
+[ext_resource type="ArrayMesh" uid="uid://qw1jhisc40ui" path="res://assets/model/glow.obj" id="24_0f76r"]
 [ext_resource type="Texture2D" uid="uid://dsvnd32wgj8x7" path="res://assets/interface/texture/confirm.png" id="25_8q4y6"]
+[ext_resource type="Material" uid="uid://degvkk23ow0w5" path="res://assets/model/material/ItemHolderCursor.tres" id="25_sle2s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ayu48"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -35,6 +40,12 @@ sky = SubResource("Sky_egai5")
 ambient_light_source = 2
 ambient_light_color = Color(0.2585261, 0.23801038, 0.38316852, 1)
 glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2t8q"]
+size = Vector3(3, 4, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0f76r"]
+size = Vector3(5, 4, 1)
 
 [sub_resource type="Animation" id="Animation_ir5lp"]
 length = 0.001
@@ -410,6 +421,60 @@ item = ExtResource("6_126te")
 [node name="ItemHolder4" parent="ItemHolders/SideCounter" unique_id=478154139 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 item = ExtResource("6_126te")
+
+[node name="DoorStarter" type="Area3D" parent="ItemHolders" unique_id=1045932909 node_paths=PackedStringArray("select_root")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("22_dupml")
+select_root = NodePath("Select")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemHolders/DoorStarter" unique_id=1205359018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_e2t8q")
+debug_color = Color(0.96216804, 0.19730136, 3.85046e-07, 0.41960785)
+
+[node name="Select" type="Node3D" parent="ItemHolders/DoorStarter" unique_id=894860150]
+visible = false
+
+[node name="Label3D" type="Label3D" parent="ItemHolders/DoorStarter/Select" unique_id=537134035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1)
+text = "Open Store"
+font = ExtResource("23_npagv")
+font_size = 72
+
+[node name="Cursor" type="MeshInstance3D" parent="ItemHolders/DoorStarter/Select" unique_id=13551064]
+transform = Transform3D(1.8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+mesh = ExtResource("24_0f76r")
+surface_material_override/0 = ExtResource("25_sle2s")
+
+[node name="Delivery" type="Area3D" parent="ItemHolders" unique_id=681672168 node_paths=PackedStringArray("select_root")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 4)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("11_8q4y6")
+select_root = NodePath("Select")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemHolders/Delivery" unique_id=284894996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+shape = SubResource("BoxShape3D_0f76r")
+debug_color = Color(0.96216804, 0.19730136, 3.85046e-07, 0.41960785)
+
+[node name="Select" type="Node3D" parent="ItemHolders/Delivery" unique_id=771804702]
+visible = false
+
+[node name="Label3D" type="Label3D" parent="ItemHolders/Delivery/Select" unique_id=1247727438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 1)
+text = "Deliveries"
+font = ExtResource("23_npagv")
+font_size = 72
+
+[node name="Cursor" type="MeshInstance3D" parent="ItemHolders/Delivery/Select" unique_id=1105952438]
+transform = Transform3D(3.6, 0, 0, 0, 1, 0, 0, 0, 1.3, 0, 0, 0)
+mesh = ExtResource("24_0f76r")
+surface_material_override/0 = ExtResource("25_sle2s")
 
 [node name="NPCManager" type="Node3D" parent="." unique_id=34856755 node_paths=PackedStringArray("npc_parent", "item_holder_parent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -7)

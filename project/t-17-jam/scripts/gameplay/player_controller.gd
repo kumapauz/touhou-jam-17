@@ -1,5 +1,8 @@
 ### Handles the player controller.
 extends CharacterBody3D
+class_name PlayerController
+
+static var instance: PlayerController
 
 @export_group("Movement Settings")
 @export var top_speed: float = 20.0
@@ -18,6 +21,9 @@ var move_speed: float
 var move_angle: float
 const TURNAROUND_ANGLE: float = PI * 0.75
 
+func _enter_tree() -> void:
+	instance = self
+
 func _ready() -> void:
 	_spawn_transform = transform
 
@@ -32,45 +38,42 @@ func process_actions() -> void:
 	if !is_input_enabled || DialogManager.instance.is_dialog_active:
 		return
 	
-	process_item_holders()
-	if Input.is_action_just_pressed("confirm") && is_instance_valid(_active_item_holder):
-		# Open inventory menu
-		var menu_settings := InventoryManager.MenuSettings.new()
-		menu_settings.allow_selecting_nothing = true
-		InventoryManager.instance.show_menu(menu_settings)
-		InventoryManager.instance.item_selected.connect(Callable.create(self, "on_inventory_selected"), CONNECT_ONE_SHOT)
-		InventoryManager.instance.menu_hidden.connect(Callable.create(self, "on_inventory_hidden"), CONNECT_ONE_SHOT)
-		disable_movement()
+	process_interactable_objects()
+	if Input.is_action_just_pressed("confirm") && is_instance_valid(_active_object):
+		_active_object.interact()
 
-func process_item_holders() -> void:
-	if item_holders.size() == 0:
+func process_interactable_objects() -> void:
+	if interactable_objects.size() == 0:
 		return
 	
 	var closest_dist: float = INF
-	var target_item_holder: ItemHolder = _active_item_holder
-	if is_instance_valid(_active_item_holder):
-		closest_dist = _active_item_holder.global_position.distance_squared_to(global_position)
-	for holder in item_holders:
-		if holder == _active_item_holder:
+	var target_object: InteractableObject = _active_object
+	if is_instance_valid(_active_object):
+		if _active_object.is_selectable():
+			closest_dist = _active_object.global_position.distance_squared_to(global_position)
+		else:
+			target_object = null
+	for interactable in interactable_objects:
+		if interactable == _active_object || !interactable.is_selectable():
 			continue
-		var dist: float = holder.global_position.distance_squared_to(global_position)
+		var dist: float = interactable.global_position.distance_squared_to(global_position)
 		if dist < closest_dist:
-			target_item_holder = holder
+			target_object = interactable
 			closest_dist = dist
-	if target_item_holder != _active_item_holder:
-		set_active_item_holder(target_item_holder)
+	if target_object != _active_object:
+		set_active_interactable_object(target_object)
 
-func set_active_item_holder(new_holder: ItemHolder) -> void:
-	print("Item holder set to %s" % new_holder)
-	if is_instance_valid(_active_item_holder):
-		_active_item_holder.deselect_holder()
-	_active_item_holder = new_holder
-	if is_instance_valid(_active_item_holder):
-		_active_item_holder.select_holder()
+func set_active_interactable_object(new_interactable: InteractableObject) -> void:
+	print("Interactable object set to %s" % new_interactable)
+	if is_instance_valid(_active_object):
+		_active_object.deselect()
+	_active_object = new_interactable
+	if is_instance_valid(_active_object):
+		_active_object.select()
 
 func on_inventory_selected(item: ItemResource) -> void:
 	InventoryManager.instance.remove_item(item)
-	_active_item_holder.set_item(item)
+	_active_object.set_item(item)
 
 func on_inventory_hidden() -> void:
 	for connection in InventoryManager.instance.item_selected.get_connections():
@@ -136,18 +139,18 @@ func respawn() -> void:
 ####################
 ###Item Detection###
 ####################
-var item_holders: Array[ItemHolder]
-var _active_item_holder: ItemHolder
+var interactable_objects: Array[InteractableObject]
+var _active_object: InteractableObject
 func _on_item_detector_entered(area: Area3D) -> void:
-	if area is ItemHolder:
-		item_holders.append(area)
-		print("Added item holder")
+	if area is InteractableObject:
+		interactable_objects.append(area)
+		print("Added interactable object")
 
 func _on_item_detector_exited(area: Area3D) -> void:
-	if area is ItemHolder:
-		var index: int = item_holders.find(area)
+	if area is InteractableObject:
+		var index: int = interactable_objects.find(area)
 		if index != -1:
-			item_holders.remove_at(index)
-			print("Removed item holder")
-			if item_holders.size() == 0:
-				set_active_item_holder(null)
+			interactable_objects.remove_at(index)
+			print("Removed interactable object")
+			if interactable_objects.size() == 0:
+				set_active_interactable_object(null)

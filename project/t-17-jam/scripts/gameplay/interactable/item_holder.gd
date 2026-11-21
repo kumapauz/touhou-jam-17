@@ -1,6 +1,6 @@
 ### A place where the player can place an object.
 ### NPCs can also walk up to certain item holders to buy the object.
-extends Area3D
+extends InteractableObject
 class_name ItemHolder
 
 signal item_sent_to_inventory(item: ItemResource)
@@ -13,7 +13,6 @@ signal item_sent_to_inventory(item: ItemResource)
 @export_group("Components")
 ## The sprite node of this item.
 @export var sprite: Sprite3D
-@export var cursor: MeshInstance3D
 
 func _ready() -> void:
 	# Mostly for testing in the editor
@@ -23,16 +22,14 @@ func _ready() -> void:
 func clear_item() -> void:
 	set_item(null_item)
 
-## Show the cursor.
-func select_holder() -> void:
-	cursor.visible = true
-
-## Hide the cursor.
-func deselect_holder() -> void:
-	cursor.visible = false
-
-func is_selected() -> bool:
-	return cursor.visible
+func interact() -> void:
+	# Open inventory menu
+	var menu_settings := InventoryManager.MenuSettings.new()
+	menu_settings.allow_selecting_nothing = true
+	InventoryManager.instance.show_menu(menu_settings)
+	InventoryManager.instance.item_selected.connect(Callable.create(PlayerController.instance, "on_inventory_selected"), CONNECT_ONE_SHOT)
+	InventoryManager.instance.menu_hidden.connect(Callable.create(PlayerController.instance, "on_inventory_hidden"), CONNECT_ONE_SHOT)
+	PlayerController.instance.disable_movement()
 
 ## Changes the item of this particular item holder.
 func set_item(new_item: ItemResource, is_initializing = false) -> void:
