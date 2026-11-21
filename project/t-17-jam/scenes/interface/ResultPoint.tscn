@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bdfjlkl3ki1hl"]
+
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="1_nyg8x"]
+[ext_resource type="Script" uid="uid://46pt643ru83a" path="res://scripts/interface/result_point.gd" id="1_umgu1"]
+
+[node name="Point" type="Control" unique_id=1926069851 node_paths=PackedStringArray("day", "bar")]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 128.0
+script = ExtResource("1_umgu1")
+day = NodePath("Label")
+bar = NodePath("Bar")
+
+[node name="Bar" type="ColorRect" parent="." unique_id=1458632222]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+
+[node name="Label" type="Label" parent="." unique_id=722162231]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1"
+label_settings = ExtResource("1_nyg8x")
+horizontal_alignment = 1

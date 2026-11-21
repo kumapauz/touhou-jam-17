@@ -51,16 +51,27 @@ func spawn_npcs() -> void:
 
 ## Spawns a single NPC.
 func spawn_npc() -> bool:
-	if _npc_pool.back().is_active:
-		# No more NPCs to spawn
+	var npc: NpcController = get_inactive_npc()
+	if !is_instance_valid(npc):
 		return false
-	var npc: NpcController = _npc_pool.pop_back()
 	npc.set_npc(request_npc())
 	npc.activate()
 	npc.position = Vector3.ZERO
 	npc.set_path(request_path(npc, true))
-	_npc_pool.push_front(npc)
 	return true
+
+func get_inactive_npc() -> NpcController:
+	for npc in _npc_pool:
+		if npc.is_active:
+			continue
+		return npc
+	return null
+
+func is_npc_active() -> bool:
+	for npc in _npc_pool:
+		if npc.is_active:
+			return true
+	return false
 
 func _process(delta: float) -> void:
 	if !_is_grid_initialized:
@@ -183,6 +194,7 @@ func request_npc() -> NpcResource:
 
 func process_spawn_timer(delta: float) -> void:
 	if !_is_spawning_npcs:
+		check_day_end()
 		return
 	
 	if DialogManager.instance.is_dialog_active:
@@ -207,3 +219,9 @@ func on_store_opened() -> void:
 
 func on_store_closed() -> void:
 	_is_spawning_npcs = false
+
+func check_day_end() -> void:
+	if StatusManager.instance.game_state != StatusManager.GAME_STATE.STORE_CLOSED:
+		return
+	if !is_npc_active():
+		StatusManager.instance.finish_day()

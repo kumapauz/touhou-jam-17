@@ -88,7 +88,7 @@ func calculate_purchase_chance() -> float:
 	return npc.purchase_bias
 
 func calculate_loiter_chance() -> float:
-	if !StatusManager.instance.is_day_active:
+	if StatusManager.instance.game_state != StatusManager.GAME_STATE.STORE_OPEN:
 		# Day has ended; leave the store
 		return 0.0
 	# Chance to leave increases with each purchase amount

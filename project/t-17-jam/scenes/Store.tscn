@@ -12,13 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://clu6oabjgfu61" path="res://scenes/character/Npc.tscn" id="6_oe1d6"]
 [ext_resource type="PackedScene" uid="uid://h0ehjwnr1vvv" path="res://assets/model/Room.gltf" id="8_7ftef"]
 [ext_resource type="PackedScene" uid="uid://dayjn8cs5wd2e" path="res://assets/model/Desk.gltf" id="9_x85wv"]
-[ext_resource type="Script" uid="uid://b1nuksdcwx12b" path="res://scripts/interface/status.gd" id="11_23q52"]
 [ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="11_hq1qq"]
-[ext_resource type="Texture2D" uid="uid://cdpediinaawmv" path="res://assets/items/bamboo_shoot.png" id="12_y1n3w"]
-[ext_resource type="Texture2D" uid="uid://cyml7meso7n57" path="res://assets/items/nothing.png" id="13_23q52"]
-[ext_resource type="Texture2D" uid="uid://bn80bx1oqo0hg" path="res://assets/items/alchemy_book.png" id="14_7ftef"]
-[ext_resource type="Texture2D" uid="uid://gtsc43xcvhx8" path="res://assets/interface/texture/point.png" id="14_7lbio"]
-[ext_resource type="LabelSettings" uid="uid://dfopdj5m4b8hp" path="res://assets/interface/font/MoneyFont.tres" id="15_0f76r"]
+[ext_resource type="PackedScene" uid="uid://c76ogwohts2gi" path="res://scenes/interface/Status.tscn" id="13_slus8"]
 [ext_resource type="AudioStream" uid="uid://h0xiyloat5cy" path="res://assets/sound/bgm/shop.ogg" id="17_deuux"]
 [ext_resource type="Script" uid="uid://dypjsvoqxetqk" path="res://scripts/interface/dialog_manager.gd" id="18_21atw"]
 [ext_resource type="Texture2D" uid="uid://c6356s3gp2yet" path="res://assets/items/apple.png" id="19_x30x7"]
@@ -439,49 +434,8 @@ grow_vertical = 2
 layout_mode = 1
 items = Array[ExtResource("4_6hsdf")]([ExtResource("6_126te"), ExtResource("4_xdmv4"), ExtResource("5_xlrfv"), ExtResource("6_126te"), ExtResource("5_xlrfv"), ExtResource("5_xlrfv"), ExtResource("6_126te")])
 
-[node name="Status" type="Control" parent="Interface" unique_id=1391030701 node_paths=PackedStringArray("npc_manager", "money_label", "time_bar")]
+[node name="Status" parent="Interface" unique_id=2004891369 instance=ExtResource("13_slus8")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_23q52")
-npc_manager = NodePath("../../NPCManager")
-money_label = NodePath("Money/Money")
-time_bar = NodePath("Time")
-
-[node name="Money" type="HBoxContainer" parent="Interface/Status" unique_id=399891086]
-layout_mode = 1
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 166.0
-offset_bottom = 96.0
-theme_override_constants/separation = 0
-
-[node name="Texture" type="TextureRect" parent="Interface/Status/Money" unique_id=974145537]
-layout_mode = 2
-texture = ExtResource("14_7lbio")
-
-[node name="Money" type="Label" parent="Interface/Status/Money" unique_id=1424785077]
-layout_mode = 2
-text = "100"
-label_settings = ExtResource("15_0f76r")
-
-[node name="Time" type="TextureProgressBar" parent="Interface/Status" unique_id=285689092]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -256.0
-offset_right = 256.0
-grow_vertical = 0
-max_value = 1.0
-step = 0.0
-fill_mode = 4
-texture_under = ExtResource("12_y1n3w")
-texture_over = ExtResource("13_23q52")
-texture_progress = ExtResource("14_7ftef")
 
 [node name="Dialog" type="Control" parent="Interface" unique_id=1525328914 node_paths=PackedStringArray("item", "speaker_frame", "speaker", "dialog_label", "confirm_animator", "dialog_animator")]
 layout_mode = 1
@@ -634,5 +588,8 @@ autoplay = &"init"
 stream = ExtResource("17_deuux")
 autoplay = true
 
-[connection signal="day_finished" from="Interface/Status" to="NPCManager" method="on_store_closed"]
-[connection signal="day_started" from="Interface/Status" to="NPCManager" method="on_store_opened"]
+[connection signal="day_finished" from="Interface/Status" to="Player/Player" method="disable_movement"]
+[connection signal="day_reset" from="Interface/Status" to="Player/Player" method="respawn"]
+[connection signal="day_started" from="Interface/Status" to="Player/Player" method="enable_movement"]
+[connection signal="store_closed" from="Interface/Status" to="NPCManager" method="on_store_closed"]
+[connection signal="store_opened" from="Interface/Status" to="NPCManager" method="on_store_opened"]

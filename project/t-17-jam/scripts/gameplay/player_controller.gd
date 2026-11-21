@@ -13,12 +13,13 @@ extends CharacterBody3D
 @export_group("Debug Settings")
 @export var debug_root: Node3D
 
+var _spawn_transform: Transform3D
 var move_speed: float
 var move_angle: float
 const TURNAROUND_ANGLE: float = PI * 0.75
 
 func _ready() -> void:
-	enable_movement()
+	_spawn_transform = transform
 
 func _process(_delta: float) -> void:
 	process_actions()
@@ -127,6 +128,10 @@ func disable_movement() -> void:
 	is_input_enabled = false
 	move_speed = 0
 	# TODO Reset animations
+
+func respawn() -> void:
+	transform = _spawn_transform
+	enable_movement()
 
 ####################
 ###Item Detection###

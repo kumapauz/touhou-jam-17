@@ -1,0 +1,562 @@
+[gd_scene format=3 uid="uid://c76ogwohts2gi"]
+
+[ext_resource type="Script" uid="uid://b1nuksdcwx12b" path="res://scripts/interface/status.gd" id="1_nqeh8"]
+[ext_resource type="Texture2D" uid="uid://gtsc43xcvhx8" path="res://assets/interface/texture/point.png" id="2_kn1ae"]
+[ext_resource type="LabelSettings" uid="uid://dfopdj5m4b8hp" path="res://assets/interface/font/MoneyFont.tres" id="3_epsb1"]
+[ext_resource type="Texture2D" uid="uid://cdpediinaawmv" path="res://assets/items/bamboo_shoot.png" id="4_nh668"]
+[ext_resource type="Texture2D" uid="uid://cyml7meso7n57" path="res://assets/items/nothing.png" id="5_7adjk"]
+[ext_resource type="Texture2D" uid="uid://bn80bx1oqo0hg" path="res://assets/items/alchemy_book.png" id="6_tdcvl"]
+[ext_resource type="PackedScene" uid="uid://bdfjlkl3ki1hl" path="res://scenes/interface/ResultPoint.tscn" id="7_8c5ii"]
+[ext_resource type="Texture2D" uid="uid://tg0jgh2itrxl" path="res://assets/interface/texture/result_target.png" id="8_ip2o3"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="9_csoct"]
+[ext_resource type="LabelSettings" uid="uid://bfbkvdibjjx1o" path="res://assets/interface/font/DayFont.tres" id="10_2b0vf"]
+
+[sub_resource type="Animation" id="Animation_3jmgg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/ClearLabel:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DayLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DayLabel:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1200, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5fqas"]
+resource_name = "finished"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/ClearLabel:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, -200), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DayLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7adjk"]
+resource_name = "reset"
+length = 0.19999999999999998
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/ClearLabel:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_day"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tdcvl"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DayLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DayLabel:offset_transform_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.7, 1),
+"transitions": PackedFloat32Array(0.5, 1, 2, 0.5),
+"update": 0,
+"values": [Vector2(-1200, 0), Vector2(0, 0), Vector2(0, 0), Vector2(1200, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_day_started"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3jmgg"]
+_data = {
+&"RESET": SubResource("Animation_3jmgg"),
+&"finished": SubResource("Animation_5fqas"),
+&"reset": SubResource("Animation_7adjk"),
+&"start": SubResource("Animation_tdcvl")
+}
+
+[sub_resource type="Animation" id="Animation_kn1ae"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nqeh8"]
+resource_name = "finished"
+length = 0.19999999999999998
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nh668"]
+resource_name = "init"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_epsb1"]
+resource_name = "reset"
+length = 0.19999999999999998
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kn1ae"]
+_data = {
+&"RESET": SubResource("Animation_kn1ae"),
+&"finished": SubResource("Animation_nqeh8"),
+&"init": SubResource("Animation_nh668"),
+&"reset": SubResource("Animation_epsb1")
+}
+
+[node name="Status" type="Control" unique_id=2004891369 node_paths=PackedStringArray("money_label", "day_label", "time_bar", "day_animator", "result_animator", "result_point_parent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nqeh8")
+money_label = NodePath("Money/Money")
+day_label = NodePath("DayTracker/DayLabel")
+time_bar = NodePath("Time")
+day_animator = NodePath("DayTracker/DayAnimationPlayer")
+result_animator = NodePath("DayTracker/Results/ResultAnimationPlayer")
+result_point_parent = NodePath("DayTracker/Results/Grid/Data")
+
+[node name="Money" type="HBoxContainer" parent="." unique_id=9903161]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 166.0
+offset_bottom = 96.0
+theme_override_constants/separation = 0
+
+[node name="Texture" type="TextureRect" parent="Money" unique_id=1882563774]
+layout_mode = 2
+texture = ExtResource("2_kn1ae")
+
+[node name="Money" type="Label" parent="Money" unique_id=870348877]
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("3_epsb1")
+
+[node name="Time" type="TextureProgressBar" parent="." unique_id=852947658]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 256.0
+grow_vertical = 0
+max_value = 1.0
+step = 0.0
+fill_mode = 4
+texture_under = ExtResource("4_nh668")
+texture_over = ExtResource("5_7adjk")
+texture_progress = ExtResource("6_tdcvl")
+
+[node name="DayTracker" type="Control" parent="." unique_id=1870400979]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="DayTracker" unique_id=1998714206]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14, 0.14, 0.14, 1)
+
+[node name="ClearLabel" type="Label" parent="DayTracker/Background" unique_id=237705846]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -448.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 192.0
+grow_horizontal = 2
+offset_transform_enabled = true
+text = "Day Cleared!"
+label_settings = ExtResource("10_2b0vf")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="DayLabel" type="Label" parent="DayTracker" unique_id=726554547]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -448.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 192.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-1200, 0)
+text = "Day 2"
+label_settings = ExtResource("10_2b0vf")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="DayAnimationPlayer" type="AnimationPlayer" parent="DayTracker" unique_id=1244798935]
+libraries/ = SubResource("AnimationLibrary_3jmgg")
+
+[node name="Results" type="Control" parent="DayTracker" unique_id=1473092176]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="NinePatchRect" parent="DayTracker/Results" unique_id=1610004182]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -104.0
+offset_right = 448.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Data" type="HBoxContainer" parent="DayTracker/Results/Grid" unique_id=348582809]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Point1" parent="DayTracker/Results/Grid/Data" unique_id=1926069851 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Point2" parent="DayTracker/Results/Grid/Data" unique_id=439473454 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Point3" parent="DayTracker/Results/Grid/Data" unique_id=872474811 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Point4" parent="DayTracker/Results/Grid/Data" unique_id=338773727 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Point5" parent="DayTracker/Results/Grid/Data" unique_id=308817473 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Point6" parent="DayTracker/Results/Grid/Data" unique_id=1987002425 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Point7" parent="DayTracker/Results/Grid/Data" unique_id=1937302367 instance=ExtResource("7_8c5ii")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Target" type="TextureRect" parent="DayTracker/Results" unique_id=2053786130]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 256.0
+offset_right = -192.0
+offset_bottom = 320.0
+grow_horizontal = 0
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.2, 1.2)
+texture = ExtResource("8_ip2o3")
+
+[node name="Label" type="Label" parent="DayTracker/Results/Target" unique_id=2138137658]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -17.5
+offset_right = 152.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+offset_transform_enabled = true
+text = "GOAL"
+label_settings = ExtResource("9_csoct")
+uppercase = true
+
+[node name="ResultAnimationPlayer" type="AnimationPlayer" parent="DayTracker/Results" unique_id=1940669307]
+libraries/ = SubResource("AnimationLibrary_kn1ae")
+autoplay = &"init"

@@ -91,10 +91,6 @@ class MenuSettings:
 	var allow_cancel: bool = true
 	## Should duplicate items be grouped together?
 	var allow_grouping: bool = true
-	enum MenuType {
-		SELECT, # Select an item. Something must be selected.
-		SELECT_WITH_NULL, # Used to place an item. Allow selecting "nothing."
-	}
 
 @export var items: Array[ItemResource]
 

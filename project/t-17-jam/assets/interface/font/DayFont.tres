@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bfbkvdibjjx1o"]
+
+[ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/font/MochiyPopOne-Regular.ttf" id="1_bfees"]
+
+[resource]
+font = ExtResource("1_bfees")
+font_size = 72
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_offset = Vector2(1, 2)
