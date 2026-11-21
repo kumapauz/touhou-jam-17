@@ -13,6 +13,7 @@ enum DIALOG_MODE {
 }
 
 @export_group("Components")
+@export var item_root: Control
 @export var item: TextureRect
 @export var speaker_frame: Control
 @export var speaker: TextureRect
@@ -54,7 +55,7 @@ func start_sale(npc: NpcController) -> void:
 	else:
 		speaker_frame.visible = false
 	
-	item.visible = true
+	item_root.visible = true
 	item.texture = _current_haggle_target._target_holder.item.ui_texture
 	play_random_quote(_current_haggle_target.npc.inquiry_quotes, "Buying this!")
 
@@ -63,7 +64,7 @@ func finish_sale() -> void:
 	play_random_quote(_current_haggle_target.npc.purchase_quotes, "Thanks!")
 	_current_haggle_target.purchase_item()
 	_current_haggle_target = null
-	item.visible = false
+	item_root.visible = false
 
 func play_random_quote(quotes: PackedStringArray, fallback: String) -> void:
 	if quotes.size() > 0:

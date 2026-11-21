@@ -71,15 +71,6 @@ func set_active_interactable_object(new_interactable: InteractableObject) -> voi
 	if is_instance_valid(_active_object):
 		_active_object.select()
 
-func on_inventory_selected(item: ItemResource) -> void:
-	InventoryManager.instance.remove_item(item)
-	_active_object.set_item(item)
-
-func on_inventory_hidden() -> void:
-	for connection in InventoryManager.instance.item_selected.get_connections():
-		InventoryManager.instance.item_selected.disconnect(connection["callable"])
-	enable_movement()
-
 func process_movement(delta: float) -> void:
 	if !is_input_enabled || DialogManager.instance.is_dialog_active:
 		return

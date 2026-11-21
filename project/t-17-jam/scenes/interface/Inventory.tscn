@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nadiwcif1tnb"]
 
-[ext_resource type="Script" uid="uid://dy3ih3d26nojk" path="res://scripts/interface/inventory_manager.gd" id="1_jhjjr"]
+[ext_resource type="Script" uid="uid://dy3ih3d26nojk" path="res://scripts/interface/menu/inventory_manager.gd" id="1_jhjjr"]
 [ext_resource type="Resource" uid="uid://hkcpujabvweg" path="res://resource/items/Nothing.tres" id="2_tb4qw"]
 [ext_resource type="PackedScene" uid="uid://dsg034tagyv50" path="res://scenes/interface/InventoryItem.tscn" id="2_unyr0"]
 
@@ -153,7 +153,7 @@ _data = {
 &"show": SubResource("Animation_tb4qw")
 }
 
-[node name="Inventory" type="Control" unique_id=576772133 node_paths=PackedStringArray("item_menu_animator", "cursor", "inventory_item_parent")]
+[node name="Inventory" type="Control" unique_id=576772133 node_paths=PackedStringArray("cursor", "animator", "selection_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,9 +162,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jhjjr")
 nothing_item = ExtResource("2_tb4qw")
-item_menu_animator = NodePath("ItemMenu/ItemMenuAnimator")
 cursor = NodePath("ItemMenu/CursorPosition")
-inventory_item_parent = NodePath("ItemMenu/Items")
+animator = NodePath("ItemMenu/MenuAnimator")
+selection_parent = NodePath("ItemMenu/Items")
 
 [node name="ItemMenu" type="Control" parent="." unique_id=403287714]
 layout_mode = 1
@@ -210,7 +210,7 @@ offset_right = 462.0
 offset_bottom = 64.0
 color = Color(0, 1, 0, 0.5019608)
 
-[node name="ItemMenuAnimator" type="AnimationPlayer" parent="ItemMenu" unique_id=150365003]
+[node name="MenuAnimator" type="AnimationPlayer" parent="ItemMenu" unique_id=150365003]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_mlrm8")
 autoplay = &"init"

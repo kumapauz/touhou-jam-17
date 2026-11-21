@@ -27,8 +27,8 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if DialogManager.instance.is_dialog_active:
-		sprite.play("idle")
 		# Pause when dialog is active (also includes haggling)
+		sprite.play("idle")
 		return
 	
 	if is_waiting() || current_path_index >= current_path.size() - 1:

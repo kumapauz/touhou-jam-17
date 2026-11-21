@@ -1,0 +1,240 @@
+[gd_scene format=3 uid="uid://dj1tbq6vtwjcd"]
+
+[ext_resource type="Script" uid="uid://b31qo24mrm4sa" path="res://scripts/interface/menu/delivery_manager.gd" id="1_lxpun"]
+[ext_resource type="Texture2D" uid="uid://do5n62wok0xsa" path="res://assets/interface/texture/delivery_option.png" id="2_febt1"]
+[ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="2_xrg3a"]
+[ext_resource type="Texture2D" uid="uid://c2pli2qt56ayq" path="res://assets/interface/texture/delivery_cursor.png" id="3_03xuj"]
+[ext_resource type="LabelSettings" uid="uid://dntqil645ys25" path="res://assets/interface/font/DeliveryFont.tres" id="3_rrj8p"]
+[ext_resource type="PackedScene" uid="uid://c8eit3h4mfo4f" path="res://scenes/interface/DialogBox.tscn" id="6_vhapf"]
+
+[sub_resource type="Animation" id="Animation_vhapf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_idbuw"]
+resource_name = "hide"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rrj8p"]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_menu_opened"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhapf"]
+_data = {
+&"RESET": SubResource("Animation_vhapf"),
+&"hide": SubResource("Animation_idbuw"),
+&"show": SubResource("Animation_rrj8p")
+}
+
+[node name="Deliveries" type="Control" unique_id=167356728 node_paths=PackedStringArray("description", "cursor", "animator", "selection_parent")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lxpun")
+description = NodePath("DialogBox/Label")
+item_resource_path = "res://resource/items"
+option_descriptions = Array[String](["Buy staple items.", "Try to get rare items.", "Throw items away."])
+cursor = NodePath("Window/Cursor")
+animator = NodePath("AnimationPlayer")
+selection_parent = NodePath("Window/Buttons")
+
+[node name="Window" type="NinePatchRect" parent="." unique_id=1630155391]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -296.0
+offset_right = 384.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xrg3a")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Cursor" type="Control" parent="Window" unique_id=1532411864]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -208.0
+offset_right = -200.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CursorL" type="TextureRect" parent="Window/Cursor" unique_id=1987209465]
+layout_mode = 0
+offset_left = -72.0
+offset_top = 32.0
+offset_right = -8.0
+offset_bottom = 96.0
+texture = ExtResource("3_03xuj")
+
+[node name="CursorR" type="TextureRect" parent="Window/Cursor" unique_id=973524331]
+layout_mode = 0
+offset_left = 408.0
+offset_top = 32.0
+offset_right = 472.0
+offset_bottom = 96.0
+texture = ExtResource("3_03xuj")
+flip_h = true
+
+[node name="Buttons" type="VBoxContainer" parent="Window" unique_id=177899693]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -208.0
+offset_right = 192.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Purchase" type="NinePatchRect" parent="Window/Buttons" unique_id=960538857]
+layout_mode = 2
+texture = ExtResource("2_febt1")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="Label" type="Label" parent="Window/Buttons/Purchase" unique_id=1897164113]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy"
+label_settings = ExtResource("3_rrj8p")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Deliveries" type="NinePatchRect" parent="Window/Buttons" unique_id=270806226]
+layout_mode = 2
+texture = ExtResource("2_febt1")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="Label" type="Label" parent="Window/Buttons/Deliveries" unique_id=449254659]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Deliveries"
+label_settings = ExtResource("3_rrj8p")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Discard" type="NinePatchRect" parent="Window/Buttons" unique_id=1305056474]
+layout_mode = 2
+texture = ExtResource("2_febt1")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="Label" type="Label" parent="Window/Buttons/Discard" unique_id=1224101380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Discard"
+label_settings = ExtResource("3_rrj8p")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1534490455]
+libraries/ = SubResource("AnimationLibrary_vhapf")
+
+[node name="DialogBox" parent="." unique_id=1674122079 instance=ExtResource("6_vhapf")]
+layout_mode = 1
+
+[node name="Label" parent="DialogBox" index="1" unique_id=1595427056]
+text = "Item Description Here."
+
+[node name="Frame" parent="DialogBox" index="2" unique_id=301628010]
+visible = false
+
+[node name="Confirm" parent="DialogBox" index="3" unique_id=1081733589]
+visible = false
+
+[editable path="DialogBox"]

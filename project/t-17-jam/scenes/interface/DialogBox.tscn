@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://c8eit3h4mfo4f"]
+
+[ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="1_vjppt"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="2_d6kom"]
+[ext_resource type="Texture2D" uid="uid://bksyf02q73x28" path="res://assets/interface/texture/dialog_portrait_frame.png" id="3_o73u4"]
+[ext_resource type="Texture2D" uid="uid://hd20laoeyel" path="res://assets/character/mob/fairy.png" id="4_q13bh"]
+[ext_resource type="Texture2D" uid="uid://dsvnd32wgj8x7" path="res://assets/interface/texture/confirm.png" id="5_cf8jg"]
+
+[node name="DialogBox" type="Control" unique_id=1674122079]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -176.0
+offset_right = 384.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+
+[node name="DialogBox" type="NinePatchRect" parent="." unique_id=148328814]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vjppt")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Label" type="Label" parent="." unique_id=1595427056]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "I want to buy this, please!"
+label_settings = ExtResource("2_d6kom")
+
+[node name="Frame" type="TextureRect" parent="." unique_id=301628010]
+self_modulate = Color(0.8833384, 0.46531957, 0.11210861, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = 64.0
+offset_bottom = 96.0
+grow_vertical = 2
+texture = ExtResource("3_o73u4")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Background" type="ColorRect" parent="Frame" unique_id=506500058]
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Speaker" type="TextureRect" parent="Frame/Background" unique_id=774373458]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 304.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_q13bh")
+stretch_mode = 5
+
+[node name="Confirm" type="TextureRect" parent="." unique_id=1081733589]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -48.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("5_cf8jg")
+expand_mode = 1
+stretch_mode = 5

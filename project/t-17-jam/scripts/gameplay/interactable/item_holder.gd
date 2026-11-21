@@ -24,12 +24,15 @@ func clear_item() -> void:
 
 func interact() -> void:
 	# Open inventory menu
-	var menu_settings := InventoryManager.MenuSettings.new()
+	var menu_settings := InventoryManager.Settings.new()
 	menu_settings.allow_selecting_nothing = true
-	InventoryManager.instance.show_menu(menu_settings)
-	InventoryManager.instance.item_selected.connect(Callable.create(PlayerController.instance, "on_inventory_selected"), CONNECT_ONE_SHOT)
-	InventoryManager.instance.menu_hidden.connect(Callable.create(PlayerController.instance, "on_inventory_hidden"), CONNECT_ONE_SHOT)
-	PlayerController.instance.disable_movement()
+	InventoryManager.instance.update_settings(menu_settings)
+	InventoryManager.instance.show_menu()
+	InventoryManager.instance.item_selected.connect(Callable.create(self, "on_inventory_selected"), CONNECT_ONE_SHOT)
+
+func on_inventory_selected(new_item: ItemResource) -> void:
+	InventoryManager.instance.remove_item(new_item)
+	set_item(new_item)
 
 ## Changes the item of this particular item holder.
 func set_item(new_item: ItemResource, is_initializing = false) -> void:
