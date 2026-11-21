@@ -147,23 +147,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="ItemHolder1" parent="ItemHolders/BackCounter" unique_id=634786455 instance=ExtResource("3_lw67d")]
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder2" parent="ItemHolders/BackCounter" unique_id=1117728636 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder3" parent="ItemHolders/BackCounter" unique_id=1182293080 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-item = ExtResource("4_xdmv4")
 
 [node name="ItemHolder4" parent="ItemHolders/BackCounter" unique_id=1730332419 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-item = ExtResource("5_xlrfv")
 
 [node name="ItemHolder5" parent="ItemHolders/BackCounter" unique_id=413252603 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-item = ExtResource("5_xlrfv")
 
 [node name="SideCounter" type="Node3D" parent="ItemHolders" unique_id=113873710]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 1)
@@ -180,10 +175,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 item = ExtResource("6_126te")
 
 [node name="ItemHolder4" parent="ItemHolders/SideCounter" unique_id=478154139 instance=ExtResource("3_lw67d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-item = ExtResource("6_126te")
-
-[node name="ItemHolder5" parent="ItemHolders/SideCounter" unique_id=1328107452 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 item = ExtResource("6_126te")
 

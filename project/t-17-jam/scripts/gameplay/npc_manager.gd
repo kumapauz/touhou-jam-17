@@ -39,6 +39,7 @@ func init_item_holder(root: Node) -> void:
 			_item_holders.append(child)
 		init_item_holder(child)
 
+## Spawns all npcs (Unused).
 func spawn_npcs() -> void:
 	for i in range(_npc_pool.size()):
 		if !spawn_npc():
@@ -53,7 +54,7 @@ func spawn_npc() -> bool:
 	npc.set_npc(request_npc())
 	npc.activate()
 	npc.position = Vector3.ZERO
-	npc.set_path(request_path(npc))
+	npc.set_path(request_path(npc, true))
 	_npc_pool.push_front(npc)
 	return true
 
@@ -119,12 +120,18 @@ func convert_world_to_grid_pos(world_pos: Vector3) -> Vector2i:
 	var local_pos: Vector3i = to_local(world_pos).round()
 	return Vector2i(local_pos.x, local_pos.z)
 
+func get_spawn_offset_3d() -> Vector3:
+	return npc_parent.position
+
+func get_spawn_offset_2d() -> Vector2:
+	return Vector2(npc_parent.position.x, npc_parent.position.z) 
+
 var PREFERRED_ITEM_CHANCE: int = 10
 var NORMAL_ITEM_CHANCE: int = 5
 var DISLIKED_ITEM_CHANCE: int = 1
 
 ## Gets a path for the given NPC.
-func request_path(npc: NpcController) -> PackedVector2Array:
+func request_path(npc: NpcController, is_entering_store = false) -> PackedVector2Array:
 	var valid_items: Array[ItemHolder]
 	for item_holder in _item_holders:
 		if !item_holder.has_item():
@@ -139,13 +146,23 @@ func request_path(npc: NpcController) -> PackedVector2Array:
 	
 	var start_pos: Vector2i = convert_world_to_grid_pos(npc.global_position)
 	# Default behavior: Head to the door and leave
-	var end_pos: Vector2i = convert_world_to_grid_pos(global_position)
+	var end_pos: Vector2i = convert_world_to_grid_pos(npc_parent.global_position)
+	if is_entering_store:
+		# Force shoppers to walk into the store a bit
+		end_pos = start_pos + Vector2i.DOWN * 3
+	
 	if valid_items.size() != 0:
 		var target_item: ItemHolder = valid_items.get(randi_range(0, valid_items.size() - 1))
 		npc.set_target_holder(target_item)
 		end_pos = convert_world_to_grid_pos(target_item.global_position)
 	else:
 		npc.set_target_holder(null)
+	return astar_grid.get_point_path(start_pos, end_pos, true)
+
+## Returns the path for the npc to exit the store.
+func get_exit_path(npc: NpcController) -> PackedVector2Array:
+	var start_pos: Vector2i = convert_world_to_grid_pos(npc.global_position)
+	var end_pos: Vector2i = convert_world_to_grid_pos(npc_parent.global_position)
 	return astar_grid.get_point_path(start_pos, end_pos, true)
 
 ## Return a random npc, ensuring that no repeat characters are allowed.

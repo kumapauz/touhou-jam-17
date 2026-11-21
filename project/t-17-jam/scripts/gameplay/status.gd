@@ -1,5 +1,8 @@
 ### Manages the game status.
 extends Node
+class_name StatusManager
+
+static var instance: StatusManager
 
 ## Tracks whether customers can come into the store.
 var is_open: bool = true
@@ -22,6 +25,9 @@ const DAY_LENGTH: float = 20.0
 
 signal day_started
 signal day_finished
+
+func _enter_tree() -> void:
+	instance = self
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):

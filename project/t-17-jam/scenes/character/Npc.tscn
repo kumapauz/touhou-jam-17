@@ -46,7 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2108846, 0)
 layers = 4
 modulate = Color(0.90541595, 0.6667114, 0.30756095, 1)
 double_sided = false
-alpha_cut = 1
+alpha_cut = 2
 sprite_frames = SubResource("SpriteFrames_4u3ad")
 animation = &"idle"
 

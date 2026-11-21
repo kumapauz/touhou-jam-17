@@ -36,17 +36,21 @@ func _physics_process(delta: float) -> void:
 	var next_pos: Vector2 = current_path.get(current_path_index + 1)
 	path_t = move_toward(path_t, 1.0, MOVE_SPEED * delta)
 	var current_pos: Vector2 = init_pos.lerp(next_pos, path_t)
-	position = Vector3(current_pos.x, 0, current_pos.y) + Vector3.LEFT * 3
+	position = Vector3(current_pos.x, 0, current_pos.y) - _manager.get_spawn_offset_3d()
 	process_sprite_direction(init_pos.x - next_pos.x)
 	if is_equal_approx(path_t, 1.0):
 		path_t = 0.0
 		current_path_index += 1
 		
 		if current_path_index >= current_path.size() - 1:
-			start_wait()
+			if next_pos.is_equal_approx(_manager.get_spawn_offset_2d()):
+				# Left the store
+				deactivate()
+			else:
+				start_wait()
 
 func start_wait() -> void:
-	_wait_time = randf()
+	_wait_time = (randf() * npc.contemplation_multiplier) + npc.contemplation_bias
 
 func is_waiting() -> bool:
 	return !is_zero_approx(_wait_time)
@@ -55,8 +59,18 @@ func process_wait(delta: float) -> void:
 	sprite.play("idle")
 	_wait_time = move_toward(_wait_time, 0, delta)
 	if !is_waiting():
-		set_path(_manager.request_path(self))
 		# TODO Roll a chance to buy an item
+		if randf() < calculate_exit_chance():
+			set_path(_manager.get_exit_path(self))
+		else:
+			set_path(_manager.request_path(self))
+
+func calculate_exit_chance() -> float:
+	if !StatusManager.instance.is_day_active:
+		# Day has ended; leave the store
+		return 1.0
+	# Chance to leave increases with each purchase amount
+	return npc.loitering_bias + (_purchase_count * npc.purchase_bias)
 
 func process_sprite_direction(h_delta: float) -> void:
 	if (h_delta < 0 && sprite.flip_h) || (h_delta > 0 && !sprite.flip_h):

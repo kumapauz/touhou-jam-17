@@ -18,3 +18,13 @@ enum NPC_TYPE {
 	MOB, # Multiple mob characters can spawn at once
 	CHAR, # Unique character that can only be spawned once
 }
+
+## Base probability to leave the store.
+@export_range(0, 1, 0.1) var loitering_bias: float = 0.3
+## How purchases influence persistence. High -> Leaves after a few purchases. Low -> Bulk buyer
+@export_range(0, 1, 0.1) var purchase_bias: float = 0.1
+
+## How long to think before performing an action.
+@export_range(0, 1, 0.1) var contemplation_bias: float = 0.5
+## Multipier for how long to think before performing an action.
+@export_range(0, 1, 0.1) var contemplation_multiplier: float = 0.5
