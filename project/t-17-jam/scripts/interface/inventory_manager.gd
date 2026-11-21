@@ -24,6 +24,9 @@ var process_inputs: bool
 var is_menu_active: bool
 ## Tracks the configuration of the current menu popup.
 var current_settings: MenuSettings
+var _input_scroll: float
+var _held_input: int
+const INPUT_SCROLL_LENGTH: float = 0.12
 
 func _enter_tree() -> void:
 	instance = self
@@ -33,11 +36,11 @@ func _ready() -> void:
 		if child is InventoryItem:
 			_menu_items.append(child)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if process_inputs:
-		process_menu()
+		process_menu(delta)
 
-func process_menu() -> void:
+func process_menu(delta: float) -> void:
 	if current_settings.allow_cancel && Input.is_action_just_pressed("cancel"):
 		hide_menu()
 		return
@@ -45,12 +48,20 @@ func process_menu() -> void:
 	if Input.is_action_just_pressed("confirm"):
 		select_item()
 	
-	if Input.is_action_just_pressed("up"):
-		scroll_selection(-1)
-	elif Input.is_action_just_pressed("down"):
-		scroll_selection(1)
+	var input: int = sign(Input.get_axis("up", "down"))
+	if _held_input != input:
+		_held_input = input
+		scroll_selection(input)
+	else:
+		_input_scroll = move_toward(_input_scroll, 0, delta)
+		if input != 0 && is_zero_approx(_input_scroll):
+			scroll_selection(input)
 
 func scroll_selection(dir: int) -> void:
+	if dir == 0:
+		return
+	
+	_input_scroll = INPUT_SCROLL_LENGTH
 	var item_count: int = _visible_items.size()
 	item_selection += dir
 	var scroll_dir: int = 0

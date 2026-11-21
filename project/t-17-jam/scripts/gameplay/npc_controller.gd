@@ -27,6 +27,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if DialogManager.instance.is_dialog_active:
+		sprite.play("idle")
 		# Pause when dialog is active (also includes haggling)
 		return
 	
@@ -73,6 +74,10 @@ func process_wait(delta: float) -> void:
 			set_path(_manager.get_exit_path(self))
 
 func calculate_purchase_chance() -> float:
+	if InventoryManager.instance.is_menu_active:
+		# Don't buy anything while player is re-stocking stuff
+		return 0.0
+	
 	if !is_instance_valid(_target_holder) || !_target_holder.has_item():
 		return 0.0
 	
