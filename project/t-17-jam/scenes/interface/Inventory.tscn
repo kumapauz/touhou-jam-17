@@ -5,13 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://dsg034tagyv50" path="res://scenes/interface/InventoryItem.tscn" id="2_unyr0"]
 [ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="3_mlrm8"]
 [ext_resource type="Texture2D" uid="uid://bbiabwi7hvkjc" path="res://assets/interface/texture/result_point.png" id="4_f4tlj"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="6_0j2j4"]
 
 [sub_resource type="Animation" id="Animation_mlrm8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ItemMenu:visible")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +24,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ItemMenu:modulate")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -54,7 +55,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ItemMenu:visible")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -66,7 +67,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ItemMenu:modulate")
+tracks/2/path = NodePath(".:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -82,7 +83,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ItemMenu:visible")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -94,7 +95,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ItemMenu:modulate")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -125,7 +126,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ItemMenu:visible")
+tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -137,7 +138,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ItemMenu:modulate")
+tracks/2/path = NodePath(".:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -155,49 +156,31 @@ _data = {
 &"show": SubResource("Animation_tb4qw")
 }
 
-[node name="InventoryManager" type="Control" unique_id=576772133 node_paths=PackedStringArray("cursor", "animator", "selection_parent")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_jhjjr")
-nothing_item = ExtResource("2_tb4qw")
-cursor = NodePath("ItemMenu/CursorPosition")
-animator = NodePath("ItemMenu/MenuAnimator")
-selection_parent = NodePath("ItemMenu/Items")
-
-[node name="ItemMenu" type="NinePatchRect" parent="." unique_id=652247356]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -241.5
-offset_top = -296.0
-offset_right = 241.5
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="InventoryManager" type="NinePatchRect" unique_id=982174319 node_paths=PackedStringArray("cursor", "animator", "selection_parent")]
+offset_right = 704.0
+offset_bottom = 368.0
 texture = ExtResource("3_mlrm8")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
+script = ExtResource("1_jhjjr")
+nothing_item = ExtResource("2_tb4qw")
+cursor = NodePath("CursorPosition")
+animator = NodePath("MenuAnimator")
+selection_parent = NodePath("Items")
 
-[node name="CursorPosition" type="Control" parent="ItemMenu" unique_id=592441975]
+[node name="CursorPosition" type="Control" parent="." unique_id=592441975]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 17.5
+offset_left = 16.75
 offset_top = 16.0
-offset_right = 17.5
+offset_right = 16.75
 offset_bottom = 16.0
 grow_horizontal = 2
 
-[node name="Cursor" type="NinePatchRect" parent="ItemMenu/CursorPosition" unique_id=1891972135]
+[node name="Cursor" type="NinePatchRect" parent="CursorPosition" unique_id=1891972135]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -211,34 +194,86 @@ patch_margin_top = 32
 patch_margin_right = 32
 patch_margin_bottom = 32
 
-[node name="Items" type="VBoxContainer" parent="ItemMenu" unique_id=1652061721]
+[node name="Items" type="VBoxContainer" parent="." unique_id=1652061721]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 19.0
+offset_left = 18.25
 offset_top = 16.0
-offset_right = -19.0
+offset_right = -19.75
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryItem1" parent="ItemMenu/Items" unique_id=10900996 instance=ExtResource("2_unyr0")]
+[node name="InventoryItem1" parent="Items" unique_id=10900996 instance=ExtResource("2_unyr0")]
 layout_mode = 2
 
-[node name="InventoryItem2" parent="ItemMenu/Items" unique_id=1577542011 instance=ExtResource("2_unyr0")]
+[node name="InventoryItem2" parent="Items" unique_id=1577542011 instance=ExtResource("2_unyr0")]
 layout_mode = 2
 
-[node name="InventoryItem3" parent="ItemMenu/Items" unique_id=168751785 instance=ExtResource("2_unyr0")]
+[node name="InventoryItem3" parent="Items" unique_id=168751785 instance=ExtResource("2_unyr0")]
 layout_mode = 2
 
-[node name="InventoryItem4" parent="ItemMenu/Items" unique_id=552323892 instance=ExtResource("2_unyr0")]
+[node name="InventoryItem4" parent="Items" unique_id=552323892 instance=ExtResource("2_unyr0")]
 layout_mode = 2
 
-[node name="InventoryItem5" parent="ItemMenu/Items" unique_id=1619945481 instance=ExtResource("2_unyr0")]
+[node name="InventoryItem5" parent="Items" unique_id=1619945481 instance=ExtResource("2_unyr0")]
 layout_mode = 2
 
-[node name="MenuAnimator" type="AnimationPlayer" parent="ItemMenu" unique_id=150365003]
-root_node = NodePath("../..")
+[node name="MenuAnimator" type="AnimationPlayer" parent="." unique_id=150365003]
 libraries/ = SubResource("AnimationLibrary_mlrm8")
 autoplay = &"init"
+
+[node name="Header" type="Control" parent="." unique_id=1600817668]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -48.0
+grow_horizontal = 2
+
+[node name="Background" type="NinePatchRect" parent="Header" unique_id=1110803860]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_f4tlj")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Item" type="Label" parent="Header" unique_id=1759689099]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 6.0
+offset_right = 152.0
+offset_bottom = 41.0
+text = "item"
+label_settings = ExtResource("6_0j2j4")
+vertical_alignment = 1
+uppercase = true
+
+[node name="Owned" type="Label" parent="Header" unique_id=650180366]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 6.0
+offset_right = 531.0
+offset_bottom = 41.0
+text = "owned"
+label_settings = ExtResource("6_0j2j4")
+vertical_alignment = 1
+uppercase = true
+
+[node name="Price" type="Label" parent="Header" unique_id=875192905]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 6.0
+offset_right = 673.0
+offset_bottom = 41.0
+text = "Price"
+label_settings = ExtResource("6_0j2j4")
+vertical_alignment = 1
+uppercase = true
