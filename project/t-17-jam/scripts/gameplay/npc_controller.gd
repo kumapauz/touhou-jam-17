@@ -74,8 +74,8 @@ func process_wait(delta: float) -> void:
 			set_path(_manager.get_exit_path(self))
 
 func calculate_purchase_chance() -> float:
-	if InventoryManager.instance.is_menu_active:
-		# Don't buy anything while player is re-stocking stuff
+	if !PlayerController.instance.is_input_enabled:
+		# Don't buy anything while player is busy
 		return 0.0
 	
 	if !is_instance_valid(_target_holder) || !_target_holder.has_item():

@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://dt68xvjso2lb6"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_c8pd4"]
+[ext_resource type="Resource" uid="uid://ccdmeu3oulrq2" path="res://resource/items/ShadyMedicine.tres" id="2_bp1ax"]
+[ext_resource type="Resource" uid="uid://c75toub3n1o0c" path="res://resource/items/BambooShoot.tres" id="3_bp1ax"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="3_f5uof"]
+[ext_resource type="Texture2D" uid="uid://bxaqxvs8m5ve" path="res://assets/character/mokou/spritesheet.png" id="4_g7fua"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5uof"]
+atlas = ExtResource("4_g7fua")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bp1ax"]
+atlas = ExtResource("4_g7fua")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc66d"]
+atlas = ExtResource("4_g7fua")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c8pd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5uof")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp1ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc66d")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("3_f5uof")
+name = "Fujiwara no Mokou"
+sprite_frames = SubResource("SpriteFrames_c8pd4")
+preferred_items = Array[ExtResource("1_c8pd4")]([ExtResource("3_bp1ax")])
+disliked_items = Array[ExtResource("1_c8pd4")]([ExtResource("2_bp1ax")])
+npc_type = 1
+expressions = Array[Texture2D]([ExtResource("4_g7fua")])

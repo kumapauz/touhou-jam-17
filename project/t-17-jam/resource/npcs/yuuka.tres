@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://ljg7k368bwd2"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_bwao8"]
+[ext_resource type="Resource" uid="uid://ca55nket6admb" path="res://resource/items/Parasol.tres" id="4_k0yve"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="5_kr6j5"]
+[ext_resource type="Texture2D" uid="uid://dd1vxnl3sx4d1" path="res://assets/character/yuuka/spritesheet.png" id="6_k0yve"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iv22"]
+atlas = ExtResource("6_k0yve")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhpy2"]
+atlas = ExtResource("6_k0yve")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr6j5"]
+atlas = ExtResource("6_k0yve")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6r7tk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iv22")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhpy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr6j5")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("5_kr6j5")
+name = "Yuuka Kazumi"
+sprite_frames = SubResource("SpriteFrames_6r7tk")
+preferred_items = Array[ExtResource("1_bwao8")]([ExtResource("4_k0yve")])
+npc_type = 1
+expressions = Array[Texture2D]([ExtResource("6_k0yve")])
