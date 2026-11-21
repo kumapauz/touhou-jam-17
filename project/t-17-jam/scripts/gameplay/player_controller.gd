@@ -53,7 +53,7 @@ func on_inventory_hidden() -> void:
 	enable_movement()
 
 func process_movement(delta: float) -> void:
-	if !is_input_enabled:
+	if !is_input_enabled || DialogManager.instance.is_dialog_active:
 		return
 	
 	var input: Vector2 = Vector2(Input.get_axis("left", "right"), Input.get_axis("down", "up")).limit_length()

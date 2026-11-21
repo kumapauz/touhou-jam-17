@@ -8,7 +8,9 @@ var _npc_chance: float
 var npc_chance_interval: float = 0.1
 
 ## Maximum number of npcs at the start
-@export_range(1,10) var max_npcs: int = 8
+@export_range(1, 10) var max_npcs: int = 8
+@export_range(1, 10) var min_initial_npc_range: int = 1
+@export_range(1, 10) var max_initial_npc_range: int = 4
 
 @export_dir var npc_resource_path: String
 var _npc_resources : Array[NpcResource]
@@ -174,7 +176,7 @@ func request_npc() -> NpcResource:
 			continue
 		
 		var index: int = valid_npcs.find(npc.npc)
-		if index == -1:
+		if index != -1:
 			valid_npcs.remove_at(index)
 	var selection: int = randi_range(0, valid_npcs.size() - 1)
 	return valid_npcs.get(selection)
@@ -199,6 +201,9 @@ func process_spawn_timer(delta: float) -> void:
 func on_store_opened() -> void:
 	_is_spawning_npcs = true
 	_spawn_timer = spawn_interval
+	# Spawn a burst of npcs when the store first opens
+	for i in range(min_initial_npc_range, max_initial_npc_range):
+		spawn_npc()
 
 func on_store_closed() -> void:
 	_is_spawning_npcs = false

@@ -67,10 +67,10 @@ func process_wait(delta: float) -> void:
 		if randf() < calculate_purchase_chance():
 			DialogManager.instance.start_sale(self)
 			return
-		if randf() < calculate_exit_chance():
-			set_path(_manager.get_exit_path(self))
-		else:
+		if randf() < calculate_loiter_chance():
 			set_path(_manager.request_path(self))
+		else:
+			set_path(_manager.get_exit_path(self))
 
 func calculate_purchase_chance() -> float:
 	if !is_instance_valid(_target_holder) || !_target_holder.has_item():
@@ -82,12 +82,12 @@ func calculate_purchase_chance() -> float:
 		return npc.purchase_bias - npc.disliked_purchase_bias
 	return npc.purchase_bias
 
-func calculate_exit_chance() -> float:
+func calculate_loiter_chance() -> float:
 	if !StatusManager.instance.is_day_active:
 		# Day has ended; leave the store
-		return 1.0
+		return 0.0
 	# Chance to leave increases with each purchase amount
-	return (1.0 - npc.loiter_chance) + (_purchase_count * npc.loiter_increment)
+	return npc.loiter_chance + (_purchase_count * npc.loiter_increment)
 
 func process_sprite_direction(h_delta: float) -> void:
 	if (h_delta < 0 && sprite.flip_h) || (h_delta > 0 && !sprite.flip_h):

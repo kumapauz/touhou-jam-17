@@ -35,6 +35,9 @@ func _process(delta: float) -> void:
 		set_day_active(!is_day_active)
 		print("Is Day Active set to %s" % is_day_active)
 	
+	if DialogManager.instance.is_dialog_active:
+		return
+	
 	if !is_day_active:
 		return
 	

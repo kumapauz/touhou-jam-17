@@ -55,20 +55,21 @@ func start_sale(npc: NpcController) -> void:
 		speaker_frame.visible = false
 	
 	item.visible = true
-	item.texture = npc._target_holder.item.ui_texture
-
-	var quotes: PackedStringArray = npc.npc.inquiry_quotes
-	if is_instance_valid(quotes) && quotes.size() > 0:
-		play_dialog(quotes.get(randi_range(0, quotes.size() - 1)))
-	else:
-		play_dialog("Buying this!")
+	item.texture = _current_haggle_target._target_holder.item.ui_texture
+	play_random_quote(_current_haggle_target.npc.inquiry_quotes, "Buying this!")
 
 func finish_sale() -> void:
-	play_dialog("Thanks!")
 	StatusManager.instance.add_money(_current_haggle_target._target_holder.item.price)
+	play_random_quote(_current_haggle_target.npc.purchase_quotes, "Thanks!")
 	_current_haggle_target.purchase_item()
 	_current_haggle_target = null
 	item.visible = false
+
+func play_random_quote(quotes: PackedStringArray, fallback: String) -> void:
+	if is_instance_valid(quotes) && quotes.size() > 0:
+		play_dialog(quotes.get(randi_range(0, quotes.size() - 1)))
+	else:
+		play_dialog(fallback)
 
 func play_dialog(dialog: String) -> void:
 	is_dialog_active = true
