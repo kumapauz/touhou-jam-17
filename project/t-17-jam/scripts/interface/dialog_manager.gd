@@ -48,7 +48,7 @@ func start_dialog_sequence() -> void:
 func start_sale(npc: NpcController) -> void:
 	_current_haggle_target = npc
 	var expressions: Array[Texture2D] = npc.npc.expressions
-	if is_instance_valid(expressions) && expressions.size() > 0:
+	if expressions.size() > 0:
 		speaker_frame.visible = true
 		speaker.texture = expressions.get(0)
 	else:
@@ -66,7 +66,7 @@ func finish_sale() -> void:
 	item.visible = false
 
 func play_random_quote(quotes: PackedStringArray, fallback: String) -> void:
-	if is_instance_valid(quotes) && quotes.size() > 0:
+	if quotes.size() > 0:
 		play_dialog(quotes.get(randi_range(0, quotes.size() - 1)))
 	else:
 		play_dialog(fallback)
