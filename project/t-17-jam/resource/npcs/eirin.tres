@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://dx08p4j1iff8x"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_12552"]
+[ext_resource type="Texture2D" uid="uid://d0jdq03wph6x6" path="res://assets/character/eirin/spritesheet.png" id="2_wv4ka"]
+[ext_resource type="Resource" uid="uid://ccdmeu3oulrq2" path="res://resource/items/ShadyMedicine.tres" id="3_12552"]
+[ext_resource type="Resource" uid="uid://c75toub3n1o0c" path="res://resource/items/BambooShoot.tres" id="4_3vlqm"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="5_6cb3u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12552"]
+atlas = ExtResource("2_wv4ka")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vlqm"]
+atlas = ExtResource("2_wv4ka")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv4ka"]
+atlas = ExtResource("2_wv4ka")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wv4ka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12552")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vlqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv4ka")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("5_6cb3u")
+name = "Eirin Yagokoro"
+sprite_frames = SubResource("SpriteFrames_wv4ka")
+preferred_items = Array[ExtResource("1_12552")]([ExtResource("3_12552"), ExtResource("4_3vlqm")])
+npc_type = 1
+contemplation_multiplier = 0.7
+expressions = Array[Texture2D]([ExtResource("2_wv4ka")])
+inquiry_quotes = PackedStringArray("I didn\'t expect to find this here.", "This could be useful.", "What can I make with this?")

@@ -46,7 +46,6 @@ name = "Patchouli Knowledge"
 sprite_frames = SubResource("SpriteFrames_bkcmx")
 preferred_items = Array[ExtResource("1_bkcmx")]([ExtResource("3_ahdsh"), ExtResource("4_1o4l7")])
 npc_type = 1
-loiter_increment = 0.0
 purchase_bias = 0.3
 contemplation_bias = 0.6
 contemplation_multiplier = 0.8
