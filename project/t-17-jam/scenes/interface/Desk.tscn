@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://c2pli2qt56ayq" path="res://assets/interface/texture/delivery_cursor.png" id="3_03xuj"]
 [ext_resource type="LabelSettings" uid="uid://dntqil645ys25" path="res://assets/interface/font/DeliveryFont.tres" id="3_rrj8p"]
 [ext_resource type="PackedScene" uid="uid://c8eit3h4mfo4f" path="res://scenes/interface/DialogBox.tscn" id="6_vhapf"]
+[ext_resource type="PackedScene" uid="uid://nadiwcif1tnb" path="res://scenes/interface/Inventory.tscn" id="7_g85th"]
+[ext_resource type="Script" uid="uid://bt8oqcekoe0wi" path="res://scripts/interface/menu/retail_manager.gd" id="8_ht104"]
 
 [sub_resource type="Animation" id="Animation_vhapf"]
 length = 0.001
@@ -89,7 +91,7 @@ _data = {
 &"show": SubResource("Animation_rrj8p")
 }
 
-[node name="DeskManager" type="Control" unique_id=167356728 node_paths=PackedStringArray("description", "cursor", "animator", "selection_parent")]
+[node name="DeskManager" type="Control" unique_id=167356728 node_paths=PackedStringArray("retail_store", "description", "cursor", "animator", "selection_parent")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -98,6 +100,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lxpun")
+retail_store = NodePath("RetailStore")
 description = NodePath("DialogBox/Label")
 item_resource_path = "res://resource/items"
 option_descriptions = Array[String](["Buy staple items.", "Try to get rare items.", "Throw items away."])
@@ -251,4 +254,9 @@ visible = false
 [node name="Confirm" parent="DialogBox" index="3" unique_id=1081733589]
 visible = false
 
+[node name="RetailStore" parent="." unique_id=576772133 instance=ExtResource("7_g85th")]
+layout_mode = 1
+script = ExtResource("8_ht104")
+
 [editable path="DialogBox"]
+[editable path="RetailStore"]

@@ -15,7 +15,7 @@ class_name ItemResource
 # TODO Add a recipe to allow for crafting this item?
 # TODO Add fields to specify which item this should turn into after being transformed by a object?
 
-@export_range(1, 5) var rarity: int
+@export_range(1, 3) var rarity: int = 1
 
 func get_ingame_texture() -> Texture2D:
 	if is_instance_valid(world_texture):

@@ -17,7 +17,7 @@ var is_open: bool = true
 var _result_points: Array[Control]
 
 ## Amount of money the player has.
-var money: int
+var money: int = 500
 ## History of money at the end of each day.
 var money_history: PackedInt64Array
 const TARGET_MONEY: int = 10000
@@ -35,6 +35,7 @@ enum GAME_STATE {
 var current_time: float
 ## How many seconds each business day is.
 const DAY_LENGTH: float = 10.0
+const MAX_MONEY_AMOUNT: int = 99999
 
 signal store_opened
 signal store_closed
@@ -75,8 +76,8 @@ func open_store() -> void:
 	store_opened.emit()
 
 func add_money(amount: int) -> void:
-	money = max(0, money + amount)
-	money_label.text = "x%08d" % money
+	money = clamp(0, money + amount, MAX_MONEY_AMOUNT)
+	money_label.text = "x%05d" % money
 
 func reset_day() -> void:
 	current_time = 0

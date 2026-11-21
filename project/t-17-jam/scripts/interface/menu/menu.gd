@@ -16,6 +16,9 @@ var selection_timer: float
 const SELECTION_SCROLL_INTERVAL: float = 0.15
 
 func _ready() -> void:
+	initialize_menu()
+
+func initialize_menu() -> void:
 	for child in selection_parent.get_children():
 		selection_options.append(child)
 
