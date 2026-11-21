@@ -31,10 +31,8 @@ func process_actions() -> void:
 	if !is_input_enabled || DialogManager.instance.is_dialog_active:
 		return
 	
-	if Input.is_action_just_pressed("confirm"):
-		if item_holders.size() == 0:
-			return
-		
+	process_item_holders()
+	if Input.is_action_just_pressed("confirm") && is_instance_valid(_active_item_holder):
 		# Open inventory menu
 		var menu_settings := InventoryManager.MenuSettings.new()
 		menu_settings.allow_selecting_nothing = true
@@ -43,9 +41,35 @@ func process_actions() -> void:
 		InventoryManager.instance.menu_hidden.connect(Callable.create(self, "on_inventory_hidden"), CONNECT_ONE_SHOT)
 		disable_movement()
 
+func process_item_holders() -> void:
+	if item_holders.size() == 0:
+		return
+	
+	var closest_dist: float = INF
+	var target_item_holder: ItemHolder = _active_item_holder
+	if is_instance_valid(_active_item_holder):
+		closest_dist = _active_item_holder.global_position.distance_squared_to(global_position)
+	for holder in item_holders:
+		if holder == _active_item_holder:
+			continue
+		var dist: float = holder.global_position.distance_squared_to(global_position)
+		if dist < closest_dist:
+			target_item_holder = holder
+			closest_dist = dist
+	if target_item_holder != _active_item_holder:
+		set_active_item_holder(target_item_holder)
+
+func set_active_item_holder(new_holder: ItemHolder) -> void:
+	print("Item holder set to %s" % new_holder)
+	if is_instance_valid(_active_item_holder):
+		_active_item_holder.deselect_holder()
+	_active_item_holder = new_holder
+	if is_instance_valid(_active_item_holder):
+		_active_item_holder.select_holder()
+
 func on_inventory_selected(item: ItemResource) -> void:
 	InventoryManager.instance.remove_item(item)
-	item_holders.get(0).set_item(item)
+	_active_item_holder.set_item(item)
 
 func on_inventory_hidden() -> void:
 	for connection in InventoryManager.instance.item_selected.get_connections():
@@ -108,6 +132,7 @@ func disable_movement() -> void:
 ###Item Detection###
 ####################
 var item_holders: Array[ItemHolder]
+var _active_item_holder: ItemHolder
 func _on_item_detector_entered(area: Area3D) -> void:
 	if area is ItemHolder:
 		item_holders.append(area)
@@ -119,3 +144,5 @@ func _on_item_detector_exited(area: Area3D) -> void:
 		if index != -1:
 			item_holders.remove_at(index)
 			print("Removed item holder")
+			if item_holders.size() == 0:
+				set_active_item_holder(null)

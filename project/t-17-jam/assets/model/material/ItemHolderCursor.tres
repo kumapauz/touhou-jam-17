@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://degvkk23ow0w5"]
+
+[ext_resource type="Shader" uid="uid://b230httq8nncl" path="res://assets/model/material/ItemHolderCursorShader.tres" id="1_utln2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_utln2")
+shader_parameter/ColorParameter = Color(0.42, 0.613333, 1, 1)

@@ -13,6 +13,7 @@ signal item_sent_to_inventory(item: ItemResource)
 @export_group("Components")
 ## The sprite node of this item.
 @export var sprite: Sprite3D
+@export var cursor: MeshInstance3D
 
 func _ready() -> void:
 	# Mostly for testing in the editor
@@ -21,6 +22,17 @@ func _ready() -> void:
 
 func clear_item() -> void:
 	set_item(null_item)
+
+## Show the cursor.
+func select_holder() -> void:
+	cursor.visible = true
+
+## Hide the cursor.
+func deselect_holder() -> void:
+	cursor.visible = false
+
+func is_selected() -> bool:
+	return cursor.visible
 
 ## Changes the item of this particular item holder.
 func set_item(new_item: ItemResource, is_initializing = false) -> void:
