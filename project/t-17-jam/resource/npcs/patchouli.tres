@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://cqqneyo0w2g2d"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_bkcmx"]
+[ext_resource type="Resource" uid="uid://biy4l7vw6axob" path="res://resource/items/AlchemyBook.tres" id="3_ahdsh"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="3_c4jhb"]
+[ext_resource type="Resource" uid="uid://ca55nket6admb" path="res://resource/items/Parasol.tres" id="4_1o4l7"]
+[ext_resource type="Texture2D" uid="uid://dbohpkb32afq6" path="res://assets/character/patchouli/spritesheet.png" id="4_w1q2g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4jhb"]
+atlas = ExtResource("4_w1q2g")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahdsh"]
+atlas = ExtResource("4_w1q2g")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o4l7"]
+atlas = ExtResource("4_w1q2g")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bkcmx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4jhb")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahdsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o4l7")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("3_c4jhb")
+name = "Patchouli Knowledge"
+sprite_frames = SubResource("SpriteFrames_bkcmx")
+preferred_items = Array[ExtResource("1_bkcmx")]([ExtResource("3_ahdsh"), ExtResource("4_1o4l7")])
+npc_type = 1
+purchase_bias = 0.3
+contemplation_bias = 0.6
+contemplation_multiplier = 0.8
+expressions = Array[Texture2D]([ExtResource("4_w1q2g")])

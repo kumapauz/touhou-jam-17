@@ -75,6 +75,11 @@ func process_wait(delta: float) -> void:
 func calculate_purchase_chance() -> float:
 	if !is_instance_valid(_target_holder) || !_target_holder.has_item():
 		return 0.0
+	
+	if is_preferred_item(_target_holder.item):
+		return npc.purchase_bias + npc.preferred_purchase_bias
+	elif is_disliked_item(_target_holder.item):
+		return npc.purchase_bias - npc.disliked_purchase_bias
 	return npc.purchase_bias
 
 func calculate_exit_chance() -> float:

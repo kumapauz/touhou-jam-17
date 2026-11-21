@@ -127,8 +127,8 @@ func get_spawn_offset_3d() -> Vector3:
 func get_spawn_offset_2d() -> Vector2:
 	return Vector2(npc_parent.position.x, npc_parent.position.z) 
 
-var PREFERRED_ITEM_CHANCE: int = 10
-var NORMAL_ITEM_CHANCE: int = 5
+var PREFERRED_ITEM_CHANCE: int = 5
+var NORMAL_ITEM_CHANCE: int = 3
 var DISLIKED_ITEM_CHANCE: int = 1
 
 ## Gets a path for the given NPC.

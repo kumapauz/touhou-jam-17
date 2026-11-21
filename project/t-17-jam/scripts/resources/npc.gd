@@ -23,6 +23,10 @@ enum NPC_TYPE {
 @export_range(0, 1, 0.1) var loiter_increment: float = 0.1
 ## Base probability to make a purchase.
 @export_range(0, 1, 0.1) var purchase_bias: float = 0.5
+## Bias when buying preferred items.
+@export_range(0, 1, 0.1) var preferred_purchase_bias: float = 0.2
+## Bias when buying disliked items.
+@export_range(0, 1, 0.1) var disliked_purchase_bias: float = 0.2
 
 ## How long to think before performing an action.
 @export_range(0, 1, 0.1) var contemplation_bias: float = 0.5
