@@ -20,9 +20,27 @@ func init_item_resources() -> void:
 
 func select() -> void:
 	if selection == 2:
+		if InventoryManager.instance.items.size() == 0:
+			# Nothing to discard
+			return
 		var settings: InventoryManager.Settings = InventoryManager.Settings.new()
 		InventoryManager.instance.update_settings(settings)
 		InventoryManager.instance.show_menu()
+		InventoryManager.instance.item_selected.connect(Callable(self, "on_discard_selected"), PROPERTY_HINT_ONESHOT)
+
+func on_discard_selected(item: ItemResource) -> void:
+	InventoryManager.instance.remove_item(item)
+	process_discard_status()
+
+func show_menu() -> void:
+	super()
+	process_discard_status()
+
+func process_discard_status() -> void:
+	if InventoryManager.instance.items.size() == 0:
+		selection_options.get(2).modulate = Color(1, 1, 1, 0.5)
+	else:
+		selection_options.get(2).modulate = Color.WHITE
 
 func _process_delivery() -> void:
 	pass

@@ -73,10 +73,13 @@ func add_item(item: ItemResource) -> void:
 
 ## Removes the first instance of an item from the inventory.
 func remove_item(item: ItemResource) -> bool:
-	var index: int = items.find(item)
+	return remove_item_at(items.find(item))
+
+## Removes a specific item from the inventory.
+func remove_item_at(index: int) -> bool:
 	if index != -1:
+		print("Item sent: " + items.get(index).item_name)
 		items.remove_at(index)
-		print("Item sent: " + item.item_name)
 		return true
 	return false
 

@@ -39,7 +39,7 @@ func set_item(new_item: ItemResource, is_initializing = false) -> void:
 	if !is_instance_valid(new_item) && !is_initializing: # Can't set to null
 		return
 	
-	if !is_initializing:
+	if !is_initializing && InventoryManager.instance.is_active_menu():
 		item_sent_to_inventory.emit(item)
 	
 	if new_item == null_item: # Clearing the item
