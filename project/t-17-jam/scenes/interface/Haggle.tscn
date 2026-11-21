@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://dkyoie1oml8n6"]
+
+[ext_resource type="Script" uid="uid://b8mvpgdkoy4dh" path="res://scripts/interface/menu/haggle_manager.gd" id="1_ctdkr"]
+[ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="2_bvgvd"]
+[ext_resource type="Texture2D" uid="uid://c6356s3gp2yet" path="res://assets/items/apple.png" id="3_mtjop"]
+[ext_resource type="LabelSettings" uid="uid://dfopdj5m4b8hp" path="res://assets/interface/font/MoneyFont.tres" id="4_mtjop"]
+
+[sub_resource type="Animation" id="Animation_bvgvd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mtjop"]
+resource_name = "hide"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_kl74k"]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_menu_shown"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8dg5f"]
+_data = {
+&"RESET": SubResource("Animation_bvgvd"),
+&"hide": SubResource("Animation_mtjop"),
+&"show": SubResource("Animation_kl74k")
+}
+
+[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("item_root", "item", "price_label", "animator")]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ctdkr")
+item_root = NodePath("ItemRect")
+item = NodePath("ItemRect/Item")
+price_label = NodePath("HagglePrice/Label")
+animator = NodePath("AnimationPlayer")
+
+[node name="ItemRect" type="NinePatchRect" parent="." unique_id=1489107450]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -374.0
+offset_top = -144.0
+offset_right = -182.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bvgvd")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Item" type="TextureRect" parent="ItemRect" unique_id=474299948]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mtjop")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=949064168]
+libraries/ = SubResource("AnimationLibrary_8dg5f")
+
+[node name="HagglePrice" type="Control" parent="." unique_id=797888435]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="HagglePrice" unique_id=986145515]
+layout_mode = 0
+offset_right = 46.0
+offset_bottom = 48.0
+text = "01"
+label_settings = ExtResource("4_mtjop")

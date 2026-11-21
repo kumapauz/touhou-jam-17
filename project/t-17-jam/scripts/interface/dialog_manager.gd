@@ -13,8 +13,7 @@ enum DIALOG_MODE {
 }
 
 @export_group("Components")
-@export var item_root: Control
-@export var item: TextureRect
+@export var haggle_manager: Menu
 @export var speaker_frame: Control
 @export var speaker: TextureRect
 @export var dialog_label: Label
@@ -22,6 +21,7 @@ enum DIALOG_MODE {
 @export var confirm_animator: AnimationPlayer
 @export var dialog_animator: AnimationPlayer
 
+var is_reading_inputs: bool
 var is_dialog_active: bool
 var _current_haggle_target: NpcController
 
@@ -32,39 +32,31 @@ func _process(_delta: float) -> void:
 	if !is_dialog_active:
 		return
 	
+	if !is_reading_inputs:
+		return
+	
 	if Input.is_action_just_pressed("confirm"):
-		if is_haggling():
-			finish_sale()
-		else:
-			advance_dialog()
+		advance_dialog()
 
-func is_haggling() -> bool:
-	return is_instance_valid(_current_haggle_target)
+func enable_inputs() -> void:
+	is_reading_inputs = true
+
+func disable_inputs() -> void:
+	is_reading_inputs = true
 
 ## Plays an entire dialog sequence. Useful for cutscenes.
 func start_dialog_sequence() -> void:
 	# TODO pass in a dialog object
 	pass
 
-func start_sale(npc: NpcController) -> void:
-	_current_haggle_target = npc
-	var expressions: Array[Texture2D] = npc.npc.expressions
+func set_speaker(npc: NpcResource) -> void:
+	var expressions: Array[Texture2D] = npc.expressions
 	if expressions.size() > 0:
 		speaker_frame.visible = true
 		speaker.texture = expressions.get(0)
 	else:
 		speaker_frame.visible = false
-	
-	item_root.visible = true
-	item.texture = _current_haggle_target._target_holder.item.ui_texture
 	play_random_quote(_current_haggle_target.npc.inquiry_quotes, "Buying this!")
-
-func finish_sale() -> void:
-	StatusManager.instance.add_money(_current_haggle_target._target_holder.item.price)
-	play_random_quote(_current_haggle_target.npc.purchase_quotes, "Thanks!")
-	_current_haggle_target.purchase_item()
-	_current_haggle_target = null
-	item_root.visible = false
 
 func play_random_quote(quotes: PackedStringArray, fallback: String) -> void:
 	if quotes.size() > 0:

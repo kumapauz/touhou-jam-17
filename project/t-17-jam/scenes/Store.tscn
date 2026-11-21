@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d3rm88qcta2u4" path="res://scripts/gameplay/interactable/desk_trigger.gd" id="11_8q4y6"]
 [ext_resource type="PackedScene" uid="uid://c76ogwohts2gi" path="res://scenes/interface/Status.tscn" id="13_slus8"]
 [ext_resource type="AudioStream" uid="uid://h0xiyloat5cy" path="res://assets/sound/bgm/shop.ogg" id="17_deuux"]
+[ext_resource type="PackedScene" uid="uid://dkyoie1oml8n6" path="res://scenes/interface/Haggle.tscn" id="18_21atw"]
 [ext_resource type="PackedScene" uid="uid://3d83gyd60kjw" path="res://scenes/interface/Dialog.tscn" id="19_slus8"]
 [ext_resource type="Script" uid="uid://v2ribksypgge" path="res://scripts/gameplay/interactable/door_trigger.gd" id="22_dupml"]
 [ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/font/MochiyPopOne-Regular.ttf" id="23_npagv"]
@@ -275,6 +276,9 @@ layout_mode = 1
 layout_mode = 1
 
 [node name="StatusManager" parent="Interface" unique_id=2004891369 instance=ExtResource("13_slus8")]
+layout_mode = 1
+
+[node name="HaggleManager" parent="Interface" unique_id=769273697 instance=ExtResource("18_21atw")]
 layout_mode = 1
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=169360429]

@@ -66,7 +66,8 @@ func process_wait(delta: float) -> void:
 	if !is_waiting():
 		# TODO Roll a chance to buy an item
 		if randf() < calculate_purchase_chance():
-			DialogManager.instance.start_sale(self)
+			HaggleManager.instance.set_npc(self)
+			HaggleManager.instance.show_menu()
 			return
 		if randf() < calculate_loiter_chance():
 			set_path(_manager.request_path(self))
