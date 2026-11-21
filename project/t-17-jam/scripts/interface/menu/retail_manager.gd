@@ -1,7 +1,7 @@
 ## Allow players to buy items.
 extends "res://scripts/interface/menu/item_selection.gd"
 
-## The amount to purchase
+## The amount to purchase.
 var amount: int = 1
 
 ## Key-value pairs of an item and its price.

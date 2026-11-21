@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://b8mvpgdkoy4dh" path="res://scripts/interface/menu/haggle_manager.gd" id="1_ctdkr"]
 [ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="2_bvgvd"]
 [ext_resource type="Texture2D" uid="uid://c6356s3gp2yet" path="res://assets/items/apple.png" id="3_mtjop"]
-[ext_resource type="LabelSettings" uid="uid://dfopdj5m4b8hp" path="res://assets/interface/font/MoneyFont.tres" id="4_mtjop"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="4_kl74k"]
+[ext_resource type="LabelSettings" uid="uid://bfbkvdibjjx1o" path="res://assets/interface/font/DayFont.tres" id="5_8dg5f"]
+[ext_resource type="Texture2D" uid="uid://c2pli2qt56ayq" path="res://assets/interface/texture/delivery_cursor.png" id="6_8dg5f"]
+[ext_resource type="Texture2D" uid="uid://gtsc43xcvhx8" path="res://assets/interface/texture/point.png" id="6_ax0ou"]
 
 [sub_resource type="Animation" id="Animation_bvgvd"]
 length = 0.001
@@ -17,7 +20,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_mtjop"]
@@ -34,6 +49,46 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8dg5f"]
+resource_name = "init"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_kl74k"]
@@ -65,16 +120,28 @@ tracks/1/keys = {
 "method": &"on_menu_shown"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8dg5f"]
 _data = {
 &"RESET": SubResource("Animation_bvgvd"),
 &"hide": SubResource("Animation_mtjop"),
+&"init": SubResource("Animation_8dg5f"),
 &"show": SubResource("Animation_kl74k")
 }
 
-[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("item_root", "item", "price_label", "animator")]
-visible = false
+[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("item_root", "item", "cursor", "animator", "selection_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,8 +151,9 @@ grow_vertical = 2
 script = ExtResource("1_ctdkr")
 item_root = NodePath("ItemRect")
 item = NodePath("ItemRect/Item")
-price_label = NodePath("HagglePrice/Label")
+cursor = NodePath("HagglePrice/Cursor")
 animator = NodePath("AnimationPlayer")
+selection_parent = NodePath("HagglePrice/Digits")
 
 [node name="ItemRect" type="NinePatchRect" parent="." unique_id=1489107450]
 layout_mode = 1
@@ -94,10 +162,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -374.0
-offset_top = -144.0
-offset_right = -182.0
-offset_bottom = 48.0
+offset_left = -384.0
+offset_top = -136.0
+offset_right = -192.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_bvgvd")
@@ -123,20 +191,106 @@ stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=949064168]
 libraries/ = SubResource("AnimationLibrary_8dg5f")
+autoplay = &"init"
 
 [node name="HagglePrice" type="Control" parent="." unique_id=797888435]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -104.0
+offset_right = 192.0
+offset_bottom = 24.0
 grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="HagglePrice" unique_id=986145515]
+[node name="Header" type="Label" parent="HagglePrice" unique_id=302334988]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -96.0
+offset_bottom = -61.0
+grow_horizontal = 2
+text = "ENTER A FAIR PRICE!"
+label_settings = ExtResource("4_kl74k")
+horizontal_alignment = 1
+
+[node name="Digits" type="HBoxContainer" parent="HagglePrice" unique_id=941571048]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -52.5
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Digit1" type="Label" parent="HagglePrice/Digits" unique_id=986145515]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_8dg5f")
+horizontal_alignment = 1
+
+[node name="Digit2" type="Label" parent="HagglePrice/Digits" unique_id=385214097]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_8dg5f")
+horizontal_alignment = 1
+
+[node name="Digit3" type="Label" parent="HagglePrice/Digits" unique_id=293726108]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_8dg5f")
+horizontal_alignment = 1
+
+[node name="Digit4" type="Label" parent="HagglePrice/Digits" unique_id=1240435446]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_8dg5f")
+horizontal_alignment = 1
+
+[node name="Digit5" type="Label" parent="HagglePrice/Digits" unique_id=1779216449]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("5_8dg5f")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HagglePrice" unique_id=1497012090]
 layout_mode = 0
-offset_right = 46.0
-offset_bottom = 48.0
-text = "01"
-label_settings = ExtResource("4_mtjop")
+offset_left = 328.0
+offset_top = 24.0
+offset_right = 424.0
+offset_bottom = 120.0
+texture = ExtResource("6_ax0ou")
+
+[node name="Cursor" type="Control" parent="HagglePrice" unique_id=2058607434]
+anchors_preset = 0
+offset_left = 264.0
+offset_top = 8.0
+offset_right = 264.0
+offset_bottom = 8.0
+
+[node name="Top" type="TextureRect" parent="HagglePrice/Cursor" unique_id=673461249]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 24.0
+offset_right = 56.0
+offset_bottom = 88.0
+rotation = -1.5707964
+texture = ExtResource("6_8dg5f")
+
+[node name="Down" type="TextureRect" parent="HagglePrice/Cursor" unique_id=712794926]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 168.0
+offset_right = 56.0
+offset_bottom = 232.0
+rotation = -1.5707964
+texture = ExtResource("6_8dg5f")
+flip_h = true

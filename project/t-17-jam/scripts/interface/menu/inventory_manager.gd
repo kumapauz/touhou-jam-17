@@ -41,7 +41,7 @@ func populate_options() -> void:
 		if is_instance_valid(option.item):
 			option.update_price(0)
 
-func  on_menu_hidden() -> void:
+func on_menu_hidden() -> void:
 	super()
 	for connection in item_selected.get_connections():
 		item_selected.disconnect(connection["callable"])

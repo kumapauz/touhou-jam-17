@@ -73,6 +73,8 @@ func hide_menu() -> void:
 		menu_stack.pop_back()
 		if menu_stack.is_empty():
 			PlayerController.instance.enable_movement()
+		else:
+			menu_stack.back().on_menu_focused()
 	animator.play("hide")
 	menu_hidden.emit()
 
@@ -83,3 +85,7 @@ func on_menu_shown() -> void:
 ## Call from the animator.
 func on_menu_hidden() -> void:
 	pass
+
+## Called after a menu is popped. 
+func on_menu_focused() -> void:
+	process_cursor_position()

@@ -23,7 +23,6 @@ enum DIALOG_MODE {
 
 var is_reading_inputs: bool
 var is_dialog_active: bool
-var _current_haggle_target: NpcController
 
 func _ready() -> void:
 	instance = self
@@ -56,7 +55,6 @@ func set_speaker(npc: NpcResource) -> void:
 		speaker.texture = expressions.get(0)
 	else:
 		speaker_frame.visible = false
-	play_random_quote(_current_haggle_target.npc.inquiry_quotes, "Buying this!")
 
 func play_random_quote(quotes: PackedStringArray, fallback: String) -> void:
 	if quotes.size() > 0:

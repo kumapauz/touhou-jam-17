@@ -11,9 +11,14 @@ var item_resources: Array[ItemResource]
 
 func _enter_tree() -> void:
 	instance = self
-	inititem_resources()
+	init_item_resources()
+	retail_store.item_hovered.connect(Callable(self, "set_item_description"))
 
-func inititem_resources() -> void:
+func set_item_description(item: ItemResource) -> void:
+	if is_instance_valid(item):
+		description.text = item.item_description
+
+func init_item_resources() -> void:
 	for resource_file in ResourceLoader.list_directory(item_resource_path):
 		var file_path: String = item_resource_path.path_join(resource_file)
 		var res: ItemResource = ResourceLoader.load(file_path)
@@ -22,7 +27,7 @@ func inititem_resources() -> void:
 func select() -> void:
 	if selection == 0:
 		retail_store.show_menu()
-	if selection == 2:
+	elif selection == 2:
 		if InventoryManager.instance.items.size() == 0:
 			# Nothing to discard
 			return
@@ -45,9 +50,13 @@ func process_discard_status() -> void:
 	else:
 		selection_options.get(2).modulate = Color.WHITE
 
-func _process_delivery() -> void:
-	pass
+func on_menu_focused() -> void:
+	super()
+	process_discard_status()
 
 func process_cursor_position() -> void:
 	super()
 	description.text = option_descriptions.get(selection)
+
+func _process_delivery() -> void:
+	pass

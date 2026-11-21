@@ -255,6 +255,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="DeskManager" parent="Interface" unique_id=167356728 instance=ExtResource("26_sle2s")]
+layout_mode = 1
+
 [node name="InventoryManager" parent="Interface" unique_id=982174319 instance=ExtResource("3_126te")]
 layout_mode = 1
 anchors_preset = 8
@@ -268,9 +271,6 @@ offset_right = 352.0
 offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="DeskManager" parent="Interface" unique_id=167356728 instance=ExtResource("26_sle2s")]
-layout_mode = 1
 
 [node name="Dialog" parent="Interface" unique_id=221836180 instance=ExtResource("19_slus8")]
 layout_mode = 1

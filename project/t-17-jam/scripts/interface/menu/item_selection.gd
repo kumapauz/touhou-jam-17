@@ -1,7 +1,9 @@
 ## Menu that allows for selecting an item from a list.
 extends Menu
 
+signal item_hovered(item: ItemResource)
 signal item_selected(item: ItemResource)
+
 @export var nothing_item: ItemResource
 
 ## List of actively visible items.
@@ -47,6 +49,7 @@ func cancel() -> void:
 
 func process_cursor_position() -> void:
 	cursor.global_position = selection_options.get(selection).global_position
+	item_hovered.emit(selection_options.get(selection).item)
 
 class Settings:
 	## Should the menu allow a separate "nothing" option?
@@ -98,3 +101,4 @@ func show_menu() -> void:
 	menu_scroll = 0
 	super()
 	populate_options()
+	item_hovered.emit(selection_options.get(selection).item)
