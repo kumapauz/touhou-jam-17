@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	if !is_active:
 		return
 	
-	if DialogManager.instance.is_dialog_active:
+	if !PlayerController.instance.is_input_enabled():
 		# Pause when dialog is active (also includes haggling)
 		sprite.play("idle")
 		return

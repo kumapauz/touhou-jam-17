@@ -42,4 +42,5 @@ animations = [{
 script = ExtResource("3_6g15t")
 name = "Tengu"
 sprite_frames = SubResource("SpriteFrames_cb4o5")
+stubborness = 3
 expressions = Array[Texture2D]([ExtResource("4_n8ibw")])

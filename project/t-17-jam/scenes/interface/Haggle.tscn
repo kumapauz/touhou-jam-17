@@ -13,6 +13,89 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqn2s"]
 size = Vector2(6, 64)
 
+[sub_resource type="Animation" id="Animation_uogte"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRoot/Cursor:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRoot/Cursor:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2v1yt"]
+resource_name = "hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRoot/Cursor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(0, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_08lo5"]
+resource_name = "loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRoot/Cursor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(0, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="Animation" id="Animation_2i03u"]
+resource_name = "miss"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRoot/Cursor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.10000001, 0.16666667, 0.23333335, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -20), Vector2(-1, 0), Vector2(7, 0), Vector2(-7, 0), Vector2(7, 0), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uogte"]
+_data = {
+&"RESET": SubResource("Animation_uogte"),
+&"hit": SubResource("Animation_2v1yt"),
+&"loop": SubResource("Animation_08lo5"),
+&"miss": SubResource("Animation_2i03u")
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sauad"]
 size = Vector2(32, 64)
 
@@ -33,70 +116,142 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath("Minigame:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Minigame:visible")
+tracks/2/path = NodePath("Minigame/Game:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Minigame/Game:modulate")
+tracks/3/path = NodePath("Minigame/Header:offset_transform_position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Minigame/Header:offset_transform_position")
+tracks/4/path = NodePath("Minigame/Header:offset_transform_scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Minigame/Header:offset_transform_scale")
+tracks/5/path = NodePath("Minigame/Header:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Minigame/Header:modulate")
+tracks/6/path = NodePath("Minigame/FinalPrice:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Minigame/FinalPrice:offset_transform_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Minigame/FinalPrice:offset_transform_position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("PriceTarget:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Alert:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Alert:offset_transform_scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -121,22 +276,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath("Minigame:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Minigame:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -248,10 +391,98 @@ tracks/5/keys = {
 "method": &"on_minigame_started"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Minigame/FinalPrice:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.26130262, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Minigame/FinalPrice:offset_transform_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.49741945),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Minigame/FinalPrice:offset_transform_position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g5kq2"]
+resource_name = "negotiate-result"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minigame/Header:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Minigame/Game:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Minigame/FinalPrice:offset_transform_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Minigame/FinalPrice:offset_transform_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004),
+"transitions": PackedFloat32Array(1, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -78)]
+}
 
 [sub_resource type="Animation" id="Animation_kl74k"]
 resource_name = "show"
-length = 0.1
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -271,7 +502,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.8),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -281,10 +512,46 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("PriceTarget:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Alert:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Alert:offset_transform_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.20000002),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -297,26 +564,50 @@ _data = {
 &"hide": SubResource("Animation_mtjop"),
 &"init": SubResource("Animation_8dg5f"),
 &"negotiate": SubResource("Animation_sauad"),
+&"negotiate-result": SubResource("Animation_g5kq2"),
 &"show": SubResource("Animation_kl74k")
 }
 
-[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("haggle_label", "item_root", "item", "haggle_point_parent", "cursor", "animator", "selection_parent")]
+[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("haggle_label", "item_root", "item", "haggle_cursor_animator", "haggle_point_parent", "cursor", "animator", "selection_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+offset_transform_enabled = true
 script = ExtResource("1_ctdkr")
-haggle_label = NodePath("Minigame/Game/FinalPrice/Price")
-item_root = NodePath("ItemRect")
-item = NodePath("ItemRect/Item")
+haggle_label = NodePath("Minigame/FinalPrice/Price")
+item_root = NodePath("PriceTarget/ItemRect")
+item = NodePath("PriceTarget/ItemRect/Item")
+haggle_cursor_animator = NodePath("Minigame/Game/Minigame/MinigameRoot/HaggleDetector/AnimationPlayer")
 haggle_point_parent = NodePath("Minigame/Game/Minigame/MinigameRoot/HagglePoints")
-cursor = NodePath("PriceInput/Cursor")
+cursor = NodePath("PriceTarget/PriceInput/Cursor")
 animator = NodePath("AnimationPlayer")
-selection_parent = NodePath("PriceInput/Digits")
+selection_parent = NodePath("PriceTarget/PriceInput/Digits")
 
-[node name="ItemRect" type="NinePatchRect" parent="." unique_id=1489107450]
+[node name="Alert" type="Label" parent="." unique_id=657774373]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 296.0
+offset_bottom = 344.0
+grow_horizontal = 2
+offset_transform_enabled = true
+text = "TRANSACTION   CHANCE!"
+label_settings = ExtResource("8_g5kq2")
+horizontal_alignment = 1
+
+[node name="PriceTarget" type="Control" parent="." unique_id=1378878077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemRect" type="NinePatchRect" parent="PriceTarget" unique_id=1489107450]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -335,7 +626,7 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="Item" type="TextureRect" parent="ItemRect" unique_id=474299948]
+[node name="Item" type="TextureRect" parent="PriceTarget/ItemRect" unique_id=474299948]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -350,7 +641,7 @@ texture = ExtResource("3_mtjop")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PriceInput" type="Control" parent="." unique_id=797888435]
+[node name="PriceInput" type="Control" parent="PriceTarget" unique_id=797888435]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -364,7 +655,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Header" type="Label" parent="PriceInput" unique_id=302334988]
+[node name="Header" type="Label" parent="PriceTarget/PriceInput" unique_id=302334988]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -377,7 +668,7 @@ text = "SUGGEST A FAIR PRICE!"
 label_settings = ExtResource("8_g5kq2")
 horizontal_alignment = 1
 
-[node name="Digits" type="HBoxContainer" parent="PriceInput" unique_id=941571048]
+[node name="Digits" type="HBoxContainer" parent="PriceTarget/PriceInput" unique_id=941571048]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -390,37 +681,37 @@ grow_vertical = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Digit1" type="Label" parent="PriceInput/Digits" unique_id=986145515]
+[node name="Digit1" type="Label" parent="PriceTarget/PriceInput/Digits" unique_id=986145515]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit2" type="Label" parent="PriceInput/Digits" unique_id=385214097]
+[node name="Digit2" type="Label" parent="PriceTarget/PriceInput/Digits" unique_id=385214097]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit3" type="Label" parent="PriceInput/Digits" unique_id=293726108]
+[node name="Digit3" type="Label" parent="PriceTarget/PriceInput/Digits" unique_id=293726108]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit4" type="Label" parent="PriceInput/Digits" unique_id=1240435446]
+[node name="Digit4" type="Label" parent="PriceTarget/PriceInput/Digits" unique_id=1240435446]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit5" type="Label" parent="PriceInput/Digits" unique_id=1779216449]
+[node name="Digit5" type="Label" parent="PriceTarget/PriceInput/Digits" unique_id=1779216449]
 layout_mode = 2
 text = "0"
 label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PriceInput" unique_id=1497012090]
+[node name="TextureRect" type="TextureRect" parent="PriceTarget/PriceInput" unique_id=1497012090]
 layout_mode = 0
 offset_left = 344.0
 offset_top = 32.0
@@ -429,14 +720,14 @@ offset_bottom = 104.0
 texture = ExtResource("6_ax0ou")
 stretch_mode = 5
 
-[node name="Cursor" type="Control" parent="PriceInput" unique_id=2058607434]
+[node name="Cursor" type="Control" parent="PriceTarget/PriceInput" unique_id=2058607434]
 anchors_preset = 0
 offset_left = 272.0
 offset_top = 16.0
 offset_right = 272.0
 offset_bottom = 16.0
 
-[node name="Top" type="TextureRect" parent="PriceInput/Cursor" unique_id=673461249]
+[node name="Top" type="TextureRect" parent="PriceTarget/PriceInput/Cursor" unique_id=673461249]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 16.0
@@ -445,7 +736,7 @@ offset_bottom = 80.0
 rotation = -1.5707964
 texture = ExtResource("6_8dg5f")
 
-[node name="Down" type="TextureRect" parent="PriceInput/Cursor" unique_id=712794926]
+[node name="Down" type="TextureRect" parent="PriceTarget/PriceInput/Cursor" unique_id=712794926]
 layout_mode = 0
 offset_left = -8.0
 offset_top = 160.0
@@ -487,15 +778,8 @@ text = "NEGOTIATE!"
 label_settings = ExtResource("8_g5kq2")
 horizontal_alignment = 1
 
-[node name="Game" type="Control" parent="Minigame" unique_id=1570410866]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="FinalPrice" type="HBoxContainer" parent="Minigame/Game" unique_id=900374015]
+[node name="FinalPrice" type="HBoxContainer" parent="Minigame" unique_id=900374015]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -505,25 +789,34 @@ offset_top = -144.0
 offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
+offset_transform_enabled = true
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="FinalPrice" type="Label" parent="Minigame/Game/FinalPrice" unique_id=2007051961]
+[node name="FinalPrice" type="Label" parent="Minigame/FinalPrice" unique_id=2007051961]
 layout_mode = 2
 text = "Final Price : "
 label_settings = ExtResource("4_mtjop")
 horizontal_alignment = 1
 
-[node name="Price" type="Label" parent="Minigame/Game/FinalPrice" unique_id=475010426]
+[node name="Price" type="Label" parent="Minigame/FinalPrice" unique_id=475010426]
 layout_mode = 2
 text = "100"
 label_settings = ExtResource("4_mtjop")
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Minigame/Game/FinalPrice" unique_id=48177627]
+[node name="TextureRect" type="TextureRect" parent="Minigame/FinalPrice" unique_id=48177627]
 layout_mode = 2
 texture = ExtResource("6_ax0ou")
 stretch_mode = 5
+
+[node name="Game" type="Control" parent="Minigame" unique_id=1570410866]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Minigame" type="Control" parent="Minigame/Game" unique_id=669123387]
 layout_mode = 1
@@ -561,11 +854,17 @@ monitorable = false
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_yqn2s")
 
-[node name="Sprite2D" type="Sprite2D" parent="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" unique_id=1360109196]
+[node name="VisualRoot" type="Node2D" parent="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" unique_id=1821431748]
 position = Vector2(0, -24)
+
+[node name="Cursor" type="Sprite2D" parent="Minigame/Game/Minigame/MinigameRoot/HaggleDetector/VisualRoot" unique_id=1360109196]
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_8dg5f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" unique_id=1716814810]
+libraries/ = SubResource("AnimationLibrary_uogte")
+autoplay = &"loop"
 
 [node name="HaggleEnd" type="Area2D" parent="Minigame/Game/Minigame/MinigameRoot" unique_id=942995501]
 position = Vector2(384, 0)
@@ -595,4 +894,5 @@ autoplay = &"init"
 
 [connection signal="area_entered" from="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" to="." method="_on_haggle_detector_area_entered"]
 [connection signal="area_exited" from="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" to="." method="_on_haggle_detector_area_exited"]
+[connection signal="animation_finished" from="Minigame/Game/Minigame/MinigameRoot/HaggleDetector/AnimationPlayer" to="." method="_on_haggle_cursor_animation_finished"]
 [connection signal="area_entered" from="Minigame/Game/Minigame/MinigameRoot/HaggleEnd" to="." method="_on_haggle_end_area_entered"]

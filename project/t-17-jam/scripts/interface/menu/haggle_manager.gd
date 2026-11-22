@@ -9,17 +9,23 @@ func _enter_tree() -> void:
 @export var haggle_label: Label
 @export var item_root: Control
 @export var item: TextureRect
+@export var haggle_cursor_animator: AnimationPlayer
 @export var haggle_point_parent: Node2D
 var _haggle_point_pool: Array[Node2D]
 var _haggle_points: Array[Area2D]
 
 ## The desired price.
 var target_price: int
+var base_price: int
 var haggle_price: int
 var haggle_score: int
 var haggle_points_processed: int
-var _haggle_timer: float
 var is_haggle_points_spawning: bool
+
+var _haggle_timer: float
+const MIN_HAGGLE_INTERVAL: float = 0.2
+const MAX_HAGGLE_INTERVAL: float = 1.2
+const HAGGLE_SPEED_MULTIPLIER: float = 2.0
 
 ## Which digit is being edited.
 var editing_place: int = 0
@@ -42,10 +48,11 @@ func process_menu(delta: float) -> void:
 		super(delta)
 
 func select() -> void:
-	var base_price: int = _haggle_target._target_holder.item.price
 	if target_price > base_price * _haggle_target.npc.max_overpay_bias:
-		# Way too expensive. Ask for a lower price.
+		# Way too expensive. Immediate rejection.
+		DialogManager.instance.enable_inputs()
 		DialogManager.instance.play_random_quote(_haggle_target.npc.discount_quotes, "That's too expensive!!!")
+		hide_menu()
 		return
 	
 	if target_price > base_price * _haggle_target.npc.overpay_bias:
@@ -79,35 +86,54 @@ func process_haggle_minigame(delta: float) -> void:
 		spawn_haggle_point()
 	
 	if Input.is_action_just_pressed("confirm"):
-		if _haggle_points.size() != 0:
-			_haggle_points.get(0).explode()
-			_haggle_points.remove_at(0)
-			update_haggle_score(1)
+		if haggle_points_processed == _haggle_target.npc.stubborness:
+			# Minigame has finished
+			finalize_sale()
+			return
+		
+		haggle_cursor_animator.seek(0.0)
+		if _haggle_points.size() == 0:
+			haggle_cursor_animator.play("miss")
+			update_haggle_score(-1)
+		else:
+			haggle_cursor_animator.play("hit")
+			for point in _haggle_points:
+				point.explode()
+				update_haggle_score(1)
+			_haggle_points.clear()
 
 func update_haggle_score(dir: int) -> void:
 	haggle_score += dir
-	haggle_points_processed += 1
+	haggle_score = max(haggle_score, 0)
 	update_haggle_price()
-	if haggle_points_processed == _haggle_point_pool.size():
+	if dir >= 0:
+		haggle_points_processed += 1
+	if haggle_points_processed == _haggle_target.npc.stubborness:
 		target_price = haggle_price
-		finalize_sale()
+		animator.play("negotiate-result")
 
 func update_haggle_price() -> void:
-	var base_price: int = _haggle_target._target_holder.item.price
-	var current_ratio: float = haggle_score / (_haggle_point_pool.size() as float)
+	var current_ratio: float = haggle_score / (_haggle_target.npc.stubborness as float)
 	haggle_price = base_price
 	haggle_price += round((target_price - base_price) * current_ratio)
 	haggle_label.text = "%05d" % haggle_price
 
 func spawn_haggle_point() -> void:
-	_haggle_timer = randf()
-	for point in _haggle_point_pool:
-		if point.is_spawnable():
-			var speed: float = _haggle_target.npc.stubborness
-			point.spawn(speed)
+	_haggle_timer = lerp(MIN_HAGGLE_INTERVAL, MAX_HAGGLE_INTERVAL, randf())
+	for i in range(0, _haggle_target.npc.stubborness):
+		if _haggle_point_pool.get(i).is_spawnable():
+			var speed: float = calculate_haggle_speed()
+			_haggle_point_pool.get(i).spawn(speed)
 			return
 	# Finished spawning points
 	is_haggle_points_spawning = false
+
+func calculate_haggle_speed() -> float:
+	var denominator: float = base_price * _haggle_target.npc.max_overpay_bias - base_price
+	var ratio: float = (target_price - base_price) / denominator
+	var min_speed: float = _haggle_target.npc.min_haggle_multiplier
+	var max_speed: float = _haggle_target.npc.max_haggle_multiplier
+	return min_speed + randf() * ratio * max_speed
 
 func process_input(delta: float) -> void:
 	# Check horizonal input
@@ -150,6 +176,9 @@ func show_menu() -> void:
 	editing_place = 0
 	update_price()
 	super()
+
+func on_menu_shown() -> void:
+	super()
 	DialogManager.instance.set_speaker(_haggle_target.npc)
 	DialogManager.instance.play_random_quote(_haggle_target.npc.inquiry_quotes, "Buying this!")
 
@@ -159,7 +188,8 @@ func update_price() -> void:
 
 func set_npc(npc: NpcController) -> void:
 	_haggle_target = npc
-	target_price = _haggle_target._target_holder.item.price
+	base_price = _haggle_target._target_holder.item.price
+	target_price = base_price
 	
 	item_root.visible = true
 	item.texture = _haggle_target._target_holder.item.ui_texture
@@ -184,5 +214,8 @@ func _on_haggle_detector_area_exited(area: Area2D) -> void:
 		_haggle_points.remove_at(index)
 
 func _on_haggle_end_area_entered(area: Area2D) -> void:
-	area.explode()
+	area.explode(true)
 	update_haggle_score(0)
+
+func _on_haggle_cursor_animation_finished(_anim_name: StringName) -> void:
+	haggle_cursor_animator.play("loop")

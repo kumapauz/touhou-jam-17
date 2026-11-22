@@ -32,10 +32,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualRoot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_baqld"]
 resource_name = "explode"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,7 +58,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(0, 1, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -59,6 +71,46 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(2, 0.9), Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_pdteu"]
+resource_name = "fail"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRoot/Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRoot:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 1.2), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualRoot:rotation")
+tracks/2/interp = 4
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.27925268, 0.27925268]
 }
 
 [sub_resource type="Animation" id="Animation_0s7o2"]
@@ -104,11 +156,24 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(2, 1), Vector2(0.8, 1.2), Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualRoot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ky4sp"]
 _data = {
 &"RESET": SubResource("Animation_ky4sp"),
 &"explode": SubResource("Animation_baqld"),
+&"fail": SubResource("Animation_pdteu"),
 &"init": SubResource("Animation_0s7o2"),
 &"spawn": SubResource("Animation_bajs7")
 }
@@ -120,6 +185,7 @@ script = ExtResource("1_0s7o2")
 animator = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=534238826]
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_e2t8q")
 
 [node name="VisualRoot" type="Node2D" parent="." unique_id=356452796]
@@ -130,5 +196,6 @@ scale = Vector2(0.5, 1)
 texture = ExtResource("2_ky4sp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1166477241]
+deterministic = true
 libraries/ = SubResource("AnimationLibrary_ky4sp")
 autoplay = &"init"

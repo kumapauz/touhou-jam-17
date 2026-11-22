@@ -18,7 +18,7 @@ enum NPC_TYPE {
 }
 
 ## Base probability to stay in the store.
-@export_range(0, 1, 0.1) var loiter_chance: float = 0.3
+@export_range(0, 1, 0.1) var loiter_chance: float = 0.5
 ## How purchases influence persistence. High -> Leaves after a few purchases. Low -> Bulk buyer
 @export_range(0, 1, 0.1) var loiter_increment: float = 0.1
 ## Base probability to make a purchase.
@@ -33,12 +33,16 @@ enum NPC_TYPE {
 ## Multipier for how long to think before performing an action.
 @export_range(0, 1, 0.1) var contemplation_multiplier: float = 0.5
 
-## The ratio of how much this shopper is willing to pay extra.
+## The ratio of how much this shopper is willing to pay extra without haggling.
 @export_range(0.5, 2, 0.1) var overpay_bias: float = 1.2
-## The ratio of how much this shopper is willing to pay extra.
-@export_range(1, 3, 0.1) var max_overpay_bias: float = 2.0
-## How stubborn the npc is to negotiations.
-@export_range(1, 5, 0.1) var stubborness: float
+## The maximum ratio this shopper is willing to pay extra with perfect haggling skills.
+@export_range(1, 5, 0.1) var max_overpay_bias: float = 3.0
+## The most aggreeable this npc is to haggle with.
+@export_range(1, 5, 0.1) var min_haggle_multiplier: float = 1.0
+## The most difficult this npc is to haggle with.
+@export_range(1, 5, 0.1) var max_haggle_multiplier: float = 4.0
+## How stubborn the npc is to negotiations. (i.e. how many negotiations need to be done).
+@export_range(1, 5) var stubborness: int = 5
 
 @export_group("Dialogs")
 ## Optional sprites for dialog.

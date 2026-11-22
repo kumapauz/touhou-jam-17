@@ -42,4 +42,5 @@ animations = [{
 script = ExtResource("3_v87if")
 name = "Kappa"
 sprite_frames = SubResource("SpriteFrames_8rk65")
+stubborness = 2
 expressions = Array[Texture2D]([ExtResource("2_8rk65")])

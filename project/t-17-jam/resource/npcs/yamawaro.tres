@@ -42,5 +42,6 @@ animations = [{
 script = ExtResource("2_8iynw")
 name = "Yamawaro"
 sprite_frames = SubResource("SpriteFrames_4ax3m")
+stubborness = 3
 expressions = Array[Texture2D]([ExtResource("3_vjca0")])
 inquiry_quotes = PackedStringArray("I\'ve been looking for this!", "Hmm...I really want to buy this...")
