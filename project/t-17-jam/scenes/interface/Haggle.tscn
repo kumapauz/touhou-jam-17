@@ -568,7 +568,7 @@ _data = {
 &"show": SubResource("Animation_kl74k")
 }
 
-[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("haggle_label", "item_root", "item", "haggle_cursor_animator", "haggle_point_parent", "cursor", "animator", "selection_parent")]
+[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("haggle_label", "markup_label", "item_root", "item", "haggle_cursor_animator", "haggle_point_parent", "cursor", "animator", "selection_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -578,6 +578,7 @@ grow_vertical = 2
 offset_transform_enabled = true
 script = ExtResource("1_ctdkr")
 haggle_label = NodePath("Minigame/FinalPrice/Price")
+markup_label = NodePath("PriceTarget/PriceInput/Markup")
 item_root = NodePath("PriceTarget/ItemRect")
 item = NodePath("PriceTarget/ItemRect/Item")
 haggle_cursor_animator = NodePath("Minigame/Game/Minigame/MinigameRoot/HaggleDetector/AnimationPlayer")
@@ -664,7 +665,7 @@ offset_top = -128.0
 offset_right = 128.0
 offset_bottom = -80.0
 grow_horizontal = 2
-text = "SUGGEST A FAIR PRICE!"
+text = "SUGGEST A PRICE!"
 label_settings = ExtResource("8_g5kq2")
 horizontal_alignment = 1
 
@@ -719,6 +720,17 @@ offset_right = 416.0
 offset_bottom = 104.0
 texture = ExtResource("6_ax0ou")
 stretch_mode = 5
+
+[node name="Markup" type="Label" parent="PriceTarget/PriceInput" unique_id=1634229588]
+layout_mode = 1
+offset_left = 320.0
+offset_top = -55.999985
+offset_right = 576.0
+offset_bottom = -7.9999847
+rotation = 0.5235988
+text = "100%"
+label_settings = ExtResource("8_g5kq2")
+horizontal_alignment = 1
 
 [node name="Cursor" type="Control" parent="PriceTarget/PriceInput" unique_id=2058607434]
 anchors_preset = 0

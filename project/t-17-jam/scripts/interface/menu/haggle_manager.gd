@@ -7,6 +7,7 @@ func _enter_tree() -> void:
 	instance = self
 
 @export var haggle_label: Label
+@export var markup_label: Label
 @export var item_root: Control
 @export var item: TextureRect
 @export var haggle_cursor_animator: AnimationPlayer
@@ -116,7 +117,7 @@ func update_haggle_price() -> void:
 	var current_ratio: float = haggle_score / (_haggle_target.npc.stubborness as float)
 	haggle_price = base_price
 	haggle_price += round((target_price - base_price) * current_ratio)
-	haggle_label.text = "%05d" % haggle_price
+	haggle_label.text = "%s" % haggle_price
 
 func spawn_haggle_point() -> void:
 	_haggle_timer = lerp(MIN_HAGGLE_INTERVAL, MAX_HAGGLE_INTERVAL, randf())
@@ -185,6 +186,9 @@ func on_menu_shown() -> void:
 func update_price() -> void:
 	for i in range(selection_options.size()):
 		selection_options.get(i).text = ("%05d" % target_price)[i]
+	
+	var ratio : int = round(100 * target_price / (base_price as float))
+	markup_label.text = "%s%%" % ratio
 
 func set_npc(npc: NpcController) -> void:
 	_haggle_target = npc
