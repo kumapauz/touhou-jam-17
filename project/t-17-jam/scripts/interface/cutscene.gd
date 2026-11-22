@@ -3,7 +3,7 @@ extends Node
 ## Scene to go load when pressing confirm.
 @export_file_path("*.tscn") var target_scene: String
 @export var animator: AnimationPlayer
-var is_reading_inputs: bool = true
+var is_reading_inputs: bool
 
 func _process(_delta: float) -> void:
 	if !is_reading_inputs:

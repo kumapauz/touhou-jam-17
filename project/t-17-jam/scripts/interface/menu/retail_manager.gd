@@ -37,7 +37,7 @@ func select() -> void:
 		print("No room in inventory!")
 		return
 	
-	super()
+	SoundManager.instance.play_sfx("menu_accept")
 	StatusManager.instance.add_money(-price)
 	InventoryManager.instance.add_item(selection_options.get(selection).item)
 	selection_options.get(selection).update_amount()
