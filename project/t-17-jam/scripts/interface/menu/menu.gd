@@ -7,6 +7,8 @@ signal menu_hidden
 @export var cursor: Control
 @export var animator: AnimationPlayer
 @export var selection_parent: Control
+
+var _is_reading_inputs: bool
 var selection_options: Array[Control]
 var selection: int
 static var menu_stack: Array[Menu]
@@ -63,10 +65,11 @@ func process_cursor_position() -> void:
 	cursor.global_position = selection_options.get(selection).global_position
 
 func is_active_menu() -> bool:
-	return !menu_stack.is_empty() && menu_stack.back() == self
+	return !menu_stack.is_empty() && menu_stack.back() == self && _is_reading_inputs
 
 func show_menu() -> void:
 	animator.play("show")
+	menu_stack.push_back(self)
 	selection = 0
 	process_cursor_position()
 	SoundManager.instance.play_sfx("menu_accept")
@@ -75,6 +78,7 @@ func show_menu() -> void:
 
 func hide_menu() -> void:
 	if is_active_menu():
+		_is_reading_inputs = false
 		menu_stack.pop_back()
 		if menu_stack.is_empty():
 			PlayerController.instance.enable_movement()
@@ -85,7 +89,7 @@ func hide_menu() -> void:
 
 ## Call from the animator.
 func on_menu_shown() -> void:
-	menu_stack.push_back(self)
+	_is_reading_inputs = true
 
 ## Call from the animator.
 func on_menu_hidden() -> void:
