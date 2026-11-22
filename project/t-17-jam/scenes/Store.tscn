@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://nadiwcif1tnb" path="res://scenes/interface/Inventory.tscn" id="3_126te"]
 [ext_resource type="PackedScene" uid="uid://by8m7efnmjpbt" path="res://scenes/prefab/ItemHolder.tscn" id="3_lw67d"]
 [ext_resource type="Script" uid="uid://02ynruafbyra" path="res://scripts/gameplay/npc_manager.gd" id="5_gii7t"]
-[ext_resource type="Resource" uid="uid://c75toub3n1o0c" path="res://resource/items/BambooShoot.tres" id="6_126te"]
 [ext_resource type="PackedScene" uid="uid://clu6oabjgfu61" path="res://scenes/character/Npc.tscn" id="6_oe1d6"]
 [ext_resource type="PackedScene" uid="uid://h0ehjwnr1vvv" path="res://assets/model/Room.gltf" id="8_7ftef"]
 [ext_resource type="PackedScene" uid="uid://dayjn8cs5wd2e" path="res://assets/model/Desk.gltf" id="9_x85wv"]
@@ -14,12 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://h0xiyloat5cy" path="res://assets/sound/bgm/shop.ogg" id="17_deuux"]
 [ext_resource type="PackedScene" uid="uid://dkyoie1oml8n6" path="res://scenes/interface/Haggle.tscn" id="18_21atw"]
 [ext_resource type="PackedScene" uid="uid://3d83gyd60kjw" path="res://scenes/interface/Dialog.tscn" id="19_slus8"]
-[ext_resource type="Script" uid="uid://cojn6xj1186ix" path="res://scripts/gameplay/sound_manager.gd" id="20_7lbio"]
-[ext_resource type="AudioStream" uid="uid://sm600emp6d63" path="res://assets/sound/sfx/menu_move.wav" id="20_slus8"]
-[ext_resource type="AudioStream" uid="uid://rklsf2srwjx" path="res://assets/sound/sfx/menu_cancel.wav" id="21_dupml"]
 [ext_resource type="Script" uid="uid://v2ribksypgge" path="res://scripts/gameplay/interactable/door_trigger.gd" id="22_dupml"]
-[ext_resource type="AudioStream" uid="uid://nl58k3cggc23" path="res://assets/sound/sfx/menu_accept.wav" id="22_npagv"]
-[ext_resource type="AudioStream" uid="uid://c60w5w3lhw5mw" path="res://assets/sound/sfx/daycleared.wav" id="23_7lbio"]
 [ext_resource type="FontFile" uid="uid://c5rnold7pkol2" path="res://assets/interface/font/MochiyPopOne-Regular.ttf" id="23_npagv"]
 [ext_resource type="ArrayMesh" uid="uid://qw1jhisc40ui" path="res://assets/model/glow.obj" id="24_0f76r"]
 [ext_resource type="Material" uid="uid://degvkk23ow0w5" path="res://assets/model/material/ItemHolderCursor.tres" id="25_sle2s"]
@@ -173,19 +167,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 1)
 
 [node name="ItemHolder1" parent="ItemHolders/SideCounter" unique_id=1423017091 instance=ExtResource("3_lw67d")]
-item = ExtResource("6_126te")
 
 [node name="ItemHolder2" parent="ItemHolders/SideCounter" unique_id=252967262 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-item = ExtResource("6_126te")
 
 [node name="ItemHolder3" parent="ItemHolders/SideCounter" unique_id=777656679 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-item = ExtResource("6_126te")
 
 [node name="ItemHolder4" parent="ItemHolders/SideCounter" unique_id=478154139 instance=ExtResource("3_lw67d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-item = ExtResource("6_126te")
 
 [node name="DoorStarter" type="Area3D" parent="ItemHolders" unique_id=1045932909 node_paths=PackedStringArray("select_root")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -8)
@@ -289,25 +279,7 @@ layout_mode = 1
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=169360429]
 stream = ExtResource("17_deuux")
 autoplay = true
-
-[node name="SoundManager" type="Node" parent="." unique_id=582211871]
-script = ExtResource("20_7lbio")
-
-[node name="MenuMove" type="AudioStreamPlayer" parent="SoundManager" unique_id=2046642666]
-stream = ExtResource("20_slus8")
-bus = &"SFX"
-
-[node name="MenuCancel" type="AudioStreamPlayer" parent="SoundManager" unique_id=2014317616]
-stream = ExtResource("21_dupml")
-bus = &"SFX"
-
-[node name="MenuAccept" type="AudioStreamPlayer" parent="SoundManager" unique_id=342420975]
-stream = ExtResource("22_npagv")
-bus = &"SFX"
-
-[node name="DayCleared" type="AudioStreamPlayer" parent="SoundManager" unique_id=2084692720]
-stream = ExtResource("23_7lbio")
-bus = &"SFX"
+bus = &"BGM"
 
 [connection signal="day_finished" from="Interface/StatusManager" to="Player/Player" method="disable_movement"]
 [connection signal="day_reset" from="Interface/StatusManager" to="Player/Player" method="respawn"]

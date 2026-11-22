@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://cdb1i8wiuft35"]
+
+[ext_resource type="Script" uid="uid://drq48aupmnmd8" path="res://scripts/interface/cutscene.gd" id="1_aqbct"]
+[ext_resource type="Texture2D" uid="uid://cw3yrhie5g0mg" path="res://assets/cutscene/title_bg.png" id="2_capyo"]
+[ext_resource type="Texture2D" uid="uid://dfb7jfkfvbcuf" path="res://assets/cutscene/newspaper_template.png" id="2_ywiat"]
+[ext_resource type="Texture2D" uid="uid://dmo1kc87mu058" path="res://assets/cutscene/intro_picture.png" id="3_mkji7"]
+[ext_resource type="LabelSettings" uid="uid://dclec14oj6w26" path="res://assets/interface/font/HeaderFont.tres" id="4_mkji7"]
+[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="5_capyo"]
+[ext_resource type="AudioStream" uid="uid://lchiasx43f3w" path="res://assets/sound/sfx/news.wav" id="7_b2a04"]
+[ext_resource type="AudioStream" uid="uid://dv3ct1fip0bjv" path="res://assets/sound/sfx/started.wav" id="8_r2s4q"]
+
+[sub_resource type="Animation" id="Animation_mkji7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Article:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NewsPaper:offset_transform_position_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewsPaper:offset_transform_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5707963267948966]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Fade:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_capyo"]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.40000004),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"load_scene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_aqbct"]
+resource_name = "init"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Article:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NewsPaper:offset_transform_position_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewsPaper:offset_transform_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [-1.5707963267948966, 0.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable_inputs"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fade:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NewsSfx")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Jingle")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkji7"]
+_data = {
+&"RESET": SubResource("Animation_mkji7"),
+&"fade": SubResource("Animation_capyo"),
+&"init": SubResource("Animation_aqbct")
+}
+
+[node name="Cutscene" type="Control" unique_id=1681194192 node_paths=PackedStringArray("animator")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aqbct")
+target_scene = "res://scenes/Store.tscn"
+animator = NodePath("AnimationPlayer")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1923994753]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=213353936]
+modulate = Color(1, 1, 1, 0.11764706)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_capyo")
+
+[node name="NewsPaper" type="TextureRect" parent="." unique_id=240699560]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 32.0
+offset_right = 930.0
+offset_bottom = 680.0
+offset_transform_enabled = true
+offset_transform_position_ratio = Vector2(0, 2)
+offset_transform_rotation = -1.5707964
+texture = ExtResource("2_ywiat")
+
+[node name="Img" type="TextureRect" parent="NewsPaper" unique_id=1224203176]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 64.0
+offset_right = 495.0
+offset_bottom = 402.0
+texture = ExtResource("3_mkji7")
+
+[node name="Article" type="ColorRect" parent="." unique_id=574309834]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = 96.0
+offset_right = 396.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.78431374)
+
+[node name="Header" type="Label" parent="Article" unique_id=868304300]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "BUNBUNMARU NEWS"
+label_settings = ExtResource("4_mkji7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Article" type="Label" parent="Article" unique_id=1959383763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 76.0
+offset_top = 56.0
+offset_right = -76.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A new store has opened in Gensokyo!
+It seems to be run by Tsukasa...What could this shady fox be up to this time?"
+label_settings = ExtResource("5_capyo")
+autowrap_mode = 3
+
+[node name="Fade" type="ColorRect" parent="." unique_id=862108759]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="NewsSfx" type="AudioStreamPlayer" parent="." unique_id=1258083338]
+stream = ExtResource("7_b2a04")
+bus = &"SFX"
+
+[node name="Jingle" type="AudioStreamPlayer" parent="." unique_id=498476236]
+stream = ExtResource("8_r2s4q")
+bus = &"BGM"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1290642828]
+libraries/ = SubResource("AnimationLibrary_mkji7")
+autoplay = &"init"

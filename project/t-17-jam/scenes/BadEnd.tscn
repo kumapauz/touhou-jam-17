@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://7b1bndokeqmb"]
+
+[ext_resource type="PackedScene" uid="uid://cdb1i8wiuft35" path="res://scenes/Intro.tscn" id="1_l44lt"]
+[ext_resource type="Texture2D" uid="uid://7wib6seqhqyd" path="res://assets/cutscene/bad_ending_picture.png" id="2_tnhko"]
+[ext_resource type="AudioStream" uid="uid://camdlisobm88m" path="res://assets/sound/sfx/failed.wav" id="3_eyn58"]
+
+[node name="Cutscene" unique_id=1681194192 instance=ExtResource("1_l44lt")]
+target_scene = "res://scenes/Title.tscn"
+
+[node name="Img" parent="NewsPaper" parent_id_path=PackedInt32Array(240699560) index="0" unique_id=1224203176]
+texture = ExtResource("2_tnhko")
+
+[node name="Article" parent="Article" parent_id_path=PackedInt32Array(574309834) index="1" unique_id=1959383763]
+text = "After just a week of business, the store has mysteriously disappeared. There haven't been any traces of its owner since..."
+
+[node name="Jingle" parent="." index="6" unique_id=498476236]
+stream = ExtResource("3_eyn58")

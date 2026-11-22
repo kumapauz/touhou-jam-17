@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cjkexu2o25ar0"]
+
+[ext_resource type="Script" uid="uid://cojn6xj1186ix" path="res://scripts/gameplay/sound_manager.gd" id="1_yai5u"]
+[ext_resource type="AudioStream" uid="uid://sm600emp6d63" path="res://assets/sound/sfx/menu_move.wav" id="2_4xaxn"]
+[ext_resource type="AudioStream" uid="uid://rklsf2srwjx" path="res://assets/sound/sfx/menu_cancel.wav" id="3_kysrt"]
+[ext_resource type="AudioStream" uid="uid://nl58k3cggc23" path="res://assets/sound/sfx/menu_accept.wav" id="4_vvvww"]
+[ext_resource type="AudioStream" uid="uid://c60w5w3lhw5mw" path="res://assets/sound/sfx/cleared.wav" id="5_pry7e"]
+
+[node name="Sfx" type="Node" unique_id=314809365]
+script = ExtResource("1_yai5u")
+
+[node name="MenuMove" type="AudioStreamPlayer" parent="." unique_id=1444602634]
+stream = ExtResource("2_4xaxn")
+bus = &"SFX"
+
+[node name="MenuCancel" type="AudioStreamPlayer" parent="." unique_id=1168466766]
+stream = ExtResource("3_kysrt")
+bus = &"SFX"
+
+[node name="MenuAccept" type="AudioStreamPlayer" parent="." unique_id=268100442]
+stream = ExtResource("4_vvvww")
+bus = &"SFX"
+
+[node name="DayCleared" type="AudioStreamPlayer" parent="." unique_id=1485679717]
+stream = ExtResource("5_pry7e")
+bus = &"SFX"

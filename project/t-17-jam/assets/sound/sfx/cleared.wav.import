@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://camdlisobm88m"
-path="res://.godot/imported/dayfailed.wav-20a192d972af65dd126b67352f0ebe38.sample"
+uid="uid://c60w5w3lhw5mw"
+path="res://.godot/imported/cleared.wav-47647c7129c9cd3dff59a3d274fbc4ad.sample"
 
 [deps]
 
-source_file="res://assets/sound/sfx/dayfailed.wav"
-dest_files=["res://.godot/imported/dayfailed.wav-20a192d972af65dd126b67352f0ebe38.sample"]
+source_file="res://assets/sound/sfx/cleared.wav"
+dest_files=["res://.godot/imported/cleared.wav-47647c7129c9cd3dff59a3d274fbc4ad.sample"]
 
 [params]
 

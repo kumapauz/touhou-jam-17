@@ -362,7 +362,7 @@ _data = {
 &"reset": SubResource("Animation_epsb1")
 }
 
-[node name="StatusManager" type="Control" unique_id=2004891369 node_paths=PackedStringArray("money_label", "day_label", "time_bar", "day_animator", "result_animator", "result_point_parent")]
+[node name="StatusManager" type="Control" unique_id=2004891369 node_paths=PackedStringArray("money_label", "day_label", "time_bar", "day_animator", "result_animator", "result_point_parent", "goal_rect")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -370,12 +370,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nqeh8")
+good_ending_path = "uid://dngpohtmkyaxh"
+bad_ending_path = "uid://7b1bndokeqmb"
 money_label = NodePath("Money/Money")
 day_label = NodePath("DayTracker/DayLabel")
 time_bar = NodePath("Time")
 day_animator = NodePath("DayTracker/DayAnimationPlayer")
 result_animator = NodePath("DayTracker/Results/ResultAnimationPlayer")
 result_point_parent = NodePath("DayTracker/Results/Grid/Data")
+goal_rect = NodePath("DayTracker/Results/TargetColumn")
 
 [node name="Money" type="HBoxContainer" parent="." unique_id=9903161]
 layout_mode = 1
@@ -526,21 +529,26 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Target" type="TextureRect" parent="DayTracker/Results" unique_id=2053786130]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -320.0
+[node name="TargetColumn" type="Control" parent="DayTracker/Results" unique_id=1071328719]
+anchors_preset = 0
+offset_left = 960.0
 offset_top = 256.0
-offset_right = -192.0
-offset_bottom = 320.0
-grow_horizontal = 0
+offset_right = 1088.0
+offset_bottom = 640.0
+offset_transform_enabled = true
+
+[node name="Target" type="TextureRect" parent="DayTracker/Results/TargetColumn" unique_id=2053786130]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 352.0
+offset_bottom = 416.0
+grow_horizontal = 2
 offset_transform_enabled = true
 offset_transform_scale = Vector2(1.2, 1.2)
 texture = ExtResource("8_ip2o3")
 
-[node name="Label" type="Label" parent="DayTracker/Results/Target" unique_id=2138137658]
+[node name="Label" type="Label" parent="DayTracker/Results/TargetColumn/Target" unique_id=2138137658]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

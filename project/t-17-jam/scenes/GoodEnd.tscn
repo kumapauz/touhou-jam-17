@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dngpohtmkyaxh"]
+
+[ext_resource type="PackedScene" uid="uid://cdb1i8wiuft35" path="res://scenes/Intro.tscn" id="1_6cnmj"]
+[ext_resource type="Texture2D" uid="uid://c6mrv7ywh1e7m" path="res://assets/cutscene/good_ending_picture.png" id="2_6cnmj"]
+[ext_resource type="AudioStream" uid="uid://c60w5w3lhw5mw" path="res://assets/sound/sfx/cleared.wav" id="3_f82s5"]
+
+[node name="Cutscene" unique_id=1681194192 instance=ExtResource("1_6cnmj")]
+target_scene = "res://scenes/Title.tscn"
+
+[node name="Img" parent="NewsPaper" parent_id_path=PackedInt32Array(240699560) index="0" unique_id=1224203176]
+texture = ExtResource("2_6cnmj")
+
+[node name="Article" parent="Article" parent_id_path=PackedInt32Array(574309834) index="1" unique_id=1959383763]
+text = "After just a week of business, the store has mysteriously disappeared. Seems like the money-making scheme was worth it!"
+
+[node name="Jingle" parent="." index="6" unique_id=498476236]
+stream = ExtResource("3_f82s5")

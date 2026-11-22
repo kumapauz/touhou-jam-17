@@ -7,6 +7,9 @@ static var instance: StatusManager
 ## Tracks whether customers can come into the store.
 var is_open: bool = true
 
+@export_file("*.tscn") var good_ending_path: String
+@export_file("*.tscn") var bad_ending_path: String
+
 @export_group("Components")
 @export var money_label: Label
 @export var day_label: Label
@@ -14,6 +17,7 @@ var is_open: bool = true
 @export var day_animator: AnimationPlayer
 @export var result_animator: AnimationPlayer
 @export var result_point_parent: Node
+@export var goal_rect: Control
 var _result_points: Array[Control]
 
 ## Amount of money the player has.
@@ -21,6 +25,8 @@ var money: int = 500
 ## History of money at the end of each day.
 var money_history: PackedInt64Array
 const TARGET_MONEY: int = 10000
+## How many days the game should last.
+const NUMBER_OF_DAYS: int = 7
 
 var game_state: GAME_STATE = GAME_STATE.INIT
 enum GAME_STATE {
@@ -80,6 +86,13 @@ func add_money(amount: int) -> void:
 	money_label.text = "x%05d" % money
 
 func reset_day() -> void:
+	if money_history.size() >= NUMBER_OF_DAYS:
+		if money >= TARGET_MONEY:
+			get_tree().change_scene_to_file(good_ending_path)
+		else:
+			get_tree().change_scene_to_file(bad_ending_path)
+		return
+
 	current_time = 0
 	day_reset.emit()
 	day_animator.play("reset")
@@ -110,6 +123,8 @@ func finish_day() -> void:
 	for i in money_history:
 		if i > max_range:
 			max_range = i
+	
+	goal_rect.offset_transform_position_ratio = Vector2.UP * (TARGET_MONEY / max_range)
 	
 	for i in range(_result_points.size()):
 		var ratio: float = 0.0
