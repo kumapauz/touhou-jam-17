@@ -98,6 +98,7 @@ func on_day_started() -> void:
 	day_started.emit()
 
 func finish_day() -> void:
+	SoundManager.instance.play_sfx("day_cleared")
 	game_state = GAME_STATE.DAY_FINISHED
 	day_finished.emit()
 	

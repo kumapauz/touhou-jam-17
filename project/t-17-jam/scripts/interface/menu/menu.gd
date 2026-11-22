@@ -50,11 +50,13 @@ func scroll_selection(dir: int) -> void:
 	selection_timer = SELECTION_SCROLL_INTERVAL
 	selection = posmod(selection + dir, selection_options.size())
 	process_cursor_position()
+	SoundManager.instance.play_sfx("menu_move")
 
 func select() -> void:
-	print("Unimplemented.")
+	SoundManager.instance.play_sfx("menu_accept")
 
 func cancel() -> void:
+	SoundManager.instance.play_sfx("menu_cancel")
 	hide_menu()
 
 func process_cursor_position() -> void:
@@ -67,6 +69,7 @@ func show_menu() -> void:
 	animator.play("show")
 	selection = 0
 	process_cursor_position()
+	SoundManager.instance.play_sfx("menu_accept")
 	PlayerController.instance.disable_movement()
 	menu_shown.emit()
 

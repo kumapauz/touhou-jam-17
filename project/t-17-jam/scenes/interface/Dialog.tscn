@@ -236,7 +236,7 @@ _data = {
 &"show": SubResource("Animation_sle2s")
 }
 
-[node name="Dialog" type="Control" unique_id=221836180 node_paths=PackedStringArray("item_root", "item", "speaker_frame", "speaker", "dialog_label", "confirm_animator", "dialog_animator")]
+[node name="Dialog" type="Control" unique_id=221836180 node_paths=PackedStringArray("speaker_frame", "speaker", "dialog_label", "confirm_animator", "dialog_animator")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,8 +244,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_opt2n")
-item_root = NodePath("")
-item = NodePath("")
 speaker_frame = NodePath("DialogBox/Frame")
 speaker = NodePath("DialogBox/Frame/Background/Speaker")
 dialog_label = NodePath("DialogBox/Label")

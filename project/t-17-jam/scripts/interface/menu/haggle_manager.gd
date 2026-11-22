@@ -49,6 +49,7 @@ func process_menu(delta: float) -> void:
 		super(delta)
 
 func select() -> void:
+	super()
 	if target_price > base_price * _haggle_target.npc.max_overpay_bias:
 		# Way too expensive. Immediate rejection.
 		DialogManager.instance.enable_inputs()

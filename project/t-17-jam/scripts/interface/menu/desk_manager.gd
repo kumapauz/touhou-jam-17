@@ -25,9 +25,10 @@ func init_item_resources() -> void:
 		item_resources.append(res)
 
 func select() -> void:
+	super()
 	if selection == 0:
 		retail_store.show_menu()
-	elif selection == 2:
+	elif selection == 1:
 		if InventoryManager.instance.items.size() == 0:
 			# Nothing to discard
 			return
@@ -46,9 +47,9 @@ func show_menu() -> void:
 
 func process_discard_status() -> void:
 	if InventoryManager.instance.items.size() == 0:
-		selection_options.get(2).modulate = Color(1, 1, 1, 0.5)
+		selection_options.get(1).modulate = Color(1, 1, 1, 0.5)
 	else:
-		selection_options.get(2).modulate = Color.WHITE
+		selection_options.get(1).modulate = Color.WHITE
 
 func on_menu_focused() -> void:
 	super()

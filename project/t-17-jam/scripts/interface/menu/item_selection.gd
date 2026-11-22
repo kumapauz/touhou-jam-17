@@ -26,6 +26,8 @@ func scroll_selection(dir: int) -> void:
 	elif selection < 0:
 		scroll_dir = -1 # Scroll up
 	selection = posmod(selection, item_count)
+	if item_count > 1:
+		SoundManager.instance.play_sfx("menu_move")
 	
 	if scroll_dir != 0:
 		var total_count: int = get_menu_item_count()
@@ -38,6 +40,7 @@ func scroll_selection(dir: int) -> void:
 	process_cursor_position()
 
 func select() -> void:
+	super()
 	var selected_item: ItemResource = selection_options.get(selection).item
 	item_selected.emit(selected_item)
 	hide_menu()
@@ -45,7 +48,7 @@ func select() -> void:
 func cancel() -> void:
 	if !current_settings.allow_cancel:
 		return
-	hide_menu()
+	super()
 
 func process_cursor_position() -> void:
 	cursor.global_position = selection_options.get(selection).global_position
