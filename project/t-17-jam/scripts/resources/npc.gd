@@ -18,11 +18,11 @@ enum NPC_TYPE {
 }
 
 ## Base probability to stay in the store.
-@export_range(0, 1, 0.1) var loiter_chance: float = 0.5
+@export_range(0, 1, 0.1) var loiter_chance: float = 0.8
 ## How purchases influence persistence. High -> Leaves after a few purchases. Low -> Bulk buyer
 @export_range(0, 1, 0.1) var loiter_increment: float = 0.1
 ## Base probability to make a purchase.
-@export_range(0, 1, 0.1) var purchase_bias: float = 0.5
+@export_range(0, 1, 0.1) var purchase_bias: float = 0.2
 ## Bias when buying preferred items.
 @export_range(0, 1, 0.1) var preferred_purchase_bias: float = 0.2
 ## Bias when buying disliked items.

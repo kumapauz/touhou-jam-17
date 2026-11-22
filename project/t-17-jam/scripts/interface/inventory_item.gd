@@ -30,4 +30,6 @@ func update_amount() -> void:
 
 ## Used for trend purchases.
 func update_price(new_price: int = 0) -> void:
+	if item == null_item:
+		return
 	price.text = str(item.price if new_price == 0 else new_price)

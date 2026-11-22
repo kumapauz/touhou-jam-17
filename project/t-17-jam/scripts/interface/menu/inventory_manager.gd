@@ -35,12 +35,6 @@ func get_item_count(item: ItemResource) -> int:
 			count += 1
 	return count
 
-func populate_options() -> void:
-	super()
-	for option in selection_options:
-		if is_instance_valid(option.item):
-			option.update_price(0)
-
 func on_menu_hidden() -> void:
 	super()
 	for connection in item_selected.get_connections():

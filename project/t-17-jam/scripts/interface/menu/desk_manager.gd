@@ -33,12 +33,14 @@ func select() -> void:
 			# Nothing to discard
 			return
 		var settings: InventoryManager.Settings = InventoryManager.Settings.new()
+		settings.is_discard_menu = true
 		InventoryManager.instance.update_settings(settings)
 		InventoryManager.instance.show_menu()
 		InventoryManager.instance.item_selected.connect(Callable(self, "on_discard_selected"), PROPERTY_HINT_ONESHOT)
 
 func on_discard_selected(item: ItemResource) -> void:
 	InventoryManager.instance.remove_item(item)
+	StatusManager.instance.add_money(item.get_discard_price())
 	process_discard_status()
 
 func show_menu() -> void:

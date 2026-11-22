@@ -59,6 +59,8 @@ class Settings:
 	var allow_selecting_nothing: bool
 	## Should the menu allow the menu to be canceled?
 	var allow_cancel: bool = true
+	## Should the prices be halved?
+	var is_discard_menu: bool
 
 ## List of items currently in this menu.
 @export var items: Array[ItemResource]
@@ -85,6 +87,11 @@ func populate_options() -> void:
 	for i in selection_options.size():
 		if i < _visible_items.size():
 			selection_options[i].set_item(_visible_items.get(i))
+			printt(current_settings.is_discard_menu, _visible_items.get(i).get_discard_price())
+			if current_settings.is_discard_menu:
+				selection_options[i].update_price(_visible_items.get(i).get_discard_price())
+			else:
+				selection_options[i].update_price(0)
 		else:
 			selection_options[i].set_item(null)
 

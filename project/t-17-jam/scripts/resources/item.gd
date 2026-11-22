@@ -21,3 +21,6 @@ func get_ingame_texture() -> Texture2D:
 	if is_instance_valid(world_texture):
 		return world_texture
 	return ui_texture
+
+func get_discard_price() -> int:
+	return floor(price * 0.5)
