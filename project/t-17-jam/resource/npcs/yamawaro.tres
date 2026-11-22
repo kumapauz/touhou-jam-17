@@ -45,3 +45,7 @@ sprite_frames = SubResource("SpriteFrames_4ax3m")
 stubborness = 3
 expressions = Array[Texture2D]([ExtResource("3_vjca0")])
 inquiry_quotes = PackedStringArray("I\'ve been looking for this!", "Hmm...I really want to buy this...")
+discount_quotes = PackedStringArray("You will receive discounts from me if you give me some.", "Let\'s make a deal!")
+expensive_quotes = PackedStringArray("Takane wouldn\'t take a blatant deal like this in a million years!", "This isn\'t how you conduct business, do you?")
+purchase_quotes = PackedStringArray("Sounds reasonable enough.", "Alright, I\'ll take that!")
+declined_quotes = PackedStringArray("You wasted an opportunity, y\'know?", "Fair enough.")

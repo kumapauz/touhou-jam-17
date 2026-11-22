@@ -48,5 +48,7 @@ max_haggle_multiplier = 2.5
 stubborness = 1
 expressions = Array[Texture2D]([ExtResource("3_4ax3m")])
 inquiry_quotes = PackedStringArray("Gimmie this, please!", "Ooh, I want this!")
+discount_quotes = PackedStringArray("I don\'t have much money. Can I have a discount?", "My funds are tight? Do you mind helping me out?")
 expensive_quotes = PackedStringArray("That\'s way too expensive for me!", "I don\'t have that much money...")
 purchase_quotes = PackedStringArray("Thanks!", "Yay!")
+declined_quotes = PackedStringArray("I\'m telling the others about this!", "No fair!")
