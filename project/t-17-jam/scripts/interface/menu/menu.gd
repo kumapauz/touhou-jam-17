@@ -25,7 +25,9 @@ func initialize_menu() -> void:
 func _process(delta: float) -> void:
 	if !is_active_menu():
 		return
-	
+	process_menu(delta)
+
+func process_menu(delta: float) -> void:
 	process_input(delta)
 	if Input.is_action_just_pressed("confirm"):
 		select()

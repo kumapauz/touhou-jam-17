@@ -33,12 +33,23 @@ enum NPC_TYPE {
 ## Multipier for how long to think before performing an action.
 @export_range(0, 1, 0.1) var contemplation_multiplier: float = 0.5
 
+## The ratio of how much this shopper is willing to pay extra.
+@export_range(0.5, 2, 0.1) var overpay_bias: float = 1.2
+## The ratio of how much this shopper is willing to pay extra.
+@export_range(1, 3, 0.1) var max_overpay_bias: float = 2.0
+## How stubborn the npc is to negotiations.
+@export_range(1, 5, 0.1) var stubborness: float
+
 @export_group("Dialogs")
 ## Optional sprites for dialog.
 @export var expressions: Array[Texture2D]
 ## Quotes for when this shopper wants to buy something.
 @export var inquiry_quotes: PackedStringArray
+## Quotes for when this shopper wants a discount.
+@export var discount_quotes: PackedStringArray
 ## Quotes for when something is too expensive.
 @export var expensive_quotes: PackedStringArray
 ## Quotes for when this shopper confirms a purchase.
 @export var purchase_quotes: PackedStringArray
+## Quotes for when the player refuses to sell to this shopper.
+@export var declined_quotes: PackedStringArray

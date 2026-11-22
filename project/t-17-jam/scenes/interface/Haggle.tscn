@@ -3,10 +3,18 @@
 [ext_resource type="Script" uid="uid://b8mvpgdkoy4dh" path="res://scripts/interface/menu/haggle_manager.gd" id="1_ctdkr"]
 [ext_resource type="Texture2D" uid="uid://bu3sb0r8g2klh" path="res://assets/interface/texture/dialog_box.png" id="2_bvgvd"]
 [ext_resource type="Texture2D" uid="uid://c6356s3gp2yet" path="res://assets/items/apple.png" id="3_mtjop"]
-[ext_resource type="LabelSettings" uid="uid://ci1qmjpev67c8" path="res://assets/interface/font/InventoryFont.tres" id="4_kl74k"]
-[ext_resource type="LabelSettings" uid="uid://bfbkvdibjjx1o" path="res://assets/interface/font/DayFont.tres" id="5_8dg5f"]
+[ext_resource type="LabelSettings" uid="uid://dfopdj5m4b8hp" path="res://assets/interface/font/MoneyFont.tres" id="4_mtjop"]
+[ext_resource type="LabelSettings" uid="uid://ck8gamur73he3" path="res://assets/interface/font/HaggleFont.tres" id="5_sauad"]
 [ext_resource type="Texture2D" uid="uid://c2pli2qt56ayq" path="res://assets/interface/texture/delivery_cursor.png" id="6_8dg5f"]
 [ext_resource type="Texture2D" uid="uid://gtsc43xcvhx8" path="res://assets/interface/texture/point.png" id="6_ax0ou"]
+[ext_resource type="LabelSettings" uid="uid://dclec14oj6w26" path="res://assets/interface/font/HeaderFont.tres" id="8_g5kq2"]
+[ext_resource type="PackedScene" uid="uid://b2dsombamov8v" path="res://scenes/interface/HagglePoint.tscn" id="9_sauad"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqn2s"]
+size = Vector2(6, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sauad"]
+size = Vector2(32, 64)
 
 [sub_resource type="Animation" id="Animation_bvgvd"]
 length = 0.001
@@ -29,6 +37,66 @@ tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Minigame:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Minigame/Game:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Minigame/Header:offset_transform_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Minigame/Header:offset_transform_scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Minigame/Header:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -62,6 +130,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Minigame:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_8dg5f"]
 resource_name = "init"
@@ -89,6 +169,84 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sauad"]
+resource_name = "negotiate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minigame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Minigame/Game:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Minigame/Header:offset_transform_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.40000004, 0.5),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector2(0, 120), Vector2(0, 50), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Minigame/Header:offset_transform_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.20000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Minigame/Header:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.13333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_minigame_started"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_kl74k"]
@@ -138,10 +296,11 @@ _data = {
 &"RESET": SubResource("Animation_bvgvd"),
 &"hide": SubResource("Animation_mtjop"),
 &"init": SubResource("Animation_8dg5f"),
+&"negotiate": SubResource("Animation_sauad"),
 &"show": SubResource("Animation_kl74k")
 }
 
-[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("item_root", "item", "cursor", "animator", "selection_parent")]
+[node name="Haggle" type="Control" unique_id=769273697 node_paths=PackedStringArray("haggle_label", "item_root", "item", "haggle_point_parent", "cursor", "animator", "selection_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,11 +308,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ctdkr")
+haggle_label = NodePath("Minigame/Game/FinalPrice/Price")
 item_root = NodePath("ItemRect")
 item = NodePath("ItemRect/Item")
-cursor = NodePath("HagglePrice/Cursor")
+haggle_point_parent = NodePath("Minigame/Game/Minigame/MinigameRoot/HagglePoints")
+cursor = NodePath("PriceInput/Cursor")
 animator = NodePath("AnimationPlayer")
-selection_parent = NodePath("HagglePrice/Digits")
+selection_parent = NodePath("PriceInput/Digits")
 
 [node name="ItemRect" type="NinePatchRect" parent="." unique_id=1489107450]
 layout_mode = 1
@@ -189,11 +350,7 @@ texture = ExtResource("3_mtjop")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=949064168]
-libraries/ = SubResource("AnimationLibrary_8dg5f")
-autoplay = &"init"
-
-[node name="HagglePrice" type="Control" parent="." unique_id=797888435]
+[node name="PriceInput" type="Control" parent="." unique_id=797888435]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -207,18 +364,20 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Header" type="Label" parent="HagglePrice" unique_id=302334988]
+[node name="Header" type="Label" parent="PriceInput" unique_id=302334988]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = -96.0
-offset_bottom = -61.0
+offset_left = -96.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = -80.0
 grow_horizontal = 2
-text = "ENTER A FAIR PRICE!"
-label_settings = ExtResource("4_kl74k")
+text = "SUGGEST A FAIR PRICE!"
+label_settings = ExtResource("8_g5kq2")
 horizontal_alignment = 1
 
-[node name="Digits" type="HBoxContainer" parent="HagglePrice" unique_id=941571048]
+[node name="Digits" type="HBoxContainer" parent="PriceInput" unique_id=941571048]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -228,69 +387,212 @@ offset_top = -52.5
 offset_bottom = 52.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Digit1" type="Label" parent="HagglePrice/Digits" unique_id=986145515]
+[node name="Digit1" type="Label" parent="PriceInput/Digits" unique_id=986145515]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("5_8dg5f")
+label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit2" type="Label" parent="HagglePrice/Digits" unique_id=385214097]
+[node name="Digit2" type="Label" parent="PriceInput/Digits" unique_id=385214097]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("5_8dg5f")
+label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit3" type="Label" parent="HagglePrice/Digits" unique_id=293726108]
+[node name="Digit3" type="Label" parent="PriceInput/Digits" unique_id=293726108]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("5_8dg5f")
+label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit4" type="Label" parent="HagglePrice/Digits" unique_id=1240435446]
+[node name="Digit4" type="Label" parent="PriceInput/Digits" unique_id=1240435446]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("5_8dg5f")
+label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="Digit5" type="Label" parent="HagglePrice/Digits" unique_id=1779216449]
+[node name="Digit5" type="Label" parent="PriceInput/Digits" unique_id=1779216449]
 layout_mode = 2
 text = "0"
-label_settings = ExtResource("5_8dg5f")
+label_settings = ExtResource("5_sauad")
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HagglePrice" unique_id=1497012090]
+[node name="TextureRect" type="TextureRect" parent="PriceInput" unique_id=1497012090]
 layout_mode = 0
-offset_left = 328.0
-offset_top = 24.0
-offset_right = 424.0
-offset_bottom = 120.0
+offset_left = 344.0
+offset_top = 32.0
+offset_right = 416.0
+offset_bottom = 104.0
 texture = ExtResource("6_ax0ou")
+stretch_mode = 5
 
-[node name="Cursor" type="Control" parent="HagglePrice" unique_id=2058607434]
+[node name="Cursor" type="Control" parent="PriceInput" unique_id=2058607434]
 anchors_preset = 0
-offset_left = 264.0
-offset_top = 8.0
-offset_right = 264.0
-offset_bottom = 8.0
+offset_left = 272.0
+offset_top = 16.0
+offset_right = 272.0
+offset_bottom = 16.0
 
-[node name="Top" type="TextureRect" parent="HagglePrice/Cursor" unique_id=673461249]
+[node name="Top" type="TextureRect" parent="PriceInput/Cursor" unique_id=673461249]
 layout_mode = 0
 offset_left = -8.0
-offset_top = 24.0
+offset_top = 16.0
 offset_right = 56.0
-offset_bottom = 88.0
+offset_bottom = 80.0
 rotation = -1.5707964
 texture = ExtResource("6_8dg5f")
 
-[node name="Down" type="TextureRect" parent="HagglePrice/Cursor" unique_id=712794926]
+[node name="Down" type="TextureRect" parent="PriceInput/Cursor" unique_id=712794926]
 layout_mode = 0
 offset_left = -8.0
-offset_top = 168.0
+offset_top = 160.0
 offset_right = 56.0
-offset_bottom = 232.0
+offset_bottom = 224.0
 rotation = -1.5707964
 texture = ExtResource("6_8dg5f")
 flip_h = true
+
+[node name="Minigame" type="NinePatchRect" parent="." unique_id=841530789]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -224.0
+offset_right = 448.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bvgvd")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Header" type="Label" parent="Minigame" unique_id=1509468316]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 40.0
+offset_bottom = 75.0
+grow_horizontal = 2
+offset_transform_enabled = true
+text = "NEGOTIATE!"
+label_settings = ExtResource("8_g5kq2")
+horizontal_alignment = 1
+
+[node name="Game" type="Control" parent="Minigame" unique_id=1570410866]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FinalPrice" type="HBoxContainer" parent="Minigame/Game" unique_id=900374015]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -144.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="FinalPrice" type="Label" parent="Minigame/Game/FinalPrice" unique_id=2007051961]
+layout_mode = 2
+text = "Final Price : "
+label_settings = ExtResource("4_mtjop")
+horizontal_alignment = 1
+
+[node name="Price" type="Label" parent="Minigame/Game/FinalPrice" unique_id=475010426]
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("4_mtjop")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Minigame/Game/FinalPrice" unique_id=48177627]
+layout_mode = 2
+texture = ExtResource("6_ax0ou")
+stretch_mode = 5
+
+[node name="Minigame" type="Control" parent="Minigame/Game" unique_id=669123387]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -36.0
+offset_right = -64.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Minigame/Game/Minigame" unique_id=1896483751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.19434929, 0.19434926, 0.19434926, 1)
+
+[node name="MinigameRoot" type="Node2D" parent="Minigame/Game/Minigame" unique_id=721151139]
+position = Vector2(384, 0)
+
+[node name="HaggleDetector" type="Area2D" parent="Minigame/Game/Minigame/MinigameRoot" unique_id=1196408206]
+position = Vector2(256, 0)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" unique_id=171621133]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_yqn2s")
+
+[node name="Sprite2D" type="Sprite2D" parent="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" unique_id=1360109196]
+position = Vector2(0, -24)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_8dg5f")
+
+[node name="HaggleEnd" type="Area2D" parent="Minigame/Game/Minigame/MinigameRoot" unique_id=942995501]
+position = Vector2(384, 0)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minigame/Game/Minigame/MinigameRoot/HaggleEnd" unique_id=877059003]
+position = Vector2(0, 32)
+shape = SubResource("RectangleShape2D_sauad")
+
+[node name="HagglePoints" type="Node2D" parent="Minigame/Game/Minigame/MinigameRoot" unique_id=2014077913]
+position = Vector2(-384, 32)
+
+[node name="HagglePoint1" parent="Minigame/Game/Minigame/MinigameRoot/HagglePoints" unique_id=2123446239 instance=ExtResource("9_sauad")]
+
+[node name="HagglePoint2" parent="Minigame/Game/Minigame/MinigameRoot/HagglePoints" unique_id=1302918089 instance=ExtResource("9_sauad")]
+
+[node name="HagglePoint3" parent="Minigame/Game/Minigame/MinigameRoot/HagglePoints" unique_id=2034308964 instance=ExtResource("9_sauad")]
+
+[node name="HagglePoint4" parent="Minigame/Game/Minigame/MinigameRoot/HagglePoints" unique_id=2084800062 instance=ExtResource("9_sauad")]
+
+[node name="HagglePoint5" parent="Minigame/Game/Minigame/MinigameRoot/HagglePoints" unique_id=532651667 instance=ExtResource("9_sauad")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=949064168]
+libraries/ = SubResource("AnimationLibrary_8dg5f")
+autoplay = &"init"
+
+[connection signal="area_entered" from="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" to="." method="_on_haggle_detector_area_entered"]
+[connection signal="area_exited" from="Minigame/Game/Minigame/MinigameRoot/HaggleDetector" to="." method="_on_haggle_detector_area_exited"]
+[connection signal="area_entered" from="Minigame/Game/Minigame/MinigameRoot/HaggleEnd" to="." method="_on_haggle_end_area_entered"]

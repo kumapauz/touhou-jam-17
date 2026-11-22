@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 	if game_state == GAME_STATE.DAY_FINISHED && Input.is_action_just_pressed("confirm"):
 		reset_day()
 	
-	if DialogManager.instance.is_dialog_active:
+	if !PlayerController.instance.is_input_enabled():
 		return
 	
 	if game_state != GAME_STATE.STORE_OPEN:

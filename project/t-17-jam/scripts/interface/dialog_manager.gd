@@ -41,7 +41,7 @@ func enable_inputs() -> void:
 	is_reading_inputs = true
 
 func disable_inputs() -> void:
-	is_reading_inputs = true
+	is_reading_inputs = false
 
 ## Plays an entire dialog sequence. Useful for cutscenes.
 func start_dialog_sequence() -> void:

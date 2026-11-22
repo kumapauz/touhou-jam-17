@@ -13,6 +13,8 @@ func set_manager(manager: NpcManager) -> void:
 var _wait_time: float
 ## Tracks the number of items this shopper bought this trip.
 var _purchase_count: int
+## Has this npc tried to haggle for the item they're currently looking at?
+var attemped_haggle: bool
 
 ## The item holder this player is moving towards.
 var _target_holder: ItemHolder
@@ -65,7 +67,8 @@ func process_wait(delta: float) -> void:
 	_wait_time = move_toward(_wait_time, 0, delta)
 	if !is_waiting():
 		# TODO Roll a chance to buy an item
-		if randf() < calculate_purchase_chance():
+		if !attemped_haggle && randf() < calculate_purchase_chance():
+			attemped_haggle = true
 			HaggleManager.instance.set_npc(self)
 			HaggleManager.instance.show_menu()
 			return
@@ -75,7 +78,7 @@ func process_wait(delta: float) -> void:
 			set_path(_manager.get_exit_path(self))
 
 func calculate_purchase_chance() -> float:
-	if !PlayerController.instance.is_input_enabled:
+	if !PlayerController.instance.is_input_enabled():
 		# Don't buy anything while player is busy
 		return 0.0
 	
@@ -105,6 +108,7 @@ func set_npc(new_npc: NpcResource) -> void:
 		sprite.sprite_frames = npc.sprite_frames
 
 func set_path(path: PackedVector2Array) -> void:
+	attemped_haggle = false
 	current_path = path
 	current_path_index = 0
 	path_t = 0

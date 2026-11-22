@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	process_animation()
 
 func process_actions() -> void:
-	if !is_input_enabled || DialogManager.instance.is_dialog_active:
+	if !is_input_enabled():
 		return
 	
 	process_interactable_objects()
@@ -72,7 +72,7 @@ func set_active_interactable_object(new_interactable: InteractableObject) -> voi
 		_active_object.select()
 
 func process_movement(delta: float) -> void:
-	if !is_input_enabled || DialogManager.instance.is_dialog_active:
+	if !is_input_enabled():
 		return
 	
 	var input: Vector2 = Vector2(Input.get_axis("left", "right"), Input.get_axis("down", "up")).limit_length()
@@ -113,13 +113,16 @@ func apply_velocity() -> void:
 	velocity = Vector3.RIGHT.rotated(Vector3.UP, move_angle) * move_speed
 	move_and_slide()
 
+var _is_processing_inputs: bool
 ## Tracks whether the player is processing movement.
-var is_input_enabled: bool
+func is_input_enabled() -> bool:
+	return _is_processing_inputs && !DialogManager.instance.is_dialog_active
+
 func enable_movement() -> void:
-	is_input_enabled = true
+	_is_processing_inputs = true
 
 func disable_movement() -> void:
-	is_input_enabled = false
+	_is_processing_inputs = false
 	move_speed = 0
 	# TODO Reset animations
 
