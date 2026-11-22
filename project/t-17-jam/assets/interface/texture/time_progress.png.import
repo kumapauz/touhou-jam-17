@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bed6xai23emng"
-path="res://.godot/imported/rarity_outline.png-5505f5804c0f38c153e3c9d64c80d783.ctex"
+uid="uid://dqys4x4xyskpo"
+path="res://.godot/imported/time_progress.png-f14e6ae009836545173610abc593d9d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/texture/rarity_outline.png"
-dest_files=["res://.godot/imported/rarity_outline.png-5505f5804c0f38c153e3c9d64c80d783.ctex"]
+source_file="res://assets/interface/texture/time_progress.png"
+dest_files=["res://.godot/imported/time_progress.png-f14e6ae009836545173610abc593d9d1.ctex"]
 
 [params]
 

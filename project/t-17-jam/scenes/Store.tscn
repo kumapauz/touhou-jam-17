@@ -250,6 +250,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="StatusManager" parent="Interface" unique_id=2004891369 instance=ExtResource("13_slus8")]
+layout_mode = 1
+
 [node name="DeskManager" parent="Interface" unique_id=167356728 instance=ExtResource("26_sle2s")]
 layout_mode = 1
 
@@ -268,9 +271,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Dialog" parent="Interface" unique_id=221836180 instance=ExtResource("19_slus8")]
-layout_mode = 1
-
-[node name="StatusManager" parent="Interface" unique_id=2004891369 instance=ExtResource("13_slus8")]
 layout_mode = 1
 
 [node name="HaggleManager" parent="Interface" unique_id=769273697 instance=ExtResource("18_21atw")]

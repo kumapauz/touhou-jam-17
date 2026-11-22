@@ -40,7 +40,7 @@ enum GAME_STATE {
 
 var current_time: float
 ## How many seconds each business day is.
-const DAY_LENGTH: float = 10.0
+const DAY_LENGTH: float = 30.0
 const MAX_MONEY_AMOUNT: int = 99999
 
 signal store_opened
@@ -94,6 +94,7 @@ func reset_day() -> void:
 		return
 
 	current_time = 0
+	time_bar.value = 0
 	day_reset.emit()
 	day_animator.play("reset")
 	result_animator.play("reset")

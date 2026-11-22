@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://70nkgtm241ur"
-path="res://.godot/imported/rarity.png-fcf4cd3306e795bbc7cdc359efcfb8ce.ctex"
+uid="uid://0kpdivdv3qis"
+path="res://.godot/imported/time_over.png-8b48aa5dc21748e49107d938e63046a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/interface/texture/rarity.png"
-dest_files=["res://.godot/imported/rarity.png-fcf4cd3306e795bbc7cdc359efcfb8ce.ctex"]
+source_file="res://assets/interface/texture/time_over.png"
+dest_files=["res://.godot/imported/time_over.png-8b48aa5dc21748e49107d938e63046a8.ctex"]
 
 [params]
 
