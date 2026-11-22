@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://dyeknkfh8tgsy"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_frw4i"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="4_4qpup"]
+[ext_resource type="Texture2D" uid="uid://do20h4hunfx7g" path="res://assets/character/seija/spritesheet.png" id="5_1ulfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exjo2"]
+atlas = ExtResource("5_1ulfb")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qpup"]
+atlas = ExtResource("5_1ulfb")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3iyc"]
+atlas = ExtResource("5_1ulfb")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frw4i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exjo2")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qpup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3iyc")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("4_4qpup")
+name = "Seija Kijin"
+sprite_frames = SubResource("SpriteFrames_frw4i")
+npc_type = 1
+expressions = Array[Texture2D]([ExtResource("5_1ulfb")])

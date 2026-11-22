@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://c4rsrclqioy0p"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_kfi44"]
+[ext_resource type="Texture2D" uid="uid://csitkk4ji4hs" path="res://assets/character/rin/spritesheet.png" id="2_5oqb8"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="3_5oqb8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfi44"]
+atlas = ExtResource("2_5oqb8")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_td81a"]
+atlas = ExtResource("2_5oqb8")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5oqb8"]
+atlas = ExtResource("2_5oqb8")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_321ny"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfi44")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_td81a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5oqb8")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("3_5oqb8")
+name = "Rin Kaenbyou"
+sprite_frames = SubResource("SpriteFrames_321ny")
+npc_type = 1
+expressions = Array[Texture2D]([ExtResource("2_5oqb8")])

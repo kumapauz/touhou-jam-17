@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://bcmw2un3crrod"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_xuy78"]
+[ext_resource type="Texture2D" uid="uid://cgeqfx8r884cg" path="res://assets/character/shou/spritesheet.png" id="3_xuy78"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="5_aqv4j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krf5c"]
+atlas = ExtResource("3_xuy78")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xap6f"]
+atlas = ExtResource("3_xuy78")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qr0n"]
+atlas = ExtResource("3_xuy78")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xuy78"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krf5c")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xap6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qr0n")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("5_aqv4j")
+name = "Shou Toramaru"
+sprite_frames = SubResource("SpriteFrames_xuy78")
+npc_type = 1
+expressions = Array[Texture2D]([ExtResource("3_xuy78")])
