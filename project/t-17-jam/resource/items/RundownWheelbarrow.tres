@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_gljyy")
 item_name = "Rundown Wheelbarrow"
+item_description = "A wheelbarrow that looks functional, but is prone to breaking down easily due to being held together with faulty parts."
 ui_texture = ExtResource("2_gljyy")
 rarity = 2
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

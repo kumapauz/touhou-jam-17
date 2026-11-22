@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_rr07n")
-item_name = "Miracle Mallet"
+item_name = "Miracle Mallet Replica"
+item_description = "A near identical replica of the Miracle. It seems like the real deal, but its surface appears to be that of plastic."
 ui_texture = ExtResource("2_rr07n")
 price = 300
 rarity = 2

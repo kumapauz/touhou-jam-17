@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_2wk36")
 item_name = "Parasol"
-item_description = "A lightweight umbrella with a cane handle used to block out light and provide shade from the sun. Also a fashionable item that indicates serenity and beauty from its user."
+item_description = "A lightweight parasol used to provide shade from the sun. Also a fashionable item indicating serenity and beauty from its user."
 ui_texture = ExtResource("2_gptsc")
 price = 200
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

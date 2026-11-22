@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_cmc2a")
 item_name = "Fake Pagoda"
-item_description = "A cheap imitation of the Jeweled Pagoda of Bishamonten, looks like the real deal, but is overall a false copy. Perfect for swindling the Disciple of Bishamonten, not so much with her familiar, Nazrin. "
+item_description = "A cheap imitation of the Jeweled Pagoda of Bishamonten. Looks like the real deal, but is overall a false copy."
 ui_texture = ExtResource("2_cmc2a")
 price = 150
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"
