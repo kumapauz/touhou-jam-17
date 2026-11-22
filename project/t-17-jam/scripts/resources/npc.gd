@@ -34,7 +34,7 @@ enum NPC_TYPE {
 @export_range(0, 1, 0.1) var contemplation_multiplier: float = 0.5
 
 ## The ratio of how much this shopper is willing to pay extra without haggling.
-@export_range(0.5, 2, 0.1) var overpay_bias: float = 1.2
+@export_range(0.5, 5, 0.1) var overpay_bias: float = 1.2
 ## The maximum ratio this shopper is willing to pay extra with perfect haggling skills.
 @export_range(1, 5, 0.1) var max_overpay_bias: float = 3.0
 ## The most aggreeable this npc is to haggle with.
