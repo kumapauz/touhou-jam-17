@@ -40,7 +40,7 @@ enum GAME_STATE {
 
 var current_time: float
 ## How many seconds each business day is.
-const DAY_LENGTH: float = 30.0
+const DAY_LENGTH: float = 15.0
 const MAX_MONEY_AMOUNT: int = 99999
 
 signal store_opened

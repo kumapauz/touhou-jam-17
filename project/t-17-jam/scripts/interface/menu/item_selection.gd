@@ -87,7 +87,6 @@ func populate_options() -> void:
 	for i in selection_options.size():
 		if i < _visible_items.size():
 			selection_options[i].set_item(_visible_items.get(i))
-			printt(current_settings.is_discard_menu, _visible_items.get(i).get_discard_price())
 			if current_settings.is_discard_menu:
 				selection_options[i].update_price(_visible_items.get(i).get_discard_price())
 			else:
