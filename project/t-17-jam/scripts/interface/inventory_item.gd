@@ -24,12 +24,17 @@ func set_item(new_item: ItemResource) -> void:
 	price.get_parent().visible = item != null_item
 	update_amount()
 
-func update_amount() -> void:
-	if amount.visible:
+func update_amount(count: int = -1) -> void:
+	if !amount.visible:
+		return
+	
+	if count == -1:
 		amount.text = "x%02d" % InventoryManager.instance.get_item_count(item)
+	else:
+		amount.text = "x%02d" % count
 
 ## Used for trend purchases.
-func update_price(new_price: int = 0) -> void:
+func update_price(new_price: int = -1) -> void:
 	if item == null_item:
 		return
-	price.text = str(item.price if new_price == 0 else new_price)
+	price.text = str(item.price if new_price < 0 else new_price)

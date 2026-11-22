@@ -552,17 +552,9 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Point6" parent="DayTracker/Results/Grid/Data" unique_id=1987002425 instance=ExtResource("7_8c5ii")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Point7" parent="DayTracker/Results/Grid/Data" unique_id=1937302367 instance=ExtResource("7_8c5ii")]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="TargetColumn" type="Control" parent="DayTracker/Results" unique_id=1071328719]
 anchors_preset = 0
-offset_left = 960.0
+offset_left = 912.0
 offset_top = 256.0
 offset_right = 1088.0
 offset_bottom = 640.0

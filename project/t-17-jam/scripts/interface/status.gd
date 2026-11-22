@@ -26,7 +26,7 @@ var money: int = 500
 var money_history: PackedInt64Array
 const TARGET_MONEY: int = 10000
 ## How many days the game should last.
-const NUMBER_OF_DAYS: int = 7
+const NUMBER_OF_DAYS: int = 5
 
 var game_state: GAME_STATE = GAME_STATE.INIT
 enum GAME_STATE {

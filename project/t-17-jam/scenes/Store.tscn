@@ -37,7 +37,7 @@ glow_enabled = true
 size = Vector3(3, 4, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0f76r"]
-size = Vector3(5, 4, 1)
+size = Vector3(5, 4, 3)
 
 [node name="Store" type="Node3D" unique_id=602147578]
 
@@ -213,7 +213,7 @@ script = ExtResource("11_8q4y6")
 select_root = NodePath("Select")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ItemHolders/Desk" unique_id=284894996]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_0f76r")
 debug_color = Color(0.96216804, 0.19730136, 3.85046e-07, 0.41960785)
 

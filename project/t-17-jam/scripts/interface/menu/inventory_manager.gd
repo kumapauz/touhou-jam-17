@@ -3,7 +3,7 @@ extends "res://scripts/interface/menu/item_selection.gd"
 class_name InventoryManager
 
 static var instance: InventoryManager
-const MAX_INVENTORY_SIZE: int = 40
+#const MAX_INVENTORY_SIZE: int = 40
 
 func _enter_tree() -> void:
 	instance = self

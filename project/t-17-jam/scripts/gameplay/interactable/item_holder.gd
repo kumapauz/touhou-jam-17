@@ -5,6 +5,20 @@ class_name ItemHolder
 
 signal item_sent_to_inventory(item: ItemResource)
 
+## List of items
+static var items: Array[ItemResource]
+
+static func clear_global_item_list() -> void:
+	items.clear()
+
+## Returns the number of a particular item the player is holding.
+static func get_item_count(target: ItemResource) -> int:
+	var count: int = 0
+	for i in items:
+		if i == target:
+			count += 1
+	return count
+
 ## The item this holder currently has.
 @export var item: ItemResource
 ## An item that forces the item to dissappear.

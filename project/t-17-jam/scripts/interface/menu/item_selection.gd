@@ -90,7 +90,7 @@ func populate_options() -> void:
 			if current_settings.is_discard_menu:
 				selection_options[i].update_price(_visible_items.get(i).get_discard_price())
 			else:
-				selection_options[i].update_price(0)
+				selection_options[i].update_price()
 		else:
 			selection_options[i].set_item(null)
 
