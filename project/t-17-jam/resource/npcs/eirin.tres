@@ -49,3 +49,7 @@ npc_type = 1
 contemplation_multiplier = 0.7
 expressions = Array[Texture2D]([ExtResource("2_wv4ka")])
 inquiry_quotes = PackedStringArray("I didn\'t expect to find this here.", "This could be useful.", "What can I make with this?")
+discount_quotes = PackedStringArray("How about we discuss a deal?", "Mind becoming business partners?")
+expensive_quotes = PackedStringArray("This is much outrageous.", "I can see through you.")
+purchase_quotes = PackedStringArray("Pleasure doing business with you.", "Let us meet again in the future.")
+declined_quotes = PackedStringArray("Oh? How disappointing.", "What a shame.")
