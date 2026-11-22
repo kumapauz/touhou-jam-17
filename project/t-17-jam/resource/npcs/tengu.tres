@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="NpcResource" format=3 uid="uid://cqx5oogptq1et"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_3au7j"]
+[ext_resource type="Script" uid="uid://dpofqnwboyc7i" path="res://scripts/resources/npc.gd" id="3_6g15t"]
+[ext_resource type="Texture2D" uid="uid://bnekfc1ucnl24" path="res://assets/character/mob/tengu.png" id="4_n8ibw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g15t"]
+atlas = ExtResource("4_n8ibw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cb4o5"]
+atlas = ExtResource("4_n8ibw")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dp5ow"]
+atlas = ExtResource("4_n8ibw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cb4o5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6g15t")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cb4o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dp5ow")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("3_6g15t")
+name = "Tengu"
+sprite_frames = SubResource("SpriteFrames_cb4o5")
+expressions = Array[Texture2D]([ExtResource("4_n8ibw")])
