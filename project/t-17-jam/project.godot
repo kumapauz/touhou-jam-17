@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="T17-Jam"
+config/name="Omagatoki Capital"
 run/main_scene="uid://c3ybem37eokfi"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="uid://buik2hynpmbp4"
+config/icon="uid://bypv8wgfycena"
 
 [audio]
 
