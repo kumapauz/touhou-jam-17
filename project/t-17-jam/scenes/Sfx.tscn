@@ -5,6 +5,9 @@
 [ext_resource type="AudioStream" uid="uid://rklsf2srwjx" path="res://assets/sound/sfx/menu_cancel.wav" id="3_kysrt"]
 [ext_resource type="AudioStream" uid="uid://nl58k3cggc23" path="res://assets/sound/sfx/menu_accept.wav" id="4_vvvww"]
 [ext_resource type="AudioStream" uid="uid://c60w5w3lhw5mw" path="res://assets/sound/sfx/cleared.wav" id="5_pry7e"]
+[ext_resource type="AudioStream" uid="uid://1nkmqnrid1hd" path="res://assets/sound/sfx/negotiation.wav" id="6_3toxi"]
+[ext_resource type="AudioStream" uid="uid://btou08xqgf3ha" path="res://assets/sound/sfx/transaction.wav" id="7_2kq82"]
+[ext_resource type="AudioStream" uid="uid://c1mj2wco4vibg" path="res://assets/sound/sfx/shop_opened.wav" id="7_5p3ky"]
 
 [node name="Sfx" type="Node" unique_id=314809365]
 script = ExtResource("1_yai5u")
@@ -23,4 +26,16 @@ bus = &"SFX"
 
 [node name="DayCleared" type="AudioStreamPlayer" parent="." unique_id=1485679717]
 stream = ExtResource("5_pry7e")
+bus = &"SFX"
+
+[node name="Negotiation" type="AudioStreamPlayer" parent="." unique_id=1389936357]
+stream = ExtResource("6_3toxi")
+bus = &"SFX"
+
+[node name="Transaction" type="AudioStreamPlayer" parent="." unique_id=1906881535]
+stream = ExtResource("7_2kq82")
+bus = &"SFX"
+
+[node name="ShopOpened" type="AudioStreamPlayer" parent="." unique_id=840044479]
+stream = ExtResource("7_5p3ky")
 bus = &"SFX"

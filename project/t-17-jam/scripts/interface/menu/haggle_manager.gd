@@ -14,6 +14,7 @@ func _enter_tree() -> void:
 @export var haggle_point_parent: Node2D
 var _haggle_point_pool: Array[Node2D]
 var _haggle_points: Array[Area2D]
+var _is_haggle_input_enabled: bool
 
 ## The desired price.
 var target_price: int
@@ -51,10 +52,8 @@ func process_menu(delta: float) -> void:
 func select() -> void:
 	super()
 	if target_price > base_price * _haggle_target.npc.max_overpay_bias:
-		# Way too expensive. Immediate rejection.
-		DialogManager.instance.enable_inputs()
-		DialogManager.instance.play_random_quote(_haggle_target.npc.discount_quotes, "That's too expensive!!!")
-		hide_menu()
+		# Way too expensive. Ask player to enter a different value
+		DialogManager.instance.play_random_quote(_haggle_target.npc.expensive_quotes, "That's too expensive!!!")
 		return
 	
 	if target_price > base_price * _haggle_target.npc.overpay_bias:
@@ -65,6 +64,7 @@ func select() -> void:
 func start_haggle_minigame() -> void:
 	haggle_score = 0
 	haggle_points_processed = 0
+	_is_haggle_input_enabled = true
 	for point in _haggle_point_pool:
 		point.respawn()
 	
@@ -87,22 +87,29 @@ func process_haggle_minigame(delta: float) -> void:
 	if is_haggle_points_spawning && is_zero_approx(_haggle_timer):
 		spawn_haggle_point()
 	
-	if Input.is_action_just_pressed("confirm"):
-		if haggle_points_processed == _haggle_target.npc.stubborness:
-			# Minigame has finished
-			finalize_sale()
-			return
-		
+	if Input.is_action_just_pressed("confirm") && _is_haggle_input_enabled:
 		haggle_cursor_animator.seek(0.0)
-		if _haggle_points.size() == 0:
-			haggle_cursor_animator.play("miss")
-			update_haggle_score(-1)
-		else:
-			haggle_cursor_animator.play("hit")
-			for point in _haggle_points:
-				point.explode()
-				update_haggle_score(1)
-			_haggle_points.clear()
+		haggle_cursor_animator.play("hit")
+		_is_haggle_input_enabled = false
+
+## Called when the haggle point is being checked.
+func check_haggle_hit() -> void:
+	_is_haggle_input_enabled = true
+	if haggle_points_processed == _haggle_target.npc.stubborness:
+		# Minigame has finished
+		finalize_sale()
+		return
+	
+	if _haggle_points.size() == 0:
+		haggle_cursor_animator.play("miss")
+		update_haggle_score(-1)
+		SoundManager.instance.play_sfx("menu_cancel")
+	else:
+		for point in _haggle_points:
+			point.explode()
+			update_haggle_score(1)
+		_haggle_points.clear()
+		SoundManager.instance.play_sfx("menu_accept")
 
 func update_haggle_score(dir: int) -> void:
 	haggle_score += dir
@@ -177,6 +184,7 @@ func scroll_selection(dir: int) -> void:
 func show_menu() -> void:
 	editing_place = 0
 	update_price()
+	SoundManager.instance.play_sfx("transaction")
 	super()
 
 func on_menu_shown() -> void:
@@ -208,6 +216,7 @@ func finalize_sale() -> void:
 	_haggle_target.purchase_item()
 	_haggle_target = null
 	item_root.visible = false
+	SoundManager.instance.play_sfx("negotiation")
 	hide_menu()
 
 func _on_haggle_detector_area_entered(area: Area2D) -> void:
