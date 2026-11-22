@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://ckquhembevsdn"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_rr07n"]
+[ext_resource type="Texture2D" uid="uid://c1u2rb0sqsmm7" path="res://assets/items/miracle_mallet_replica.png" id="2_rr07n"]
+
+[resource]
+script = ExtResource("1_rr07n")
+item_name = "Miracle Mallet"
+ui_texture = ExtResource("2_rr07n")
+price = 300
+rarity = 2
+metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

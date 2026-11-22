@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://4g3cr8hikh44"]
+
+[ext_resource type="Script" uid="uid://rnbtm2pl8g8f" path="res://scripts/resources/item.gd" id="1_gljyy"]
+[ext_resource type="Texture2D" uid="uid://bimig3f6xamv3" path="res://assets/items/rundown_wheelbarrow.png" id="2_gljyy"]
+
+[resource]
+script = ExtResource("1_gljyy")
+item_name = "Rundown Wheelbarrow"
+ui_texture = ExtResource("2_gljyy")
+rarity = 2
+metadata/_custom_type_script = "uid://rnbtm2pl8g8f"

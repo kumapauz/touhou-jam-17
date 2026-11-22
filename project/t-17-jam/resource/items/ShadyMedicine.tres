@@ -9,4 +9,5 @@ item_name = "Shady Medicine"
 item_description = "A rather shady drug supposedly used to treat illnesses to the sick. Stolen from Gensokyo’s black market."
 ui_texture = ExtResource("2_sshbx")
 price = 500
+rarity = 3
 metadata/_custom_type_script = "uid://rnbtm2pl8g8f"
