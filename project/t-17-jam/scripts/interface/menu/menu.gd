@@ -83,8 +83,11 @@ func show_menu() -> void:
 
 func hide_menu() -> void:
 	if is_active_menu():
+		print("Menu %s hidden" % name)
 		_is_reading_inputs = false
-		menu_stack.pop_back()
+		while !menu_stack.is_empty() && menu_stack.back() == self:
+			# Softlock fix
+			menu_stack.pop_back()
 		if menu_stack.is_empty():
 			PlayerController.instance.enable_movement()
 		else:
@@ -95,6 +98,7 @@ func hide_menu() -> void:
 ## Call from the animator.
 func on_menu_shown() -> void:
 	_is_reading_inputs = true
+	print("Menu %s shown" % name)
 
 ## Call from the animator.
 func on_menu_hidden() -> void:
