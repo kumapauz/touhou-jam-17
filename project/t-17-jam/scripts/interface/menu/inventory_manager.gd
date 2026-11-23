@@ -35,7 +35,7 @@ func get_item_count(item: ItemResource) -> int:
 			count += 1
 	return count
 
-func on_menu_hidden() -> void:
+func hide_menu() -> void:
 	super()
 	for connection in item_selected.get_connections():
 		item_selected.disconnect(connection["callable"])

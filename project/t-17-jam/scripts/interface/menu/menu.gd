@@ -19,6 +19,11 @@ const SELECTION_SCROLL_INTERVAL: float = 0.15
 
 func _ready() -> void:
 	initialize_menu()
+	StatusManager.instance.day_finished.connect(Callable(self, "force_close"))
+
+func force_close() -> void:
+	if is_active_menu():
+		hide_menu()
 
 func initialize_menu() -> void:
 	for child in selection_parent.get_children():
