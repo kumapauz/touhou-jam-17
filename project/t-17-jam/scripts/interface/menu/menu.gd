@@ -73,6 +73,9 @@ func is_active_menu() -> bool:
 	return !menu_stack.is_empty() && menu_stack.back() == self && _is_reading_inputs
 
 func show_menu() -> void:
+	if !menu_stack.is_empty() && menu_stack.back() == self:
+		return
+	
 	animator.play("show")
 	menu_stack.push_back(self)
 	selection = 0
